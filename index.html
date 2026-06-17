@@ -39,7 +39,6 @@
   --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-  --shadow-lg: 0 10px 30px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -50,11 +49,11 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
 .header-left{display:flex;align-items:center;gap:14px;}
 .header-logo-mark{width:32px;height:32px;background:rgba(255,255,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.2);}
 .header-title{color:#fff;font-size:15px;font-weight:700;letter-spacing:-0.02em;}
-.header-sub{font-size:11px;color:rgba(255,255,255,0.55);margin-top:1px;}
-.header-right{display:flex;align-items:center;gap:10px;}
-.header-tag{font-size:10px;font-weight:600;letter-spacing:0.04em;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.18);}
-.btn-print-header{display:flex;align-items:center;gap:6px;padding:7px 14px;font-size:12px;font-weight:500;border:1px solid rgba(255,255,255,0.25);border-radius:var(--r-sm);background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);cursor:pointer;transition:all 0.15s;}
-.btn-print-header:hover{background:rgba(255,255,255,0.2);}
+.header-right{display:flex;align-items:center;gap:8px;}
+.header-tag{font-size:10.5px;font-weight:600;letter-spacing:0.02em;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.18); transition:all 0.2s;}
+.header-tag.large{background:var(--danger); border-color:#fff; color:#fff;}
+.btn-reset{display:flex;align-items:center;gap:6px;padding:6px 14px;font-size:11px;font-weight:600;border:1px solid rgba(255,255,255,0.25);border-radius:20px;background:var(--surface);color:var(--accent);cursor:pointer;transition:all 0.15s; margin-left:10px;}
+.btn-reset:hover{background:#f0f0f0; transform:scale(0.98);}
 
 /* ── Tab Nav ── */
 .tab-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 36px;display:flex;gap:0;box-shadow:var(--shadow-xs);}
@@ -70,16 +69,23 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
 .tab-panel.active{display:block;}
 .two-col{display:grid;grid-template-columns:400px 1fr;gap:20px;align-items:start;}
 
-/* ── Card ── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-sm);}
+/* ── Card & AI Box ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-sm); margin-bottom:16px;}
 .card-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--surface-2);}
 .card-title{font-size:12px;font-weight:700;color:var(--text-primary);letter-spacing:0.01em;text-transform:uppercase;}
 .card-icon{width:26px;height:26px;border-radius:var(--r-sm);background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(59,111,168,0.15);}
 .card-body{padding:18px 20px;}
 
+/* Smart Advisor Box */
+.ai-box{background:linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%); border:1px solid #cce0ff; border-radius:var(--r-xl); padding:18px 20px; margin-bottom:20px;}
+.ai-title{font-size:13px; font-weight:700; color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:12px;}
+.ai-textarea{width:100%; height:60px; padding:10px 12px; font-size:12px; border:1px solid #b3d4ff; border-radius:var(--r-sm); resize:none; font-family:inherit; margin-bottom:10px;}
+.ai-textarea:focus{outline:none; border-color:var(--accent-mid); box-shadow:0 0 0 3px rgba(59,111,168,0.1);}
+.ai-btn{padding:8px 16px; background:var(--accent); color:#fff; font-size:12px; font-weight:600; border:none; border-radius:var(--r-sm); cursor:pointer; transition:0.15s;}
+.ai-btn:hover{background:var(--accent-hover);}
+
 /* ── Field ── */
 .field{margin-bottom:13px;}
-.field:last-child{margin-bottom:0;}
 .field label{display:block;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:5px;letter-spacing:0.02em;text-transform:uppercase;}
 .field input,.field select{width:100%;padding:8px 11px;font-size:13px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);color:var(--text-primary);transition:all 0.15s;font-family:inherit;appearance:none;}
 .field input:focus,.field select:focus{outline:none;border-color:var(--accent-mid);box-shadow:0 0 0 3px var(--accent-glow);}
@@ -89,161 +95,84 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
 .input-unit{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-tertiary);pointer-events:none;font-weight:500;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 
-/* ── Segment ── */
+/* ── Segment & Tabs ── */
 .segment{display:flex;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px;gap:2px;}
-.seg-btn{flex:1;padding:6px 10px;font-size:12px;font-weight:500;border:none;background:none;border-radius:4px;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;text-align:center;white-space:nowrap;}
+.seg-btn{flex:1;padding:6px 10px;font-size:12px;font-weight:500;border:none;background:none;border-radius:4px;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;text-align:center;}
 .seg-btn.active{background:var(--surface);color:var(--accent);box-shadow:var(--shadow-xs);font-weight:600;}
 
-/* ── Finance Tabs ── */
 .fin-tabs{display:flex;gap:2px;margin-bottom:14px;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px;}
-.fin-tab{flex:1;padding:7px 12px;font-size:12px;font-weight:500;border:none;border-radius:4px;background:none;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;text-align:center;}
-.fin-tab.active{background:var(--accent);color:#fff;font-weight:600;box-shadow:0 1px 4px rgba(27,63,110,0.3);}
+.fin-tab{flex:1;padding:7px 12px;font-size:12px;font-weight:500;border:none;border-radius:4px;background:none;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.fin-tab.active{background:var(--accent);color:#fff;font-weight:600;}
 .fin-panel{display:none;}
 .fin-panel.active{display:block;}
-.fin-badge{font-size:10px;color:var(--text-tertiary);background:var(--surface-3);border:1px solid var(--border);border-radius:4px;padding:3px 8px;margin-bottom:10px;display:inline-block;}
 
-/* ── Category Tabs ── */
+/* ── Search & Lists ── */
+.search-box{margin-bottom:12px; position:relative;}
+.search-box input{width:100%; padding:9px 12px 9px 32px; font-size:12px; border:1px solid var(--border-strong); border-radius:20px; background:var(--surface-2);}
+.search-icon{position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-tertiary); font-size:12px;}
+
 .cat-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
 .cat-btn{padding:4px 10px;font-size:11px;font-weight:600;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-secondary);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
-.cat-btn:hover{border-color:var(--accent-mid);color:var(--accent);}
 .cat-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 
-/* ── Type List ── */
-.type-scroll{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding-right:2px;}
+.type-scroll{max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding-right:2px;}
 .type-scroll::-webkit-scrollbar{width:3px;}
-.type-scroll::-webkit-scrollbar-track{background:transparent;}
 .type-scroll::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:2px;}
 .type-item{padding:9px 12px;border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:all 0.15s;background:var(--surface);display:flex;align-items:flex-start;gap:8px;}
 .type-item:hover{border-color:var(--accent-mid);background:var(--accent-light);}
 .type-item.selected{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 2px rgba(27,63,110,0.08);}
 .type-item-body{flex:1;min-width:0;}
 .type-name{font-size:12px;font-weight:600;color:var(--text-primary);}
-.type-desc{font-size:11px;color:var(--text-tertiary);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.badge{flex-shrink:0;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:0.03em;margin-top:2px;}
+.type-desc{font-size:11px;color:var(--text-tertiary);margin-top:1px; white-space:normal; line-height:1.4;} /* Changed to normal to show full dynamic text */
+.badge{flex-shrink:0;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;}
 .badge-day{background:var(--danger-light);color:var(--danger);border:1px solid var(--danger-border);}
 .badge-next{background:var(--warning-light);color:var(--warning);border:1px solid var(--warning-border);}
 
-/* ── Amount ── */
 .quick-btns{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px;}
-.quick-btn{padding:4px 9px;font-size:11px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
-.quick-btn:hover{border-color:var(--accent-mid);color:var(--accent);background:var(--accent-light);}
+.quick-btn{padding:4px 9px;font-size:11px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-secondary);cursor:pointer;}
 
-/* ── Analyze Button ── */
-.btn-analyze{width:100%;padding:11px;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:all 0.15s;margin-top:14px;letter-spacing:0.01em;box-shadow:0 2px 8px rgba(27,63,110,0.25);}
-.btn-analyze:hover{background:linear-gradient(135deg,var(--accent-hover) 0%,var(--accent) 100%);box-shadow:0 4px 12px rgba(27,63,110,0.35);}
-.btn-analyze:active{transform:scale(0.99);}
+.btn-analyze{width:100%;padding:11px;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer; margin-top:14px;}
 
-/* ── Result ── */
+/* ── Result UI ── */
 .result-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center;color:var(--text-tertiary);gap:14px;}
-.result-empty-icon{width:52px;height:52px;border-radius:50%;background:var(--surface-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
-.result-empty p{font-size:13px;line-height:1.8;color:var(--text-tertiary);}
-
-/* ── Verdict ── */
 .verdict{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:var(--r-lg);margin-bottom:20px;border:1px solid;}
 .verdict.required{background:var(--danger-light);border-color:var(--danger-border);}
 .verdict.ok{background:var(--success-light);border-color:var(--success-border);}
 .verdict.info{background:var(--warning-light);border-color:var(--warning-border);}
-.verdict-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:700;}
-.verdict.required .verdict-icon{background:var(--danger-mid);color:#fff;}
-.verdict.ok .verdict-icon{background:var(--success-mid);color:#fff;}
-.verdict.info .verdict-icon{background:var(--warning-mid);color:#fff;}
+.verdict-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:700; color:#fff;}
+.verdict.required .verdict-icon{background:var(--danger-mid);}
+.verdict.ok .verdict-icon{background:var(--success-mid);}
+.verdict.info .verdict-icon{background:var(--warning-mid);}
 .verdict-tag{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px;}
 .verdict.required .verdict-tag{color:var(--danger);}
 .verdict.ok .verdict-tag{color:var(--success);}
-.verdict.info .verdict-tag{color:var(--warning);}
 .verdict-text{font-size:13px;font-weight:500;color:var(--text-primary);line-height:1.5;}
 
-/* ── Metrics ── */
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
 .metric{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;}
-.metric-label{font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:5px;}
-.metric-val{font-size:20px;font-weight:700;color:var(--text-primary);line-height:1.1;}
+.metric-label{font-size:10px;font-weight:600;color:var(--text-tertiary);margin-bottom:5px;}
+.metric-val{font-size:20px;font-weight:700;color:var(--text-primary);}
 .metric-val.red{color:var(--danger-mid);}
-.metric-val.green{color:var(--success-mid);}
-.metric-sub{font-size:10px;color:var(--text-tertiary);margin-top:3px;}
 
-/* ── Progress ── */
-.prog-wrap{margin-bottom:20px;}
-.prog-header{display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary);margin-bottom:6px;font-weight:500;}
-.prog-track{height:7px;background:var(--surface-3);border-radius:4px;border:1px solid var(--border);overflow:hidden;}
-.prog-fill{height:100%;border-radius:4px;transition:width 0.45s cubic-bezier(.4,0,.2,1);}
-
-/* ── Info Table ── */
 .info-table{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-bottom:18px;}
 .info-row{display:flex;align-items:flex-start;padding:10px 14px;border-bottom:1px solid var(--border);gap:12px;}
-.info-row:last-child{border-bottom:none;}
 .info-row:nth-child(even){background:var(--surface-2);}
-.info-key{font-size:11px;font-weight:600;color:var(--text-tertiary);min-width:96px;flex-shrink:0;padding-top:1px;letter-spacing:0.02em;}
-.info-val{font-size:12px;color:var(--text-primary);font-weight:500;flex:1;line-height:1.5;}
+.info-key{font-size:11px;font-weight:600;color:var(--text-tertiary);min-width:96px;flex-shrink:0;padding-top:1px;}
+.info-val{font-size:12px;color:var(--text-primary);font-weight:500;flex:1;}
 
-/* ── Checklist ── */
-.sec-label{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;margin-top:18px;display:flex;align-items:center;gap:6px;}
-.sec-label:first-child{margin-top:0;}
+.sec-label{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:0.08em;margin-bottom:8px;margin-top:18px;display:flex;align-items:center;gap:6px;}
 .sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
 .checklist{display:flex;flex-direction:column;gap:6px;}
-.check-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--surface-2);border-radius:var(--r-sm);border:1px solid var(--border);font-size:12px;color:var(--text-primary);line-height:1.5;}
+.check-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--surface-2);border-radius:var(--r-sm);border:1px solid var(--border);font-size:12px;}
 .check-dot{width:5px;height:5px;border-radius:50%;background:var(--accent-mid);flex-shrink:0;margin-top:6px;}
 
-/* ── Penalty Box ── */
-.penalty-box{background:linear-gradient(135deg,#FFF8F8 0%,#FEF2F2 100%);border:1px solid var(--danger-border);border-radius:var(--r-lg);padding:16px 20px;margin-top:18px;}
-.penalty-box-title{font-size:11px;font-weight:700;color:var(--danger);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-.penalty-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.p-metric{background:#fff;border:1px solid var(--danger-border);border-radius:var(--r-md);padding:12px 14px;}
-.p-metric-label{font-size:10px;color:var(--text-secondary);margin-bottom:5px;font-weight:600;letter-spacing:0.03em;}
-.p-metric-val{font-size:22px;font-weight:800;color:var(--danger);}
-.p-note{font-size:11px;color:var(--text-secondary);background:#fff;border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 12px;}
-
-/* ── Risk Options ── */
-.risk-group{margin-bottom:14px;}
-.risk-group-label{font-size:11px;font-weight:700;color:var(--text-secondary);margin-bottom:7px;letter-spacing:0.03em;}
-.risk-opts{display:flex;flex-direction:column;gap:5px;}
-.risk-opt{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:all 0.15s;background:var(--surface);}
-.risk-opt:hover{border-color:var(--accent-mid);}
-.risk-opt.sel{border-color:var(--accent);background:var(--accent-light);}
-.risk-radio{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--border-strong);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
-.risk-opt.sel .risk-radio{border-color:var(--accent);background:var(--accent);}
-.risk-opt.sel .risk-radio::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;}
-.risk-opt-main{font-size:12px;font-weight:600;color:var(--text-primary);}
-.risk-opt-sub{font-size:10px;color:var(--text-tertiary);margin-top:1px;}
-
-/* ── Fin Cards ── */
-.fin-card-item{background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-md);padding:10px 13px;}
-.fin-card-label{font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.03em;margin-bottom:5px;}
-.fin-card-val{font-size:16px;font-weight:700;color:var(--text-primary);}
-.fin-card-item.adjusted{border-color:var(--warning-border);background:var(--warning-light);}
-.fin-card-item.adjusted .fin-card-val{color:var(--warning-mid);}
-
-/* ── Q&A Section ── */
 .qa-section{margin-top:20px;}
 .qa-item{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-bottom:8px;}
-.qa-q{padding:11px 14px;font-size:12px;font-weight:600;color:var(--text-primary);cursor:pointer;background:var(--surface-2);display:flex;justify-content:space-between;align-items:center;transition:background 0.15s;}
-.qa-q:hover{background:var(--accent-light);}
-.qa-q-prefix{color:var(--accent-mid);font-weight:700;margin-right:6px;font-size:10px;}
-.qa-arrow{font-size:10px;color:var(--text-tertiary);transition:transform 0.2s;}
-.qa-item.open .qa-arrow{transform:rotate(180deg);}
-.qa-a{display:none;padding:11px 14px;font-size:12px;color:var(--text-secondary);background:var(--surface);border-top:1px solid var(--border);line-height:1.7;}
+.qa-q{padding:11px 14px;font-size:12px;font-weight:600;cursor:pointer;background:var(--surface-2);display:flex;justify-content:space-between;}
+.qa-a{display:none;padding:11px 14px;font-size:12px;color:var(--text-secondary);background:var(--surface);border-top:1px solid var(--border);}
 .qa-item.open .qa-a{display:block;}
 
-/* ── Footer ── */
 .footer{text-align:center;padding:20px 36px;font-size:11px;color:var(--text-tertiary);border-top:1px solid var(--border);margin-top:36px;line-height:1.9;}
-
-@media print {
-  .header,.tab-nav,.btn-analyze,.quick-btns,.cat-wrap,.type-scroll,.field{display:none!important;}
-  .main{padding:0;}
-  .card{box-shadow:none;break-inside:avoid;}
-  .two-col{grid-template-columns:1fr;}
-}
-
-/* --- 인쇄용 결재란 CSS --- */
-.print-approval { display: none; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; border-bottom: 2px solid var(--text-primary); padding-bottom: 12px; }
-.print-approval-title { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); }
-.print-approval-box { display: flex; border: 1px solid var(--text-primary); background: #fff; }
-.print-approval-cell { width: 65px; height: 65px; border-left: 1px solid var(--text-primary); display: flex; flex-direction: column; align-items: center; font-size: 12px; }
-.print-approval-cell:first-child { border-left: none; background: var(--surface-2); font-weight: 700; justify-content: center; width: 25px; writing-mode: vertical-rl; letter-spacing: 5px; }
-.print-approval-sign { flex: 1; display: flex; align-items: center; justify-content: center; }
-@media print {
-  .print-approval { display: flex !important; }
-}
 </style>
 </head>
 <body>
@@ -258,11 +187,12 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
     </div>
   </div>
   <div class="header-right">
-    <span class="header-tag">KOSPI · KOSDAQ</span>
-    <span class="header-tag">2026년 기준</span>
-    <button class="btn-print-header" onclick="window.print()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      의견서 인쇄
+    <span id="top-mkt-badge" class="header-tag">코스피 적용 중</span>
+    <span id="top-large-badge" class="header-tag large" style="display:none;">대규모법인</span>
+    
+    <button class="btn-reset" onclick="resetAll()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.22-10.27l-3.26 3.26"/></svg>
+      전체 초기화
     </button>
   </div>
 </header>
@@ -273,29 +203,26 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
 </nav>
 
 <main class="main">
-
-<div class="print-approval">
-  <div class="print-approval-title">공시 의무 검토 의견서</div>
-  <div class="print-approval-box">
-    <div class="print-approval-cell">결재</div>
-    <div class="print-approval-cell"><div style="border-bottom: 1px solid var(--text-primary); width: 100%; text-align: center; padding: 3px 0;">담당</div><div class="print-approval-sign"></div></div>
-    <div class="print-approval-cell"><div style="border-bottom: 1px solid var(--text-primary); width: 100%; text-align: center; padding: 3px 0;">팀장</div><div class="print-approval-sign"></div></div>
-    <div class="print-approval-cell"><div style="border-bottom: 1px solid var(--text-primary); width: 100%; text-align: center; padding: 3px 0;">임원</div><div class="print-approval-sign"></div></div>
+  <div class="ai-box">
+    <div class="ai-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      상황으로 자동 찾기 (스마트 검색)
+    </div>
+    <textarea id="smart-text" class="ai-textarea" placeholder="현재 당면한 이벤트나 상황을 자유롭게 적어보세요. (예: 어제 임원이 자사주를 1만주 매도했습니다. / 은행에서 50억원을 단기 차입하기로 결정했습니다.)"></textarea>
+    <button class="ai-btn" onclick="analyzeSituation()">관련 공시 찾아보기 →</button>
   </div>
-</div>
 
 <div id="tab-major" class="tab-panel active">
   <div class="two-col">
 
-    <div style="display:flex;flex-direction:column;gap:16px;">
-
+    <div style="display:flex;flex-direction:column;gap:0;">
       <div class="card">
         <div class="card-header">
           <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
           <span class="card-title">회사 기본 정보</span>
         </div>
         <div class="card-body">
-          <div class="field">
+          <div class="field" style="margin:0;">
             <label>상장 시장</label>
             <div class="segment" id="mkt-seg">
               <button class="seg-btn active" onclick="setSeg('mkt-seg','mkt','kospi',this);calcMajor()">코스피</button>
@@ -310,10 +237,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
         <div class="card-header">
           <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           <span class="card-title">재무정보 입력</span>
-          <div style="margin-left:auto;display:flex;gap:6px;align-items:center;">
-            <span id="fin-active-label" style="font-size:10px;font-weight:600;color:var(--accent-mid);background:var(--accent-light);padding:2px 8px;border-radius:10px;border:1px solid rgba(59,111,168,0.2);">연결 기준 적용 중</span>
-            <span id="large-badge" style="display:none;font-size:10px;font-weight:600;color:var(--danger);background:var(--danger-light);padding:2px 8px;border-radius:10px;border:1px solid var(--danger-border);">대규모법인</span>
-          </div>
         </div>
         <div class="card-body">
           <div class="fin-tabs">
@@ -322,47 +245,24 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
           </div>
 
           <div id="fin-con" class="fin-panel active">
-            <span class="fin-badge">K-IFRS 연결 기준 · 최근 사업연도말</span>
             <div class="field-row">
-              <div class="field"><label>자산총계</label><div class="input-wrap"><input type="number" id="con-asset" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>매출액</label><div class="input-wrap"><input type="number" id="con-rev" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+              <div class="field"><label>자산총계</label><div class="input-wrap"><input type="number" id="con-asset" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+              <div class="field"><label>매출액</label><div class="input-wrap"><input type="number" id="con-rev" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
             </div>
             <div class="field-row">
-              <div class="field"><label>자기자본</label><div class="input-wrap"><input type="number" id="con-equity" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>납입 자본금</label><div class="input-wrap"><input type="number" id="con-capital" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+              <div class="field"><label>자기자본</label><div class="input-wrap"><input type="number" id="con-equity" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+              <div class="field"><label>납입 자본금</label><div class="input-wrap"><input type="number" id="con-capital" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
             </div>
           </div>
 
           <div id="fin-sep" class="fin-panel">
-            <span class="fin-badge">K-IFRS 별도 기준 · 최근 사업연도말</span>
             <div class="field-row">
-              <div class="field"><label>자산총계</label><div class="input-wrap"><input type="number" id="sep-asset" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>매출액</label><div class="input-wrap"><input type="number" id="sep-rev" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+              <div class="field"><label>자산총계</label><div class="input-wrap"><input type="number" id="sep-asset" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+              <div class="field"><label>매출액</label><div class="input-wrap"><input type="number" id="sep-rev" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
             </div>
             <div class="field-row">
-              <div class="field"><label>자기자본</label><div class="input-wrap"><input type="number" id="sep-equity" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>납입 자본금</label><div class="input-wrap"><input type="number" id="sep-capital" placeholder="0" oninput="markFilled(this);updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-            </div>
-          </div>
-
-          <div id="fin-cards" style="display:none;margin-top:14px;">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-              <div class="fin-card-item" id="fc-asset">
-                <div class="fin-card-label">최근사업연도 자산총액</div>
-                <div class="fin-card-val" id="fc-asset-val">—</div>
-              </div>
-              <div class="fin-card-item" id="fc-rev">
-                <div class="fin-card-label">최근사업연도 매출액</div>
-                <div class="fin-card-val" id="fc-rev-val">—</div>
-              </div>
-              <div class="fin-card-item" id="fc-equity">
-                <div class="fin-card-label">자기자본 <span id="fc-equity-note" style="font-size:9px;font-weight:500;color:var(--warning-mid);"></span></div>
-                <div class="fin-card-val" id="fc-equity-val">—</div>
-              </div>
-              <div class="fin-card-item" id="fc-capital">
-                <div class="fin-card-label">납입 자본금</div>
-                <div class="fin-card-val" id="fc-capital-val">—</div>
-              </div>
+              <div class="field"><label>자기자본</label><div class="input-wrap"><input type="number" id="sep-equity" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+              <div class="field"><label>납입 자본금</label><div class="input-wrap"><input type="number" id="sep-capital" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
             </div>
           </div>
         </div>
@@ -374,6 +274,12 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
           <span class="card-title">수시공시 항목 선택</span>
         </div>
         <div class="card-body">
+          
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="rule-search" placeholder="공시 항목 검색 (예: 소송, 합병, 차입...)" oninput="searchRules(this.value)">
+          </div>
+
           <div class="cat-wrap" id="cat-wrap">
             <button class="cat-btn active" onclick="filterCat('all',this)">전체</button>
             <button class="cat-btn" onclick="filterCat('biz',this)">영업·생산</button>
@@ -382,11 +288,11 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
             <button class="cat-btn" onclick="filterCat('debt',this)">채무·재무</button>
             <button class="cat-btn" onclick="filterCat('loss',this)">손실·재해</button>
             <button class="cat-btn" onclick="filterCat('corp',this)">기업경영</button>
-            <button class="cat-btn" onclick="filterCat('sub',this)">종속회사 관련</button>
+            <button class="cat-btn" onclick="filterCat('sub',this)">종속회사</button>
           </div>
           <div class="type-scroll" id="type-scroll"></div>
 
-          <div class="field" style="margin-top:14px;">
+          <div class="field" style="margin-top:18px;">
             <label>거래 / 사건 금액</label>
             <div class="input-wrap"><input type="number" id="deal" placeholder="0" oninput="calcMajor()"><span class="input-unit">억원</span></div>
             <div class="quick-btns">
@@ -395,7 +301,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
               <button class="quick-btn" onclick="addAmt(50)">+50억</button>
               <button class="quick-btn" onclick="addAmt(100)">+100억</button>
               <button class="quick-btn" onclick="addAmt(500)">+500억</button>
-              <button class="quick-btn" onclick="addAmt(1000)">+1,000억</button>
             </div>
           </div>
           <button class="btn-analyze" onclick="calcMajor()">공시 의무 검토 →</button>
@@ -412,45 +317,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
         <div class="card-body" id="major-result">
           <div class="result-empty">
             <div class="result-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-            <p>좌측에서 재무정보와<br>수시공시 항목을 선택하세요.<br><br>거래금액 입력 시 공시 의무<br>발생 여부를 자동 판단합니다.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header" style="cursor:pointer;" onclick="togglePenalty()">
-          <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-          <span class="card-title" style="color:var(--danger);">불성실공시 리스크 시뮬레이터</span>
-          <span id="penalty-arrow" style="margin-left:auto;font-size:11px;color:var(--text-tertiary);">▼ 펼치기</span>
-        </div>
-        <div id="penalty-body" style="display:none;">
-          <div class="card-body">
-            <div class="risk-group">
-              <div class="risk-group-label">위반의 동기 (귀책 범위)</div>
-              <div class="risk-opts" id="motive-opts">
-                <label class="risk-opt sel" onclick="setRisk('motive',this,'minor')"><div class="risk-radio"></div><div><div class="risk-opt-main">경과실</div><div class="risk-opt-sub">통상적인 과실, 기재 실수</div></div></label>
-                <label class="risk-opt" onclick="setRisk('motive',this,'major')"><div class="risk-radio"></div><div><div class="risk-opt-main">중과실</div><div class="risk-opt-sub">부서 간 공문 누락, 검토 미흡</div></div></label>
-                <label class="risk-opt" onclick="setRisk('motive',this,'intent')"><div class="risk-radio"></div><div><div class="risk-opt-main">고의</div><div class="risk-opt-sub">의도적 누락, 장기 지연</div></div></label>
-              </div>
-            </div>
-            <div class="risk-group">
-              <div class="risk-group-label">위반의 중요성 (투자 영향)</div>
-              <div class="risk-opts" id="severity-opts">
-                <label class="risk-opt sel" onclick="setRisk('severity',this,'minor')"><div class="risk-radio"></div><div><div class="risk-opt-main">경미</div><div class="risk-opt-sub">기준 근접, 투자 영향 작음</div></div></label>
-                <label class="risk-opt" onclick="setRisk('severity',this,'moderate')"><div class="risk-radio"></div><div><div class="risk-opt-main">보통</div><div class="risk-opt-sub">공시 비율 상당 수준 초과</div></div></label>
-                <label class="risk-opt" onclick="setRisk('severity',this,'serious')"><div class="risk-radio"></div><div><div class="risk-opt-main">중대</div><div class="risk-opt-sub">회사 존립 위협, 시황 왜곡</div></div></label>
-              </div>
-            </div>
-            <div class="risk-group" style="margin-bottom:0;">
-              <div class="risk-group-label">위반 종류</div>
-              <div class="risk-opts" id="violation-opts">
-                <label class="risk-opt sel" onclick="setRisk('violation',this,'omit')"><div class="risk-radio"></div><div><div class="risk-opt-main">공시 불이행</div><div class="risk-opt-sub">공시 기한 내 미제출</div></div></label>
-                <label class="risk-opt" onclick="setRisk('violation',this,'change')"><div class="risk-radio"></div><div><div class="risk-opt-main">공시 번복·변경</div><div class="risk-opt-sub">공시 내용 번복 또는 중요 변경</div></div></label>
-                <label class="risk-opt" onclick="setRisk('violation',this,'false')"><div class="risk-radio"></div><div><div class="risk-opt-main">허위 공시</div><div class="risk-opt-sub">사실과 다른 내용 공시</div></div></label>
-              </div>
-            </div>
-            <button class="btn-analyze" style="background:linear-gradient(135deg,var(--danger) 0%,#E53E3E 100%);box-shadow:0 2px 8px rgba(185,28,28,0.25);" onclick="calcRisk()">리스크 산출 →</button>
-            <div id="risk-result"></div>
+            <p>좌측에서 재무정보와<br>수시공시 항목을 선택하세요.<br><br>스마트 어시스턴트에 상황을 묘사하면<br>관련 공시를 알아서 찾아줍니다.</p>
           </div>
         </div>
       </div>
@@ -461,22 +328,14 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
           <span class="card-title">실무 Q&A</span>
         </div>
         <div class="card-body">
-          <div class="qa-section">
+          <div class="qa-section" style="margin:0;">
             <div class="qa-item" onclick="toggleQA(this)">
               <div class="qa-q"><span><span class="qa-q-prefix">Q.</span>자기자본이 완전 자본잠식인 경우 공시 기준은?</span><span class="qa-arrow">▼</span></div>
               <div class="qa-a">공시규정 제3조 제5항에 의거하여, 자기자본이 자본금 미만인 법인은 <strong>납입 자본금액을 자기자본으로 대체</strong>하여 공시 의무 비율을 적용합니다. 자본잠식 상태에서도 자본금 기준으로 공시 의무 발생 여부를 검토해야 합니다.</div>
             </div>
             <div class="qa-item" onclick="toggleQA(this)">
-              <div class="qa-q"><span><span class="qa-q-prefix">Q.</span>공동계약 체결 시 공시 기준금액 산출 방법은?</span><span class="qa-arrow">▼</span></div>
-              <div class="qa-a">공동계약의 경우 계약 총액이 아닌 <strong>해당 법인이 직접 부담하는 지분 금액</strong>을 기준으로 공시 의무 비율을 산출합니다. 컨소시엄 참여 계약 등은 자기 부담분만 검토 금액으로 입력하시기 바랍니다.</div>
-            </div>
-            <div class="qa-item" onclick="toggleQA(this)">
               <div class="qa-q"><span><span class="qa-q-prefix">Q.</span>의무 공시 미달인 경우 자율공시가 가능한가요?</span><span class="qa-arrow">▼</span></div>
               <div class="qa-a">가능합니다. 공시규정 제28조(자율공시) 및 시행세칙 제8조에 따라 의무 비율 미달이더라도 <strong>투자판단에 중요하다고 판단되는 경우</strong> 사유발생 다음 날까지 자율공시를 진행할 수 있습니다.</div>
-            </div>
-            <div class="qa-item" onclick="toggleQA(this)">
-              <div class="qa-q"><span><span class="qa-q-prefix">Q.</span>공시 후 계약 내용이 소폭 변경된 경우 정정공시 필요 여부?</span><span class="qa-arrow">▼</span></div>
-              <div class="qa-a">시행세칙 제18조의3에 의거, 최초 공시 대비 <strong>계약금액 10% 이내 변동</strong> 또는 계약 기간이 20일(장기계약 3개월) 이내로 경미하게 변경되는 경우 정정공시 의무가 면제될 수 있습니다.</div>
             </div>
             <div class="qa-item" onclick="toggleQA(this)">
               <div class="qa-q"><span><span class="qa-q-prefix">Q.</span>공시 유보 신청이 가능한 경우는?</span><span class="qa-arrow">▼</span></div>
@@ -584,99 +443,65 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
 </main>
 
 <footer class="footer">
-  본 시스템은 유가증권시장 공시규정(제7조·제8조의2), 공시규정 시행세칙 및 자본시장법을 기반으로 한 자가진단 도구입니다.<br>
-  법적 구속력이 없으며, 최종 판단은 반드시 전문가 검토를 수반하시기 바랍니다. | 규정 기준일: 2026년
+  본 도구는 상장사 공시 실무자를 위한 개인용 자가진단 시스템입니다.<br>
+  유가증권/코스닥 공시규정 및 자본시장법을 기반으로 구동되며, 최종 판단은 전문가 검토를 수반하시기 바랍니다.
 </footer>
 
 <script>
+// ── 전체 초기화 기능 ──
+function resetAll() {
+  if(confirm("입력한 모든 재무 금액과 선택 사항을 초기화하시겠습니까?")) {
+    localStorage.clear();
+    location.reload();
+  }
+}
+
 // ── 상태 ──
 const S = {
   mkt:'kospi', isLarge:false, fin:'con',
-  type:null, cat:'all',
-  riskMotive:'minor', riskSeverity:'minor', riskViolation:'omit'
+  type:null, cat:'all'
 };
 
 // ── 수시공시 항목 ──
 // r:[[코스피일반,코스피大규모],[코스닥일반,코스닥大규모]]
-// 코스피大 = 자산2조↑, 코스닥大 = 자산2조↑ (동일 기준)
-// 코스닥은 코스피 대비 전반적으로 2배 높은 비율(느슨한 기준)
 const RULES = [
-  // 영업·생산 — 코스피 매출5%, 코스닥 매출10% (수거·파기 코스닥大기업 5%)
-  {id:'b01',cat:'biz',name:'영업 일부/전부 정지·정지처분',desc:'영업정지, 행정처분',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호가목 / 코스닥 제6조제1항제1호가목',chk:['행정처분 문서','매출액 산출근거','향후 영업재개 계획']},
-  {id:'b02',cat:'biz',name:'거래처와의 거래중단',desc:'주요 거래처 거래 중단',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호나목 / 코스닥 제6조제1항제1호나목',chk:['거래중단 확인서','해당 매출액 비율 산출','대체 거래처 확보 계획']},
-  {id:'b03',cat:'biz',name:'단일 판매·공급계약 체결·해지',desc:'주요 판매·공급계약 (익일)',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제1호다목 / 코스닥 제6조제1항제1호다목',chk:['계약서 사본','계약금액 산출근거','계약상대방 정보','계약기간 및 주요조건']},
-  {id:'b04',cat:'biz',name:'제품 수거·파기 결정',desc:'리콜, 수거·파기 조치',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호라목 / 코스닥 제6조제1항제1호라목',chk:['수거·파기 대상 제품 목록','예상 손실 규모','원인 및 향후 조치']},
-  {id:'b05',cat:'biz',name:'생산활동 중단·폐업',desc:'생산시설 가동 중단, 폐업',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호마목 / 코스닥 제6조제1항제1호마목',chk:['중단 사유 및 범위','재가동 또는 폐업 계획']},
-  {id:'b06',cat:'biz',name:'중대재해 발생',desc:'산업안전보건법상 중대재해',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제1호바목 / 코스닥 제6조제1항제1호바목',chk:['재해 발생 경위','피해 현황','관계기관 신고','재발방지 조치']},
+  {id:'b01',cat:'biz',name:'영업 일부/전부 정지·정지처분',desc:'영업정지, 행정처분 발생 시',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호가목 / 코스닥 제6조제1항제1호가목',chk:['행정처분 문서','매출액 산출근거','향후 영업재개 계획']},
+  {id:'b02',cat:'biz',name:'거래처와의 거래중단',desc:'주요 거래처와의 거래가 중단된 경우',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호나목 / 코스닥 제6조제1항제1호나목',chk:['거래중단 확인서','해당 매출액 비율 산출','대체 거래처 확보 계획']},
+  {id:'b03',cat:'biz',name:'단일 판매·공급계약 체결·해지',desc:'주요 판매·공급계약을 체결하거나 해지한 경우',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제1호다목 / 코스닥 제6조제1항제1호다목',chk:['계약서 사본','계약금액 산출근거','계약상대방 정보','계약기간 및 주요조건']},
+  {id:'b04',cat:'biz',name:'제품 수거·파기 결정',desc:'제품의 리콜, 수거 또는 파기 조치',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호라목 / 코스닥 제6조제1항제1호라목',chk:['수거·파기 대상 제품 목록','예상 손실 규모','원인 및 향후 조치']},
+  {id:'b05',cat:'biz',name:'생산활동 중단·폐업',desc:'주요 생산시설 가동 중단 또는 폐업',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호마목 / 코스닥 제6조제1항제1호마목',chk:['중단 사유 및 범위','재가동 또는 폐업 계획']},
+  {id:'b06',cat:'biz',name:'중대재해 발생',desc:'산업안전보건법상 중대재해 발생',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제1호바목 / 코스닥 제6조제1항제1호바목',chk:['재해 발생 경위','피해 현황','관계기관 신고','재발방지 조치']},
 
-  // 발행증권 — 코스피 자기자본10%/5%, 코스닥 자기자본10%/5% (동일)
-  {id:'i01',cat:'issue',name:'유상증자·무상증자·자본감소',desc:'신주 발행 또는 감자',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(1) / 코스닥 제6조제1항제2호가목(1)',chk:['이사회 의사록','신주발행 방식','발행예정가액 산출근거','납입일정']},
-  {id:'i02',cat:'issue',name:'주식 소각 (이익소각)',desc:'자기주식 소각, 이익소각',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(2) / 코스닥 제6조제1항제2호가목(2)',chk:['이사회 의사록','소각 주식수 및 금액','소각 일정']},
-  {id:'i03',cat:'issue',name:'자기주식 취득·처분·신탁',desc:'자사주 매입·매각·신탁계약',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호가목(3) / 코스닥 제6조제1항제2호가목(3)',chk:['이사회 의사록','취득방법(장내/공개매수/신탁)','취득기간 및 한도','취득목적']},
-  {id:'i04',cat:'issue',name:'주식분할·병합',desc:'액면분할·병합 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(4) / 코스닥 제6조제1항제2호가목(5)',chk:['이사회 의사록','분할/병합 비율','효력 발생일']},
-  {id:'i05',cat:'issue',name:'CB·BW·EB·DR 등 발행',desc:'주권 관련 사채권 발행',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(6) / 코스닥 제6조제1항제2호가목(9)',chk:['이사회 의사록','발행조건(이율·만기·전환가액)','배정방식']},
-  {id:'i06',cat:'issue',name:'해외증권시장 상장·상장폐지',desc:'해외 거래소 관련 사항 (익일)',basis:'none',r:[[0,0],[0,0]],dl:'익일',ref:'코스피 제7조제1항제2호가목(7)',chk:['해당국 거래소 신고서','상장/폐지 일정']},
-  {id:'i07',cat:'issue',name:'어음 위·변조 사실 확인',desc:'발행어음 위변조 확인',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(9) / 코스닥 제6조제1항제2호가목(11)',chk:['위변조 확인 경위','피해금액','수사기관 신고 여부']},
+  {id:'i01',cat:'issue',name:'유상증자·무상증자·자본감소',desc:'신주를 발행하거나 감자를 결정한 경우',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(1) / 코스닥 제6조제1항제2호가목(1)',chk:['이사회 의사록','신주발행 방식','발행예정가액 산출근거','납입일정']},
+  {id:'i02',cat:'issue',name:'주식 소각 (이익소각)',desc:'보유 중인 자기주식을 소각하기로 한 경우',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(2) / 코스닥 제6조제1항제2호가목(2)',chk:['이사회 의사록','소각 주식수 및 금액','소각 일정']},
+  {id:'i03',cat:'issue',name:'자기주식 취득·처분·신탁',desc:'자사주 매입, 매각, 신탁계약 체결',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호가목(3) / 코스닥 제6조제1항제2호가목(3)',chk:['이사회 의사록','취득방법(장내/공개매수/신탁)','취득기간 및 한도','취득목적']},
+  {id:'i04',cat:'issue',name:'주식분할·병합',desc:'주식 액면분할 또는 병합 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(4) / 코스닥 제6조제1항제2호가목(5)',chk:['이사회 의사록','분할/병합 비율','효력 발생일']},
+  {id:'i05',cat:'issue',name:'CB·BW·EB·DR 등 발행',desc:'전환사채, 신주인수권부사채 등 주권관련 사채 발행',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(6) / 코스닥 제6조제1항제2호가목(9)',chk:['이사회 의사록','발행조건(이율·만기·전환가액)','배정방식']},
+  
+  {id:'v01',cat:'invest',name:'신규시설투자·시설증설·공장신설',desc:'설비 투자, 별도 공장 신설 등에 자금 투입',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(1) / 코스닥 제6조제1항제2호나목(4)',chk:['이사회 의사록','투자금액 및 기간','투자 목적·기대효과','재원조달 방법']},
+  {id:'v02',cat:'invest',name:'유형자산 취득·처분',desc:'부동산, 설비 등 대규모 유형자산 거래',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(2) / 코스닥 제6조제1항제2호나목(5)',chk:['이사회 의사록','매매계약서','감정평가서(부동산)','자산 현황 명세서']},
+  {id:'v03',cat:'invest',name:'타법인 주식·출자증권 취득·처분',desc:'계열사를 포함한 타법인 지분을 매매한 경우',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(3) / 코스닥 제6조제1항제2호나목(6)',chk:['이사회 의사록','주식매매계약서','투자대상법인 재무정보','취득목적']},
+  
+  {id:'d01',cat:'debt',name:'단기차입금 증가 결정',desc:'금융기관 차입 등 1년 이하의 단기차입금 증가',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(1) / 코스닥 제6조제1항제2호다목(1)',chk:['이사회 의사록 또는 대표이사 결정','차입조건','기존 단기차입금 현황']},
+  {id:'d02',cat:'debt',name:'채무인수·채무면제 결정',desc:'타인의 채무를 인수하거나 자사 채무를 면제받음',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(2) / 코스닥 제6조제1항제2호다목(3)',chk:['이사회 의사록','인수·면제 대상 채무 내역','거래 배경']},
+  {id:'d03',cat:'debt',name:'담보제공·채무보증 결정',desc:'타인을 위해 자산을 담보로 주거나 빚을 보증함',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(3) / 코스닥 제6조제1항제2호다목(4)',chk:['이사회 의사록','피보증법인 재무현황','보증금액 및 기간','담보 목적물 명세']},
+  {id:'d07',cat:'debt',name:'선급금·금전가지급·대여',desc:'타인에게 금전이나 증권을 대여·가지급함',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(7) / 코스닥 제6조제1항제2호다목(5)',chk:['이사회 의사록','거래상대방 정보','금액 및 조건','회수 방법']},
 
-  // 투자·자산 — 코스피: 시설투자 자기자본10%, 유형자산 자산5%, 타법인 자기자본5%
-  //             코스닥: 시설투자 자기자본10%, 유형자산 자산10%, 타법인 자기자본10%
-  {id:'v01',cat:'invest',name:'신규시설투자·시설증설·공장신설',desc:'설비투자, 별도공장 신설',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(1) / 코스닥 제6조제1항제2호나목(4)',chk:['이사회 의사록','투자금액 및 기간','투자 목적·기대효과','재원조달 방법']},
-  {id:'v02',cat:'invest',name:'유형자산 취득·처분',desc:'부동산·설비 등 유형자산',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(2) / 코스닥 제6조제1항제2호나목(5)',chk:['이사회 의사록','매매계약서','감정평가서(부동산)','자산 현황 명세서']},
-  {id:'v03',cat:'invest',name:'타법인 주식·출자증권 취득·처분',desc:'계열사 포함 타법인 지분 거래',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(3) / 코스닥 제6조제1항제2호나목(6)',chk:['이사회 의사록','주식매매계약서','투자대상법인 재무정보','취득목적']},
-  {id:'v04',cat:'invest',name:'피출자 비상장법인 부도·회생·해산',desc:'출자한 비상장법인 존폐 사유 (익일)',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제2호나목(4) / 코스닥 제6조제1항제2호나목(7)',chk:['해당 법인 부도·회생 확인서','출자금액 및 장부가액','회수 가능성 검토']},
+  {id:'l01',cat:'loss',name:'재해발생',desc:'화재, 홍수 등으로 인한 대규모 재산 피해',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호라목(1) / 코스닥 제6조제1항제2호라목(1)',chk:['재해 발생 경위','피해규모 산정','보험처리 여부','복구 계획']},
+  {id:'l02',cat:'loss',name:'벌금·과태료·추징금 부과',desc:'행정, 형사 제재금이 부과된 경우',basis:'equity',r:[[.05,.025],[.05,.03]],dl:'당일',ref:'코스피 제7조제1항제2호라목(2) / 코스닥 제6조제1항제2호라목(4)',chk:['부과기관 및 처분일','부과금액','부과 사유','이의신청 여부']},
+  {id:'l03',cat:'loss',name:'임·직원 횡령·배임 혐의 확인',desc:'임원(금액무관) 또는 직원의 횡령·배임 혐의 (직원은 별도 기준율 적용)',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호라목(3) / 코스닥 제6조제1항제2호라목(6)',chk:['혐의 확인 경위','관련 금액','수사기관 신고 여부','내부통제 조치']},
+  {id:'l09',cat:'loss',name:'현금·주식 배당 결정',desc:'분기, 중간, 결산 배당 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(4)(5) / 코스닥 제6조제1항제2호마목(4)',chk:['이사회 의사록','배당금액 및 배당기준일','주주명부폐쇄기간']},
 
-  // 채무·재무 — 코스피: 단기차입 자기자본10%, 나머지 5%
-  //             코스닥: 단기차입 자기자본10%, 나머지 10% (채무보증 등)
-  {id:'d01',cat:'debt',name:'단기차입금 증가 결정',desc:'단기차입, 1년 이하 사모사채',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(1) / 코스닥 제6조제1항제2호다목(1)',chk:['이사회 의사록 또는 대표이사 결정','차입조건','기존 단기차입금 현황']},
-  {id:'d02',cat:'debt',name:'채무인수·채무면제 결정',desc:'타인 채무 인수 또는 면제',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(2) / 코스닥 제6조제1항제2호다목(3)',chk:['이사회 의사록','인수·면제 대상 채무 내역','거래 배경']},
-  {id:'d03',cat:'debt',name:'담보제공·채무보증 결정',desc:'타인 위한 담보 제공 또는 채무보증',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(3) / 코스닥 제6조제1항제2호다목(4)',chk:['이사회 의사록','피보증법인 재무현황','보증금액 및 기간','담보 목적물 명세']},
-  {id:'d04',cat:'debt',name:'피보증법인 부도·회생·해산',desc:'보증(담보)한 법인 존폐 사유 (익일)',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제2호다목(4) / 코스닥 제6조제1항제2호다목(4)',chk:['해당 법인 부도·회생 확인서','보증금액 및 이행 위험']},
-  {id:'d05',cat:'debt',name:'사채원리금 미지급',desc:'공모·사모사채 원리금 불이행, 누계',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(5) / 코스닥 제6조제1항제2호다목(6)',chk:['미지급 사채 내역','미지급 원인','향후 지급 계획']},
-  {id:'d06',cat:'debt',name:'금융기관 대출원리금 미지급',desc:'은행·금융기관 대출 원리금 연체, 누계',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(6) / 코스닥 제6조제1항제2호다목(7)',chk:['미지급 대출 내역','연체 원인','만기연장·자구책 계획']},
-  {id:'d07',cat:'debt',name:'선급금·금전가지급·금전대여·증권대여',desc:'타인에 대한 금전·증권 공여',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(7) / 코스닥 제6조제1항제2호다목(5)',chk:['이사회 의사록','거래상대방 정보','금액 및 조건','회수 방법']},
-
-  // 손실·재해 — 코스피: 재해 자산5%, 벌금 자기자본5% / 코스닥: 재해 자산10%, 벌금 자기자본5%
-  {id:'l01',cat:'loss',name:'재해발생',desc:'화재·홍수 등 재산 피해',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호라목(1) / 코스닥 제6조제1항제2호라목(1)',chk:['재해 발생 경위','피해규모 산정','보험처리 여부','복구 계획']},
-  {id:'l02',cat:'loss',name:'벌금·과태료·추징금·과징금 등 부과',desc:'행정·형사 제재금 확정',basis:'equity',r:[[.05,.025],[.05,.03]],dl:'당일',ref:'코스피 제7조제1항제2호라목(2) / 코스닥 제6조제1항제2호라목(4)',chk:['부과기관 및 처분일','부과금액','부과 사유','이의신청 여부']},
-  {id:'l03',cat:'loss',name:'임·직원 횡령·배임 혐의 확인',desc:'임원 금액무관, 직원: 코스피 자기자본5%·코스닥 별도기준',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호라목(3) / 코스닥 제6조제1항제2호라목(6)',chk:['혐의 확인 경위','관련 금액','수사기관 신고 여부','내부통제 조치']},
-  {id:'l04',cat:'loss',name:'파생상품 거래 손실발생',desc:'위험회피 제외, 미실현분 포함, 누계 (익일)',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'익일',ref:'코스피 제7조제1항제2호라목(4) / 코스닥 제6조제1항제2호라목(8)',chk:['파생상품 내역','누계 손실 산출','손실 원인','포지션 관리 계획']},
-  {id:'l05',cat:'loss',name:'가장납입 혐의 확인',desc:'임원(퇴직자 포함) 등의 가장납입',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호라목(5)',chk:['혐의 확인 경위','관련 금액','수사기관 신고']},
-  {id:'l06',cat:'loss',name:'대규모 손상차손',desc:'매출채권 외 채권 손상, 자기자본 50%(大25%) 누계',basis:'equity',r:[[.50,.25],[.50,.25]],dl:'당일',ref:'코스피 제7조제1항제2호라목(6)',chk:['손상차손 대상 자산','손상금액 산출근거','손상 원인','충당금 설정 현황']},
-  {id:'l07',cat:'loss',name:'감사보고서 제출',desc:'감사의견 부적정·의견거절, 자본잠식 50%↑',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(1) / 코스닥 제6조제1항제2호마목(1)',chk:['감사보고서','감사의견 및 이유','자본잠식률 계산']},
-  {id:'l08',cat:'loss',name:'매출액·손익구조 30%(大15%) 이상 변동',desc:'내부결산 결과 주요 손익 지표 대폭 변동',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(3) / 코스닥 제6조제1항제2호마목(3)',chk:['내부결산 재무제표','직전연도 대비 변동률','변동 원인 설명']},
-  {id:'l09',cat:'loss',name:'현금·주식 배당 결정',desc:'분기·중간·결산 배당 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(4)(5) / 코스닥 제6조제1항제2호마목(4)',chk:['이사회 의사록','배당금액 및 배당기준일','주주명부폐쇄기간']},
-  {id:'l10',cat:'loss',name:'회계처리기준 위반 관련',desc:'증선위 검찰고발, 임원 해임권고 등',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(6)',chk:['처분 문서','위반 내용','정정공시 계획']},
-
-  // 기업경영
-  {id:'c01',cat:'corp',name:'최대주주 변경',desc:'최대주주 변경 사실 확인 (익일)',basis:'none',r:[[0,0],[0,0]],dl:'익일',ref:'코스피 제7조제1항제3호가목(1) / 코스닥 제6조제1항제3호가목(1)',chk:['변경 경위 및 확인일','신·구 최대주주 현황','지분변동 내역']},
-  {id:'c02',cat:'corp',name:'지주회사 자회사 편입·탈퇴',desc:'공정거래법상 자회사 편입·탈퇴',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(3)',chk:['이사회 의사록','편입·탈퇴 사유','해당 자회사 현황']},
-  {id:'c03',cat:'corp',name:'주식 포괄교환·이전',desc:'완전자회사 편입',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(4) / 코스닥 제6조제1항제3호가목(3)',chk:['이사회 의사록','교환비율 산출근거','주주총회 일정']},
-  {id:'c04',cat:'corp',name:'영업양수도·합병·분할·분할합병',desc:'주요 조직 구조개편',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(5) / 코스닥 제6조제1항제3호가목(4)',chk:['이사회 의사록','합병·분할 계획서','상대방 법인 재무정보','합병비율 산출근거','주총 일정']},
-  {id:'c05',cat:'corp',name:'간이합병·소규모합병',desc:'주주총회 생략 가능한 합병',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(6) / 코스닥 제6조제1항제3호가목(5)',chk:['이사회 의사록','간이/소규모 해당 요건','반대주주 주식매수청구 일정']},
-  {id:'c06',cat:'corp',name:'부도·은행거래정지',desc:'어음부도, 당좌거래 정지·금지',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호나목(1) / 코스닥 제6조제1항제3호나목(1)',chk:['부도 어음 내역','당좌거래 정지 통보문','긴급 자구계획']},
-  {id:'c07',cat:'corp',name:'회생절차·파산 관련사항',desc:'회생·파산 신청, 개시, 종결 등',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호나목(2) / 코스닥 제6조제1항제3호나목(2)',chk:['법원 결정문','신청 원인','향후 절차 일정']},
-  {id:'c08',cat:'corp',name:'해산사유 발생',desc:'법적 해산사유 발생 또는 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호나목(3) / 코스닥 제6조제1항제3호나목(3)',chk:['해산 사유','주주총회 결의 여부','청산 계획']},
-  {id:'c09',cat:'corp',name:'일정 청구금액 이상 소송 제기·판결',desc:'코스피 자기자본5% / 코스닥 자산총액10% 이상',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제3호다목(2) / 코스닥 제6조의2제1항제6호',chk:['소장 사본','청구금액','소송 원인','법률 자문 의견']},
-  {id:'c10',cat:'corp',name:'경영권분쟁 관련 소송',desc:'경영권 관련 소송 제기·판결',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호다목(3)',chk:['소장 또는 판결문','분쟁 경위','향후 대응']},
-  {id:'c11',cat:'corp',name:'주주총회 소집 이사회결의·주총결의',desc:'주주총회 소집 및 결의 사항',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호라목 / 코스닥 제6조제1항제3호라목',chk:['이사회 의사록','주총 일정','의안 목록']},
-  {id:'c12',cat:'corp',name:'투자판단 관련 중요정보 (포괄주의)',desc:'열거주의 외 중요정보 자율 공시',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제4호 / 코스닥 제6조제1항제4호',chk:['중요정보 해당 여부 검토','거래소 사전협의','공시 내용 초안']},
-
-  // 종속회사 — 코스피 5%(大2.5%), 코스닥 10%(大5%)
-  {id:'s01',cat:'sub',name:'종속회사 유상증자·감자',desc:'코스피 연결 자기자본5% / 코스닥 10%',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','지배회사 연결 자기자본 대비 비율','종속회사 재무현황']},
-  {id:'s02',cat:'sub',name:'종속회사 유형자산 취득·처분',desc:'코스피 연결 자산총액5% / 코스닥 10%',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','거래계약서','지배회사 연결 자산총액 대비 비율']},
-  {id:'s03',cat:'sub',name:'종속회사 타법인 주식 취득·처분',desc:'코스피 연결 자기자본5% / 코스닥 10%',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','투자대상법인 정보','지배회사 연결 자기자본 대비 비율']},
-  {id:'s04',cat:'sub',name:'종속회사 영업양수도·합병·분할',desc:'코스피 연결 자산총액5% / 코스닥 10%',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','합병·분할 계획서','지배회사 연결 기준 비율 산출']},
-  {id:'s05',cat:'sub',name:'종속회사 단기차입금 증가',desc:'코스피 연결 자기자본10% / 코스닥 10%',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 차입 내역','지배회사 연결 자기자본 대비 비율']},
-  {id:'s06',cat:'sub',name:'종속회사 담보·채무보증 제공',desc:'코스피 연결 자기자본5% / 코스닥 10%',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','보증금액 및 상대방','지배회사 연결 자기자본 대비 비율']},
-  {id:'s07',cat:'sub',name:'종속회사 부도·회생·해산',desc:'종속회사 존폐 사유 발생',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 부도·회생 확인서','지배회사 연결 재무 영향 분석']},
+  {id:'c01',cat:'corp',name:'최대주주 변경',desc:'최대주주가 변경된 사실을 확인한 경우',basis:'none',r:[[0,0],[0,0]],dl:'익일',ref:'코스피 제7조제1항제3호가목(1) / 코스닥 제6조제1항제3호가목(1)',chk:['변경 경위 및 확인일','신·구 최대주주 현황','지분변동 내역']},
+  {id:'c04',cat:'corp',name:'영업양수도·합병·분할',desc:'기업의 주요 조직 구조개편 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(5) / 코스닥 제6조제1항제3호가목(4)',chk:['이사회 의사록','합병·분할 계획서','상대방 법인 재무정보','합병비율 산출근거','주총 일정']},
+  {id:'c06',cat:'corp',name:'부도·은행거래정지',desc:'어음부도 또는 당좌거래가 정지된 경우',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호나목(1) / 코스닥 제6조제1항제3호나목(1)',chk:['부도 어음 내역','당좌거래 정지 통보문','긴급 자구계획']},
+  {id:'c09',cat:'corp',name:'일정 청구금액 이상 소송',desc:'대규모 소송이 제기되거나 판결이 난 경우',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제3호다목(2) / 코스닥 제6조의2제1항제6호',chk:['소장 사본','청구금액','소송 원인','법률 자문 의견']},
+  
+  {id:'s01',cat:'sub',name:'종속회사 유상증자·감자',desc:'연결 대상 종속회사의 자본금 변동',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','지배회사 연결 자기자본 대비 비율','종속회사 재무현황']},
+  {id:'s02',cat:'sub',name:'종속회사 유형자산 취득·처분',desc:'종속회사의 대규모 자산 거래',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','거래계약서','지배회사 연결 자산총액 대비 비율']},
+  {id:'s03',cat:'sub',name:'종속회사 타법인 주식 취득·처분',desc:'종속회사의 타사 지분 거래',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','투자대상법인 정보','지배회사 연결 자기자본 대비 비율']},
+  {id:'s05',cat:'sub',name:'종속회사 단기차입금 증가',desc:'종속회사의 단기 빚 증가',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 차입 내역','지배회사 연결 자기자본 대비 비율']}
 ];
-
-// 벌점 테이블
-const PENALTY = {
-  omit:  {minor:{minor:1,moderate:3,serious:5},major:{minor:2,moderate:5,serious:8},intent:{minor:4,moderate:7,serious:12}},
-  change:{minor:{minor:1,moderate:2,serious:4},major:{minor:2,moderate:4,serious:7},intent:{minor:3,moderate:6,serious:10}},
-  false: {minor:{minor:2,moderate:4,serious:7},major:{minor:4,moderate:7,serious:10},intent:{minor:6,moderate:10,serious:15}}
-};
 
 // ── 초기화 ──
 (function init(){
@@ -684,20 +509,54 @@ const PENALTY = {
   if(RULES.length) selectType(RULES[0].id);
 })();
 
+// ── 동적 설명 생성기 (스마트 UI) ──
+function getDynamicDesc(rule) {
+  if (rule.basis === 'none') return `<span style="color:var(--danger-mid); font-weight:600;">[금액 무관 즉시 공시]</span> ${rule.desc}`;
+  
+  const mktIdx = S.mkt === 'kospi' ? 0 : 1;
+  const lgIdx = S.isLarge ? 1 : 0;
+  const ratio = rule.r[mktIdx][lgIdx];
+  const basisName = rule.basis === 'asset' ? '자산총계' : (rule.basis === 'equity' ? '자기자본' : '매출액');
+  const finPrefix = rule.cat === 'sub' ? '연결 ' : (S.fin === 'con' ? '연결 ' : '별도 ');
+  
+  return `<span style="color:var(--accent-mid); font-weight:600;">[적용 기준: ${finPrefix}${basisName}의 ${ratio * 100}% 이상]</span><br>${rule.desc}`;
+}
+
+// ── 검색 기능 ──
+function searchRules(query) {
+  query = query.toLowerCase();
+  const list = document.getElementById('type-scroll');
+  const items = RULES.filter(r => 
+    r.name.toLowerCase().includes(query) || 
+    r.desc.toLowerCase().includes(query)
+  );
+  
+  // 검색 시엔 탭과 무관하게 전체에서 검색 결과를 렌더링
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.cat-btn')[0].classList.add('active'); // 전체 버튼 활성화
+  
+  renderHTMLList(items);
+}
+
 // ── 탭 ──
 function switchTab(name,btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
 }
 
 // ── 세그먼트 ──
 function setSeg(segId,inputId,val,btn){
   document.querySelectorAll('#'+segId+' .seg-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
   document.getElementById(inputId).value=val;
-  if(inputId==='mkt') S.mkt=val;
+  if(inputId==='mkt') {
+    S.mkt=val;
+    document.getElementById('top-mkt-badge').textContent = val === 'kospi' ? '코스피 적용 중' : '코스닥 적용 중';
+    renderList(S.cat); // 시장이 바뀌면 목록 내 % 설명도 다시 그려줌
+    calcMajor();
+  }
 }
 
 // ── 재무탭 ──
@@ -707,46 +566,26 @@ function switchFin(basis,btn){
   btn.classList.add('active');
   document.querySelectorAll('.fin-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('fin-'+basis).classList.add('active');
-  document.getElementById('fin-active-label').textContent = basis==='con' ? '연결 기준 적용 중' : '별도 기준 적용 중';
-  updateFinCards();
+  renderList(S.cat);
   calcMajor();
 }
 
 // ── 재무 지표 카드 업데이트 ──
 function updateFinCards(){
   const b=S.fin;
-  const asset  = parseFloat(document.getElementById(b+'-asset').value)||0;
-  const rev    = parseFloat(document.getElementById(b+'-rev').value)||0;
-  const equity = parseFloat(document.getElementById(b+'-equity').value)||0;
-  const capital= parseFloat(document.getElementById(b+'-capital').value)||0;
-
-  const hasAny = asset||rev||equity||capital;
-  document.getElementById('fin-cards').style.display = hasAny ? 'block' : 'none';
-
-  // 대규모법인 자동 판정: 자산총계 2조(20,000억)원 이상
+  const asset = parseFloat(document.getElementById(b+'-asset').value)||0;
+  // 대규모법인 판정 (자산 2조 이상)
   S.isLarge = asset >= 20000;
-  document.getElementById('large-badge').style.display = S.isLarge ? 'inline-block' : 'none';
-
-  if(!hasAny) return;
-
-  // 자본잠식 조정: 자기자본 < 납입자본금 이면 납입자본금 사용 (공시규정 제3조 제5항)
-  const isAdjusted = capital>0 && equity < capital;
-  const effectiveEquity = isAdjusted ? capital : equity;
-
-  document.getElementById('fc-asset-val').textContent = asset ? fmt(asset)+'억 원' : '—';
-  document.getElementById('fc-rev-val').textContent   = rev   ? fmt(rev)+'억 원'   : '—';
-  document.getElementById('fc-equity-val').textContent= effectiveEquity ? fmt(effectiveEquity)+'억 원' : '—';
-  document.getElementById('fc-capital-val').textContent= capital ? fmt(capital)+'억 원' : '—';
-
-  const noteEl = document.getElementById('fc-equity-note');
-  const eqCard = document.getElementById('fc-equity');
-  if(isAdjusted){
-    noteEl.textContent='(자본잠식 조정 적용)';
-    eqCard.classList.add('adjusted');
+  
+  const badge = document.getElementById('top-large-badge');
+  if(S.isLarge) {
+    badge.style.display = 'inline-block';
   } else {
-    noteEl.textContent='';
-    eqCard.classList.remove('adjusted');
+    badge.style.display = 'none';
   }
+  
+  // 리스트 설명을 실시간으로 업데이트 (일반법인 <-> 대규모법인 비율 변경 적용)
+  renderList(S.cat);
 }
 
 function markFilled(el){el.value?el.classList.add('filled'):el.classList.remove('filled');}
@@ -762,18 +601,23 @@ function addAmt(n){
 function filterCat(cat,btn){
   S.cat=cat;
   document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
+  document.getElementById('rule-search').value = ''; // 검색창 초기화
   renderList(cat);
 }
 
 function renderList(cat){
-  const list=document.getElementById('type-scroll');
-  const items=cat==='all'?RULES:RULES.filter(r=>r.cat===cat);
-  list.innerHTML=items.map(r=>`
+  const items = cat === 'all' ? RULES : RULES.filter(r => r.cat === cat);
+  renderHTMLList(items);
+}
+
+function renderHTMLList(items) {
+  const list = document.getElementById('type-scroll');
+  list.innerHTML = items.map(r => `
     <div class="type-item ${S.type===r.id?'selected':''}" id="ti-${r.id}" onclick="selectType('${r.id}')">
       <div class="type-item-body">
         <div class="type-name">${r.name}</div>
-        <div class="type-desc">${r.desc}</div>
+        <div class="type-desc">${getDynamicDesc(r)}</div>
       </div>
       <span class="badge badge-${r.dl==='당일'?'day':'next'}">${r.dl}</span>
     </div>`).join('');
@@ -787,6 +631,55 @@ function selectType(id){
   calcMajor();
 }
 
+// ── AI 스마트 검색 ──
+function analyzeSituation() {
+  const text = document.getElementById('smart-text').value.toLowerCase();
+  if(!text.trim()) {
+    alert("상황을 먼저 입력해주세요!");
+    return;
+  }
+  
+  // 1. 지분공시 매칭 로직
+  if(text.includes('임원') && (text.includes('매도') || text.includes('매수') || text.includes('팔') || text.includes('샀'))) {
+    switchTab('share', document.querySelectorAll('.tab-btn')[1]);
+    setSeg('sh-seg','sh-type','officer', document.querySelectorAll('#sh-seg .seg-btn')[0]);
+    switchSh('officer');
+    alert("💡 입력하신 상황을 분석하여 [지분공시 - 임원 소유상황 보고] 항목으로 안내합니다.\n주식수를 입력해 의무를 확인하세요.");
+    return;
+  }
+  if((text.includes('5%') || text.includes('대량')) && (text.includes('매수') || text.includes('매도') || text.includes('처분') || text.includes('취득'))) {
+    switchTab('share', document.querySelectorAll('.tab-btn')[1]);
+    setSeg('sh-seg','sh-type','bulk', document.querySelectorAll('#sh-seg .seg-btn')[1]);
+    switchSh('bulk');
+    alert("💡 [지분공시 - 대량보유(5%룰) 보고] 항목으로 안내합니다.");
+    return;
+  }
+
+  // 2. 주요경영사항 매칭 로직
+  let targetId = null;
+  if(text.includes('차입') || text.includes('은행에서 돈') || text.includes('빌렸')) targetId = 'd01';
+  else if(text.includes('소송') || text.includes('피소') || text.includes('재판')) targetId = 'c09';
+  else if(text.includes('합병') || text.includes('인수')) targetId = 'c04';
+  else if(text.includes('자회사') || text.includes('종속회사')) targetId = 's01'; 
+  else if(text.includes('투자') || text.includes('공장') || text.includes('설비')) targetId = 'v01';
+  else if(text.includes('배당')) targetId = 'l09';
+  else if(text.includes('계약') || text.includes('수주')) targetId = 'b03';
+  else if(text.includes('횡령') || text.includes('배임')) targetId = 'l03';
+  
+  if(targetId) {
+    switchTab('major', document.querySelectorAll('.tab-btn')[0]);
+    const rule = RULES.find(r=>r.id===targetId);
+    if(rule) {
+      filterCat('all', document.querySelectorAll('.cat-btn')[0]); // 전체보기로 변경
+      selectType(targetId);
+      document.getElementById('ti-'+targetId).scrollIntoView({behavior: 'smooth', block: 'center'});
+      alert(`💡 분석 완료! [${rule.name}] 항목을 찾아 선택했습니다.\n좌측에 거래 금액을 입력해 보세요.`);
+    }
+  } else {
+    alert("🤔 아직 관련된 공시 항목을 찾지 못했습니다.\n핵심 단어(예: 차입, 소송, 임원 매도, 합병)를 포함해서 조금 더 구체적으로 적어주세요.");
+  }
+}
+
 // ── 메인 계산 ──
 function calcMajor(){
   const rule=RULES.find(r=>r.id===S.type);
@@ -798,13 +691,14 @@ function calcMajor(){
   const capital= parseFloat(document.getElementById(b+'-capital').value)||0;
   const rev    = parseFloat(document.getElementById(b+'-rev').value)||0;
 
-  // 자본잠식 조정 (공시규정 제3조 제5항)
+  // 자본잠식 조정
   const isCapAdj = capital>0 && equity<capital;
   const effEquity = isCapAdj ? capital : equity;
 
-  // 비율: 코스피/코스닥 동일, 대규모법인만 구분
+  // 시장 및 대규모법인 비율 적용
+  const mktIdx = S.mkt === 'kospi' ? 0 : 1;
   const lgIdx = S.isLarge ? 1 : 0;
-  const ratio = rule.r[0][lgIdx];
+  const ratio = rule.r[mktIdx][lgIdx]; 
 
   if(rule.basis==='none'||ratio===0){
     renderNoThreshold(rule,b); return;
@@ -833,7 +727,7 @@ function calcMajor(){
   const isReq=deal>=threshold;
   const mktLabel=S.mkt==='kospi'?'코스피':'코스닥';
   const corpLabel=S.isLarge?'대규모법인':'일반법인';
-  const bLabel=S.fin==='con'?'연결':'별도';
+  const bLabel=rule.cat==='sub'?'연결':(S.fin==='con'?'연결':'별도'); // 종속회사는 무조건 연결기준
   const dlText=rule.dl==='당일'?'사유 발생 당일 오후 6시까지':'익일 오후 6시까지 (전일 18시 이후 발생 시 익일 07:30~07:50 가능)';
 
   document.getElementById('major-result').innerHTML=`
@@ -876,7 +770,6 @@ function calcMajor(){
     <div class="info-table">
       <div class="info-row"><span class="info-key">공시 항목</span><span class="info-val">${rule.name}</span></div>
       <div class="info-row"><span class="info-key">제출 기한</span><span class="info-val" style="color:${isReq?'var(--danger)':'inherit'};">${dlText}</span></div>
-      <div class="info-row"><span class="info-key">제출처</span><span class="info-val">KIND (한국거래소 전자공시시스템)</span></div>
       <div class="info-row"><span class="info-key">적용 기준</span><span class="info-val">${mktLabel} ${corpLabel} · ${bLabel} ${baseName} 대비 ${thPct}%</span></div>
       <div class="info-row"><span class="info-key">관련 조항</span><span class="info-val" style="font-size:11px;">유가증권시장 공시규정 ${rule.ref}</span></div>
     </div>
@@ -894,7 +787,6 @@ function calcMajor(){
 }
 
 function renderNoThreshold(rule,b){
-  const bLabel=b==='con'?'연결':'별도';
   const dlText=rule.dl==='당일'?'사유 발생 당일 오후 6시까지':'익일 오후 6시까지 (전일 18시 이후 발생 시 익일 07:30~07:50 가능)';
   document.getElementById('major-result').innerHTML=`
     <div class="verdict required">
@@ -908,63 +800,10 @@ function renderNoThreshold(rule,b){
     <div class="info-table">
       <div class="info-row"><span class="info-key">공시 항목</span><span class="info-val">${rule.name}</span></div>
       <div class="info-row"><span class="info-key">제출 기한</span><span class="info-val" style="color:var(--danger);">${dlText}</span></div>
-      <div class="info-row"><span class="info-key">제출처</span><span class="info-val">KIND (한국거래소 전자공시시스템)</span></div>
       <div class="info-row"><span class="info-key">관련 조항</span><span class="info-val" style="font-size:11px;">유가증권시장 공시규정 ${rule.ref}</span></div>
     </div>
     <div class="sec-label">준비 서류 체크리스트</div>
     <div class="checklist">${rule.chk.map(i=>`<div class="check-item"><div class="check-dot"></div>${i}</div>`).join('')}</div>
-  `;
-}
-
-// ── 불성실공시 토글 ──
-function togglePenalty(){
-  const body=document.getElementById('penalty-body');
-  const arrow=document.getElementById('penalty-arrow');
-  const open=body.style.display==='none';
-  body.style.display=open?'block':'none';
-  arrow.textContent=open?'▲ 접기':'▼ 펼치기';
-}
-
-function setRisk(group,el,val){
-  const map={motive:'riskMotive',severity:'riskSeverity',violation:'riskViolation'};
-  document.querySelectorAll('#'+group+'-opts .risk-opt').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');
-  S[map[group]]=val;
-}
-
-function calcRisk(){
-  const pts=PENALTY[S.riskViolation]?.[S.riskMotive]?.[S.riskSeverity]||0;
-  const fine=pts>=5?pts*4000000:0;
-  const canSub=pts<5&&S.riskMotive!=='intent';
-  const ml={minor:'경과실',major:'중과실',intent:'고의'}[S.riskMotive];
-  const sl={minor:'경미',moderate:'보통',serious:'중대'}[S.riskSeverity];
-  const vl={omit:'공시 불이행',change:'공시 번복·변경',false:'허위 공시'}[S.riskViolation];
-
-  document.getElementById('risk-result').innerHTML=`
-    <div style="height:14px;"></div>
-    <div class="penalty-box">
-      <div class="penalty-box-title">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-        제재 추정 결과
-      </div>
-      <div class="penalty-grid">
-        <div class="p-metric"><div class="p-metric-label">추정 부과 벌점</div><div class="p-metric-val">${pts}점</div></div>
-        <div class="p-metric"><div class="p-metric-label">추정 추가 제재금</div><div class="p-metric-val" style="font-size:18px;">${fine>0?(fine/10000).toFixed(0)+'만원':'미발생'}</div></div>
-      </div>
-      <div class="info-table" style="margin-bottom:10px;">
-        <div class="info-row"><span class="info-key">위반 종류</span><span class="info-val">${vl}</span></div>
-        <div class="info-row"><span class="info-key">귀책 범위</span><span class="info-val">${ml}</span></div>
-        <div class="info-row"><span class="info-key">중요성</span><span class="info-val">${sl}</span></div>
-        <div class="info-row"><span class="info-key">관련 규정</span><span class="info-val" style="font-size:11px;">공시규정 제35조, 시행세칙 [별표 2]</span></div>
-      </div>
-      <div class="p-note">
-        <strong>체크포인트:</strong>
-        누계 벌점 15점↑ → 관리종목 지정 위험.
-        ${canSub?' 벌점 5점 미만·비고의 시 1점당 400만원 제재금 대체 신청 가능(세칙 제13조의3).':''}
-        ${pts>=5?' 벌점 5점↑ → 법무팀 즉시 보고 필요.':''}
-        자진 정정공시 시 제재 경감 가능.
-      </div>
-    </div>
   `;
 }
 
@@ -1010,7 +849,6 @@ function calcOfficer(){
       <div class="info-row"><span class="info-key">적용 규정</span><span class="info-val">자본시장법 제173조 (임원·주요주주 소유상황 보고)</span></div>
       <div class="info-row"><span class="info-key">보고 기한</span><span class="info-val">${vc==='required'?'사유 발생일로부터 5영업일 이내':'보고 의무 미발생'}</span></div>
       <div class="info-row"><span class="info-key">1% 도달까지</span><span class="info-val">${rem>0?'추가 '+fmtN(rem)+'주 거래 시 보고 의무 발생':'이미 1% 초과 — 보고 의무 발생'}</span></div>
-      <div class="info-row"><span class="info-key">제출처</span><span class="info-val">금융감독원 DART 전자공시시스템</span></div>
     </div>
     <div class="sec-label">준비 서류</div>
     <div class="checklist">
@@ -1054,7 +892,6 @@ function calcBulk(){
       <div class="info-row"><span class="info-key">적용 규정</span><span class="info-val">자본시장법 제147조 (주식 등의 대량보유 보고)</span></div>
       <div class="info-row"><span class="info-key">보고 기한</span><span class="info-val">${vc==='required'?'5영업일 이내':'보고 의무 미발생'}</span></div>
       <div class="info-row"><span class="info-key">보유 목적</span><span class="info-val">${purpose==='management'?'경영 참여 목적 (상세 계획 기재 필요)':'단순 투자 목적'}</span></div>
-      <div class="info-row"><span class="info-key">제출처</span><span class="info-val">금융감독원 DART 전자공시시스템</span></div>
     </div>
     <div class="sec-label">준비 서류</div>
     <div class="checklist">
@@ -1074,19 +911,14 @@ function toggleQA(el){
 function fmt(n){return Math.round(n).toLocaleString('ko-KR');}
 function fmtN(n){return Math.round(n).toLocaleString('ko-KR');}
 
-// ==========================================
-// 💡 추가 기능: 로컬 스토리지 자동 저장 & 천 단위 콤마 마법 스크립트
-// 기존 코드를 전혀 수정하지 않고 덮어씌워 작동합니다.
-// ==========================================
+// ── 로컬 스토리지 & 콤마 마법 ──
 document.addEventListener('DOMContentLoaded', function() {
-  
-  // 1. 천 단위 콤마 마법 (계산 함수들이 고장나지 않게 콤마를 숨겨서 전달)
   const originalDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
   Object.defineProperty(HTMLInputElement.prototype, 'value', {
     get: function() {
       let val = originalDescriptor.get.call(this);
       if (this.dataset.comma === 'true' && val) {
-        return val.replace(/,/g, ''); // 계산할 땐 콤마를 빼고 숫자만 줌
+        return val.replace(/,/g, ''); 
       }
       return val;
     },
@@ -1095,11 +927,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // 모든 숫자 입력창을 텍스트로 바꾸고 콤마 기능 켜기
   document.querySelectorAll('input[type="number"]').forEach(input => {
     input.type = 'text';
     input.dataset.comma = 'true';
-    
     input.addEventListener('input', function(e) {
       let raw = originalDescriptor.get.call(this).replace(/[^0-9]/g, '');
       if(raw) {
@@ -1110,8 +940,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // 2. 재무정보 자동 저장 & 새로고침 시 불러오기
-  const inputsToSave = ['con-asset', 'con-rev', 'con-equity', 'con-capital', 'sep-asset', 'sep-rev', 'sep-equity', 'sep-capital'];
+  const inputsToSave = ['con-asset', 'con-rev', 'con-equity', 'con-capital', 'sep-asset', 'sep-rev', 'sep-equity', 'sep-capital', 'o-total', 'b-total'];
   
   inputsToSave.forEach(id => {
     const savedValue = localStorage.getItem(id);
@@ -1124,20 +953,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // 화면 켜질 때 초기 세팅 업데이트
   setTimeout(() => {
     if(typeof updateFinCards === 'function') updateFinCards();
     if(typeof calcMajor === 'function') calcMajor();
   }, 100);
 
-  // 입력할 때마다 내 컴퓨터(브라우저)에 몰래 저장하기
   document.addEventListener('input', function(e) {
     if (inputsToSave.includes(e.target.id)) {
       let rawNum = originalDescriptor.get.call(e.target).replace(/[^0-9]/g, '');
       localStorage.setItem(e.target.id, rawNum);
     }
   });
-  
 });
 </script>
 </body>
