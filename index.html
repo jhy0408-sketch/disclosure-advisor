@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공시 자가진단 시스템</title>
+<style>
+  :root {
+    --bg: #F7F7F5;
+    --surface: #FFFFFF;
+    --surface-2: #F2F2F0;
+    --border: #E4E4E0;
+    --border-strong: #C8C8C2;
+    --text-primary: #1A1A18;
+    --text-secondary: #6B6B65;
+    --text-tertiary: #9E9E96;
+    --accent: #1A3A5C;
+    --accent-light: #E8EFF6;
+    --accent-mid: #4A7FAF;
+    --danger: #C0392B;
+    --danger-light: #FDECEA;
+    --warning: #B7770D;
+    --warning-light: #FEF6E4;
+    --success: #1A6B3C;
+    --success-light: #E8F5EE;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: var(--accent);
+    padding: 0 32px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-logo {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-logo svg { opacity: 0.9; }
+  .header-badge {
+    font-size: 11px;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 400;
+  }
+
+  /* Tab Nav */
+  .tab-nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+  }
+  .tab-btn {
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text-primary); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* Layout */
+  .main { max-width: 1100px; margin: 0 auto; padding: 28px 32px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .card-body { padding: 20px; }
+  .card-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-icon svg { color: var(--accent); }
+
+  /* Form Elements */
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+  }
+  .field input, .field select {
+    width: 100%;
+    padding: 8px 11px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-primary);
+    transition: border-color 0.15s;
+    font-family: inherit;
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--accent-mid);
+    box-shadow: 0 0 0 3px rgba(74,127,175,0.12);
+  }
+  .field input.has-value { background: #FAFDF8; border-color: #B8D4C8; }
+
+  .input-unit {
+    position: relative;
+  }
+  .input-unit input { padding-right: 36px; }
+  .input-unit .unit {
+    position: absolute;
+    right: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    pointer-events: none;
+  }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Segment Control */
+  .segment {
+    display: flex;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    gap: 2px;
+  }
+  .segment-btn {
+    flex: 1;
+    padding: 6px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .segment-btn.active {
+    background: var(--surface);
+    color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+
+  /* Quick Amount Buttons */
+  .quick-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 7px;
+  }
+  .quick-btn {
+    padding: 4px 10px;
+    font-size: 11px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .quick-btn:hover {
+    border-color: var(--accent-mid);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  /* Result Panel */
+  .result-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--text-tertiary);
+    gap: 12px;
+  }
+  .result-empty svg { opacity: 0.3; }
+  .result-empty p { font-size: 13px; line-height: 1.7; }
+
+  /* Verdict Badge */
+  .verdict {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+  }
+  .verdict.required {
+    background: var(--danger-light);
+    border: 1px solid #F5C6C2;
+  }
+  .verdict.not-required {
+    background: var(--success-light);
+    border: 1px solid #A8D5BC;
+  }
+  .verdict.accumulate {
+    background: var(--warning-light);
+    border: 1px solid #F5DFA0;
+  }
+  .verdict-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .verdict.required .verdict-icon { background: var(--danger); color: #fff; }
+  .verdict.not-required .verdict-icon { background: var(--success); color: #fff; }
+  .verdict.accumulate .verdict-icon { background: var(--warning); color: #fff; }
+  .verdict-label { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2px; }
+  .verdict.required .verdict-label { color: var(--danger); }
+  .verdict.not-required .verdict-label { color: var(--success); }
+  .verdict.accumulate .verdict-label { color: var(--warning); }
+  .verdict-desc { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+
+  /* Metrics Grid */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .metric {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+  }
+  .metric-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+  .metric-value { font-size: 18px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
+  .metric-value.danger { color: var(--danger); }
+  .metric-value.success { color: var(--success); }
+  .metric-sub { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
+
+  /* Progress Bar */
+  .progress-wrap { margin-bottom: 20px; }
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 7px;
+  }
+  .progress-track {
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    position: relative;
+  }
+  .progress-threshold {
+    position: absolute;
+    top: -2px;
+    width: 2px;
+    height: 12px;
+    background: var(--text-primary);
+    opacity: 0.3;
+  }
+
+  /* Info Rows */
+  .info-rows { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 20px; }
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    min-width: 100px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .info-row-value {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 500;
+    flex: 1;
+  }
+
+  /* Checklist */
+  .checklist { display: flex; flex-direction: column; gap: 8px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .check-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-mid);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* Section Divider */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* Disclosure Type Grid */
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+  .type-card {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--surface);
+  }
+  .type-card:hover { border-color: var(--accent-mid); background: var(--accent-light); }
+  .type-card.selected {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    box-shadow: 0 0 0 2px rgba(26,58,92,0.08);
+  }
+  .type-card-name { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+  .type-card-desc { font-size: 11px; color: var(--text-tertiary); }
+
+  /* Print Button */
+  .btn-print {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-left: auto;
+  }
+  .btn-print:hover { border-color: var(--accent-mid); color: var(--accent); background: var(--accent-light); }
+
+  /* Analyze Button */
+  .btn-analyze {
+    width: 100%;
+    padding: 11px;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 16px;
+    letter-spacing: -0.01em;
+  }
+  .btn-analyze:hover { background: #152E4A; }
+  .btn-analyze:active { transform: scale(0.99); }
+
+  /* Risk Simulator */
+  .risk-row { margin-bottom: 16px; }
+  .risk-row-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
+  .risk-options { display: flex; flex-direction: column; gap: 6px; }
+  .risk-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--surface);
+  }
+  .risk-option:hover { border-color: var(--accent-mid); }
+  .risk-option.selected { border-color: var(--accent); background: var(--accent-light); }
+  .risk-option input[type="radio"] { display: none; }
+  .risk-radio {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-strong);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .risk-option.selected .risk-radio {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+  .risk-option.selected .risk-radio::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .risk-option-text { font-size: 13px; color: var(--text-primary); }
+  .risk-option-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 1px; }
+
+  /* Risk Result */
+  .risk-result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .risk-metric {
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+  }
+  .risk-metric.danger { background: var(--danger-light); border-color: #F5C6C2; }
+  .risk-metric.warning { background: var(--warning-light); border-color: #F5DFA0; }
+  .risk-metric-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+  .risk-metric-value { font-size: 22px; font-weight: 700; }
+  .risk-metric.danger .risk-metric-value { color: var(--danger); }
+  .risk-metric.warning .risk-metric-value { color: var(--warning); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px 32px;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    line-height: 1.8;
+  }
+
+  /* Tooltip */
+  .tooltip-wrap { position: relative; display: inline-flex; align-items: center; }
+  .tooltip-icon {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-tertiary);
+    font-size: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    margin-left: 4px;
+    flex-shrink: 0;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag-danger { background: var(--danger-light); color: var(--danger); }
+  .tag-warning { background: var(--warning-light); color: var(--warning); }
+  .tag-success { background: var(--success-light); color: var(--success); }
+  .tag-neutral { background: var(--surface-2); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  @media print {
+    .header, .tab-nav, .btn-print, .btn-analyze, .quick-btns { display: none !important; }
+    .main { padding: 0; }
+    .card { box-shadow: none; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+    공시 자가진단 시스템
+    <span class="header-badge">범용 버전</span>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('major')">주요경영사항 공시</button>
+  <button class="tab-btn" onclick="switchTab('shareholding')">지분공시</button>
+  <button class="tab-btn" onclick="switchTab('risk')">불성실공시 리스크</button>
+</nav>
+
+<main class="main">
+
+  <!-- ===== TAB 1: 주요경영사항 ===== -->
+  <div id="tab-major" class="tab-panel active">
+    <div class="two-col">
+      <!-- Left Panel -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <span class="card-title">회사 기본 정보</span>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label>상장 시장</label>
+              <div class="segment" id="market-seg">
+                <button class="segment-btn active" onclick="setSegment('market-seg', this, 'kospi')">코스피</button>
+                <button class="segment-btn" onclick="setSegment('market-seg', this, 'kosdaq')">코스닥</button>
+                <button class="segment-btn" onclick="setSegment('market-seg', this, 'unlisted')">비상장</button>
+              </div>
+              <input type="hidden" id="market" value="kospi">
+            </div>
+            <div class="field">
+              <label>회계기준</label>
+              <div class="segment" id="acct-seg">
+                <button class="segment-btn active" onclick="setSegment('acct-seg', this, 'consolidated')">연결</button>
+                <button class="segment-btn" onclick="setSegment('acct-seg', this, 'separate')">별도</button>
+              </div>
+              <input type="hidden" id="acct-basis" value="consolidated">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <span class="card-title">재무정보 입력</span>
+          </div>
+          <div class="card-body">
+            <div class="field-row">
+              <div class="field">
+                <label>자산총계</label>
+                <div class="input-unit">
+                  <input type="number" id="total-assets" placeholder="0" oninput="onFinInput(this)">
+                  <span class="unit">억원</span>
+                </div>
+              </div>
+              <div class="field">
+                <label>자본총계</label>
+                <div class="input-unit">
+                  <input type="number" id="total-equity" placeholder="0" oninput="onFinInput(this)">
+                  <span class="unit">억원</span>
+                </div>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>매출액</label>
+                <div class="input-unit">
+                  <input type="number" id="revenue" placeholder="0" oninput="onFinInput(this)">
+                  <span class="unit">억원</span>
+                </div>
+              </div>
+              <div class="field">
+                <label>자본금</label>
+                <div class="input-unit">
+                  <input type="number" id="paid-capital" placeholder="0" oninput="onFinInput(this)">
+                  <span class="unit">억원</span>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>자산총계 기준</label>
+              <select id="asset-standard">
+                <option value="latest">최근 사업연도말</option>
+                <option value="semi">반기말</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <span class="card-title">검토 대상 사건</span>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label>공시 유형</label>
+              <div class="type-grid" id="type-grid">
+                <div class="type-card selected" onclick="selectType(this, 'asset-acquire')" data-type="asset-acquire">
+                  <div class="type-card-name">자산 양수도</div>
+                  <div class="type-card-desc">부동산·설비 취득/처분</div>
+                </div>
+                <div class="type-card" onclick="selectType(this, 'equity-acquire')" data-type="equity-acquire">
+                  <div class="type-card-name">타법인 주식취득</div>
+                  <div class="type-card-desc">지분 취득·처분</div>
+                </div>
+                <div class="type-card" onclick="selectType(this, 'contract')" data-type="contract">
+                  <div class="type-card-name">단일 판매·공급계약</div>
+                  <div class="type-card-desc">주요 계약 체결</div>
+                </div>
+                <div class="type-card" onclick="selectType(this, 'debt-issue')" data-type="debt-issue">
+                  <div class="type-card-name">채무증권 발행</div>
+                  <div class="type-card-desc">CB·BW·회사채 등</div>
+                </div>
+                <div class="type-card" onclick="selectType(this, 'capital-increase')" data-type="capital-increase">
+                  <div class="type-card-name">유상증자</div>
+                  <div class="type-card-desc">신주 발행</div>
+                </div>
+                <div class="type-card" onclick="selectType(this, 'treasury')" data-type="treasury">
+                  <div class="type-card-name">자기주식 취득·처분</div>
+                  <div class="type-card-desc">자사주 매입·매각</div>
+                </div>
+                <div class="type-card" onclick="selectType(this, 'loss')" data-type="loss">
+                  <div class="type-card-name">손실 발생</div>
+                  <div class="type-card-desc">재해·소송·손상</div>
+                </div>
+                <div class="type-card" onclick="selectType(this, 'merger')" data-type="merger">
+                  <div class="type-card-name">합병·분할</div>
+                  <div class="type-card-desc">조직 구조 변경</div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>거래 금액</label>
+              <div class="input-unit">
+                <input type="number" id="deal-amount" placeholder="0" oninput="calcMajor()">
+                <span class="unit">억원</span>
+              </div>
+              <div class="quick-btns">
+                <button class="quick-btn" onclick="addAmount(1)">+1억</button>
+                <button class="quick-btn" onclick="addAmount(10)">+10억</button>
+                <button class="quick-btn" onclick="addAmount(50)">+50억</button>
+                <button class="quick-btn" onclick="addAmount(100)">+100억</button>
+                <button class="quick-btn" onclick="addAmount(500)">+500억</button>
+                <button class="quick-btn" onclick="addAmount(1000)">+1,000억</button>
+              </div>
+            </div>
+            <button class="btn-analyze" onclick="calcMajor()">공시 의무 검토</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Panel -->
+      <div class="card" id="major-result-card">
+        <div class="card-header" style="justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <span class="card-title">공시 검토 결과</span>
+          </div>
+          <button class="btn-print" onclick="window.print()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            의견서 인쇄
+          </button>
+        </div>
+        <div class="card-body" id="major-result">
+          <div class="result-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <p>좌측에서 회사 재무정보와<br>검토 대상 사건을 입력해주세요.<br><br>거래금액 입력 시 자동으로<br>공시 의무 발생 여부를 판단합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB 2: 지분공시 ===== -->
+  <div id="tab-shareholding" class="tab-panel">
+    <div class="two-col">
+      <!-- Left Panel -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <span class="card-title">보고 유형 선택</span>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <div class="segment" id="sh-type-seg" style="margin-bottom: 0;">
+                <button class="segment-btn active" onclick="setSegment('sh-type-seg', this, 'officer'); switchShType('officer')">임원·주요주주</button>
+                <button class="segment-btn" onclick="setSegment('sh-type-seg', this, 'bulk'); switchShType('bulk')">대량보유(5%룰)</button>
+              </div>
+              <input type="hidden" id="sh-type" value="officer">
+            </div>
+          </div>
+        </div>
+
+        <!-- 임원·주요주주 패널 -->
+        <div id="officer-panel" class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <span class="card-title">임원·주요주주 소유상황</span>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label>보고 대상자 구분</label>
+              <div class="segment" id="reporter-seg">
+                <button class="segment-btn active" onclick="setSegment('reporter-seg', this, 'officer')">임원</button>
+                <button class="segment-btn" onclick="setSegment('reporter-seg', this, 'major')">주요주주(10% 이상)</button>
+              </div>
+              <input type="hidden" id="reporter-type" value="officer">
+            </div>
+            <div class="field">
+              <label>총 발행주식수</label>
+              <div class="input-unit">
+                <input type="number" id="total-shares" placeholder="0" oninput="calcOfficer()">
+                <span class="unit">주</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>현재 보유주식수 (거래 전)</label>
+              <div class="input-unit">
+                <input type="number" id="current-shares" placeholder="0" oninput="calcOfficer()">
+                <span class="unit">주</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>이번 거래 주식수</label>
+              <div class="input-unit">
+                <input type="number" id="trade-shares" placeholder="0" oninput="calcOfficer()">
+                <span class="unit">주</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>거래 방향</label>
+              <div class="segment" id="trade-dir-seg">
+                <button class="segment-btn active" onclick="setSegment('trade-dir-seg', this, 'buy'); calcOfficer()">매수</button>
+                <button class="segment-btn" onclick="setSegment('trade-dir-seg', this, 'sell'); calcOfficer()">매도</button>
+              </div>
+              <input type="hidden" id="trade-dir" value="buy">
+            </div>
+            <div class="field">
+              <label>누적 미보고 변동주식수 (선택)</label>
+              <div class="input-unit">
+                <input type="number" id="accum-shares" placeholder="0" oninput="calcOfficer()">
+                <span class="unit">주</span>
+              </div>
+            </div>
+            <button class="btn-analyze" onclick="calcOfficer()">보고 의무 검토</button>
+          </div>
+        </div>
+
+        <!-- 대량보유 패널 -->
+        <div id="bulk-panel" class="card" style="display:none;">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="card-title">대량보유 보고 (5%룰)</span>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label>총 발행주식수</label>
+              <div class="input-unit">
+                <input type="number" id="bulk-total-shares" placeholder="0" oninput="calcBulk()">
+                <span class="unit">주</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>보유 전 주식수</label>
+              <div class="input-unit">
+                <input type="number" id="bulk-before-shares" placeholder="0" oninput="calcBulk()">
+                <span class="unit">주</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>이번 취득/처분 주식수</label>
+              <div class="input-unit">
+                <input type="number" id="bulk-trade-shares" placeholder="0" oninput="calcBulk()">
+                <span class="unit">주</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>거래 방향</label>
+              <div class="segment" id="bulk-dir-seg">
+                <button class="segment-btn active" onclick="setSegment('bulk-dir-seg', this, 'buy'); calcBulk()">취득</button>
+                <button class="segment-btn" onclick="setSegment('bulk-dir-seg', this, 'sell'); calcBulk()">처분</button>
+              </div>
+              <input type="hidden" id="bulk-dir" value="buy">
+            </div>
+            <div class="field">
+              <label>보유 목적</label>
+              <select id="bulk-purpose" onchange="calcBulk()">
+                <option value="investment">단순 투자</option>
+                <option value="management">경영 참여</option>
+              </select>
+            </div>
+            <button class="btn-analyze" onclick="calcBulk()">보고 의무 검토</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Panel -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <span class="card-title">지분공시 검토 결과</span>
+        </div>
+        <div class="card-body" id="sh-result">
+          <div class="result-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p>좌측에서 보고 유형과<br>주식 보유 현황을 입력해주세요.<br><br>보고 의무 발생 여부와<br>누적 잔여분을 자동 계산합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB 3: 불성실공시 리스크 ===== -->
+  <div id="tab-risk" class="tab-panel">
+    <div class="two-col">
+      <!-- Left Panel -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span class="card-title">위반 유형 입력</span>
+          </div>
+          <div class="card-body">
+            <div class="risk-row">
+              <div class="risk-row-label">위반의 동기 (귀책 범위)</div>
+              <div class="risk-options" id="motive-options">
+                <label class="risk-option selected" onclick="selectRiskOpt('motive', this, 'minor')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">경과실</div>
+                    <div class="risk-option-sub">통상적인 과실, 기재 실수</div>
+                  </div>
+                </label>
+                <label class="risk-option" onclick="selectRiskOpt('motive', this, 'major')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">중과실</div>
+                    <div class="risk-option-sub">부서 간 공문 누락, 검토 미흡</div>
+                  </div>
+                </label>
+                <label class="risk-option" onclick="selectRiskOpt('motive', this, 'intent')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">고의</div>
+                    <div class="risk-option-sub">의도적 누락, 장기 지연</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="risk-row">
+              <div class="risk-row-label">위반의 중요성 (투자 영향)</div>
+              <div class="risk-options" id="severity-options">
+                <label class="risk-option selected" onclick="selectRiskOpt('severity', this, 'minor')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">경미</div>
+                    <div class="risk-option-sub">기준 근접, 투자 영향 작음</div>
+                  </div>
+                </label>
+                <label class="risk-option" onclick="selectRiskOpt('severity', this, 'moderate')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">보통</div>
+                    <div class="risk-option-sub">공시 비율 상당 수준 초과</div>
+                  </div>
+                </label>
+                <label class="risk-option" onclick="selectRiskOpt('severity', this, 'serious')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">중대</div>
+                    <div class="risk-option-sub">회사 존립 위협, 시황 왜곡</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="risk-row" style="margin-bottom: 0;">
+              <div class="risk-row-label">위반 종류</div>
+              <div class="risk-options" id="violation-options">
+                <label class="risk-option selected" onclick="selectRiskOpt('violation', this, 'omit')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">공시 불이행</div>
+                    <div class="risk-option-sub">공시 기한 내 미제출</div>
+                  </div>
+                </label>
+                <label class="risk-option" onclick="selectRiskOpt('violation', this, 'change')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">공시 번복·변경</div>
+                    <div class="risk-option-sub">공시 내용 번복 또는 중요 변경</div>
+                  </div>
+                </label>
+                <label class="risk-option" onclick="selectRiskOpt('violation', this, 'false')">
+                  <div class="risk-radio"></div>
+                  <div>
+                    <div class="risk-option-text">허위 공시</div>
+                    <div class="risk-option-sub">사실과 다른 내용 공시</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <button class="btn-analyze" onclick="calcRisk()">리스크 산출</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+          </div>
+          <span class="card-title">제재 추정 보고서</span>
+        </div>
+        <div class="card-body" id="risk-result">
+          <div class="result-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <p>좌측에서 위반 유형을 선택하면<br>예상 벌점과 제재금을 추정합니다.<br><br>규정 제35조 및 [별표 2]<br>심의기준을 기반으로 산출합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  본 시스템은 한국거래소 유가증권시장·코스닥시장 공시규정 및 자본시장법을 기반으로 한 자가진단 도구입니다.<br>
+  법적 구속력이 없으며, 최종 판단은 반드시 전문가 검토를 수반하시기 바랍니다. | 공시규정 기준일: 2026년
+</footer>
+
+<script>
+// ===== STATE =====
+const state = {
+  market: 'kospi',
+  acctBasis: 'consolidated',
+  selectedType: 'asset-acquire',
+  shType: 'officer',
+  reporterType: 'officer',
+  tradeDir: 'buy',
+  bulkDir: 'buy',
+  riskMotive: 'minor',
+  riskSeverity: 'minor',
+  riskViolation: 'omit'
+};
+
+// ===== RULES =====
+// 코스피: 자산/자본 10%, 매출 5% | 대규모법인(자산 2조↑): 자산/자본 2.5%, 매출 1.25%
+// 코스닥: 자산/자본 5%, 매출 2.5%
+const DISCLOSURE_RULES = {
+  'asset-acquire': {
+    name: '자산 양수도',
+    basis: 'asset',
+    kospi: { normal: 0.10, large: 0.025 },
+    kosdaq: { normal: 0.05 },
+    deadline: '이사회 결의일 당일 (오후 6시까지)',
+    authority: '유가증권시장 공시규정 제7조 제1항 제1호',
+    checklist: ['이사회 의사록', '매매계약서 사본', '감정평가서 (부동산의 경우)', '자산 현황 명세서']
+  },
+  'equity-acquire': {
+    name: '타법인 주식 취득·처분',
+    basis: 'asset',
+    kospi: { normal: 0.10, large: 0.025 },
+    kosdaq: { normal: 0.05 },
+    deadline: '이사회 결의일 당일 (오후 6시까지)',
+    authority: '유가증권시장 공시규정 제7조 제1항 제2호',
+    checklist: ['이사회 의사록', '주식매매계약서', '투자대상법인 재무정보', '취득 목적 및 기대효과']
+  },
+  'contract': {
+    name: '단일 판매·공급계약',
+    basis: 'revenue',
+    kospi: { normal: 0.05, large: 0.025 },
+    kosdaq: { normal: 0.025 },
+    deadline: '계약 체결일 익일 (오후 6시까지)',
+    authority: '유가증권시장 공시규정 제7조 제1항 제13호',
+    checklist: ['계약서 사본 (또는 요약)', '계약상대방 정보', '계약기간 및 주요 조건', '계약금액 산출근거']
+  },
+  'debt-issue': {
+    name: '채무증권 발행',
+    basis: 'equity',
+    kospi: { normal: 0.10, large: 0.025 },
+    kosdaq: { normal: 0.05 },
+    deadline: '이사회 결의일 당일 (오후 6시까지)',
+    authority: '자본시장법 제161조, 공시규정 제7조',
+    checklist: ['이사회 의사록', '증권 발행 계획서', '주요 조건 (이율·만기·전환조건 등)', '대표주관사 정보']
+  },
+  'capital-increase': {
+    name: '유상증자 결정',
+    basis: 'equity',
+    kospi: { normal: 0.10, large: 0.025 },
+    kosdaq: { normal: 0.05 },
+    deadline: '이사회 결의일 당일 (오후 6시까지)',
+    authority: '자본시장법 제165조의6, 공시규정 제7조',
+    checklist: ['이사회 의사록', '신주 발행 방식 (일반공모/주주배정/3자배정)', '발행 예정가액 산출근거', '모집 일정']
+  },
+  'treasury': {
+    name: '자기주식 취득·처분',
+    basis: 'equity',
+    kospi: { normal: 0.05, large: 0.025 },
+    kosdaq: { normal: 0.05 },
+    deadline: '이사회 결의일 당일 (오후 6시까지)',
+    authority: '상법 제341조, 자본시장법 제165조의2',
+    checklist: ['이사회 의사록', '취득 방법 (시장매수/공개매수/신탁계약 등)', '취득 기간 및 한도', '취득 목적']
+  },
+  'loss': {
+    name: '손실 발생',
+    basis: 'equity',
+    kospi: { normal: 0.05, large: 0.025 },
+    kosdaq: { normal: 0.05 },
+    deadline: '사유 발생 당일 (오후 6시까지)',
+    authority: '유가증권시장 공시규정 제7조 제1항 제11호',
+    checklist: ['손실 발생 경위 및 원인', '피해 규모 산정 근거', '보험 처리 여부', '향후 대응 계획']
+  },
+  'merger': {
+    name: '합병·분할 결정',
+    basis: 'asset',
+    kospi: { normal: 0.10, large: 0.025 },
+    kosdaq: { normal: 0.05 },
+    deadline: '이사회 결의일 당일 (오후 6시까지)',
+    authority: '자본시장법 제161조 제1항 제1호',
+    checklist: ['이사회 의사록', '합병·분할 계획서', '상대방 법인 재무정보', '합병비율 산출근거', '주주총회 소집 일정']
+  }
+};
+
+// 벌점 테이블 (규정 [별표 2] 기준 추정)
+const PENALTY_TABLE = {
+  omit:   { minor: { minor: 1, moderate: 3, serious: 5 }, major: { minor: 2, moderate: 5, serious: 8 }, intent: { minor: 4, moderate: 7, serious: 12 } },
+  change: { minor: { minor: 1, moderate: 2, serious: 4 }, major: { minor: 2, moderate: 4, serious: 7 }, intent: { minor: 3, moderate: 6, serious: 10 } },
+  false:  { minor: { minor: 2, moderate: 4, serious: 7 }, major: { minor: 4, moderate: 7, serious: 10 }, intent: { minor: 6, moderate: 10, serious: 15 } }
+};
+
+// ===== TAB SWITCH =====
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== SEGMENT CONTROL =====
+function setSegment(segId, btn, value) {
+  document.querySelectorAll('#' + segId + ' .segment-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const map = {
+    'market-seg': 'market',
+    'acct-seg': 'acct-basis',
+    'sh-type-seg': 'sh-type',
+    'reporter-seg': 'reporter-type',
+    'trade-dir-seg': 'trade-dir',
+    'bulk-dir-seg': 'bulk-dir'
+  };
+  if (map[segId]) {
+    document.getElementById(map[segId]).value = value;
+    state[map[segId].replace(/-([a-z])/g, (g) => g[1].toUpperCase())] = value;
+  }
+  calcMajor();
+}
+
+// ===== TYPE SELECT =====
+function selectType(el, type) {
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.selectedType = type;
+  calcMajor();
+}
+
+// ===== INPUT HELPER =====
+function onFinInput(el) { if (el.value) el.classList.add('has-value'); else el.classList.remove('has-value'); calcMajor(); }
+function addAmount(n) {
+  const el = document.getElementById('deal-amount');
+  el.value = (parseFloat(el.value) || 0) + n;
+  calcMajor();
+}
+
+// ===== MAIN CALC =====
+function calcMajor() {
+  const market = document.getElementById('market').value;
+  const assets = parseFloat(document.getElementById('total-assets').value) || 0;
+  const equity = parseFloat(document.getElementById('total-equity').value) || 0;
+  const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+  const paidCapital = parseFloat(document.getElementById('paid-capital').value) || 0;
+  const deal = parseFloat(document.getElementById('deal-amount').value) || 0;
+  const type = state.selectedType;
+  const rule = DISCLOSURE_RULES[type];
+
+  if (!deal || deal === 0) return;
+
+  const isLargeCorpKospi = market === 'kospi' && assets >= 20000;
+  let threshold, baseValue, baseName;
+
+  if (rule.basis === 'asset') {
+    baseValue = assets;
+    baseName = '자산총계';
+    threshold = market === 'kospi'
+      ? (isLargeCorpKospi ? rule.kospi.large : rule.kospi.normal)
+      : (market === 'kosdaq' ? rule.kosdaq.normal : rule.kospi.normal);
+  } else if (rule.basis === 'equity') {
+    const effectiveEquity = equity > 0 ? Math.max(equity, paidCapital) : paidCapital;
+    baseValue = effectiveEquity;
+    baseName = '자기자본';
+    threshold = market === 'kospi'
+      ? (isLargeCorpKospi ? rule.kospi.large : rule.kospi.normal)
+      : (market === 'kosdaq' ? rule.kosdaq.normal : rule.kospi.normal);
+  } else {
+    baseValue = revenue;
+    baseName = '매출액';
+    threshold = market === 'kospi'
+      ? (isLargeCorpKospi ? rule.kospi.large : rule.kospi.normal)
+      : (market === 'kosdaq' ? rule.kosdaq.normal : rule.kospi.normal);
+  }
+
+  if (!baseValue || baseValue === 0) {
+    document.getElementById('major-result').innerHTML = `
+      <div class="verdict accumulate">
+        <div class="verdict-icon">!</div>
+        <div>
+          <div class="verdict-label">재무정보 필요</div>
+          <div class="verdict-desc">${baseName} 정보를 입력해주세요.</div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const minAmount = baseValue * threshold;
+  const ratio = deal / baseValue;
+  const pct = (ratio * 100).toFixed(2);
+  const thresholdPct = (threshold * 100).toFixed(2);
+  const progress = Math.min((ratio / threshold) * 100, 100);
+  const isRequired = deal >= minAmount;
+
+  const marketLabel = { kospi: '코스피', kosdaq: '코스닥', unlisted: '비상장' }[market];
+  const corpLabel = isLargeCorpKospi ? '대규모법인' : '일반법인';
+
+  const html = `
+    <div class="verdict ${isRequired ? 'required' : 'not-required'}">
+      <div class="verdict-icon">${isRequired ? '!' : '✓'}</div>
+      <div>
+        <div class="verdict-label">${isRequired ? '공시 의무 발생' : '공시 의무 미발생'}</div>
+        <div class="verdict-desc">${isRequired
+          ? `${rule.name} 공시를 ${rule.deadline}까지 제출해야 합니다.`
+          : `거래금액이 기준선(${fmt(minAmount)}억원) 미만으로 의무 공시 대상이 아닙니다.`
+        }</div>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">거래금액 비율</div>
+        <div class="metric-value ${isRequired ? 'danger' : 'success'}">${pct}%</div>
+        <div class="metric-sub">기준 ${thresholdPct}%</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">의무 발생 최소금액</div>
+        <div class="metric-value">${fmt(minAmount)}억</div>
+        <div class="metric-sub">${baseName} 기준</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">잔여 여유금액</div>
+        <div class="metric-value ${isRequired ? 'danger' : ''}">${isRequired ? '초과' : fmt(minAmount - deal) + '억'}</div>
+        <div class="metric-sub">${isRequired ? `${fmt(deal - minAmount)}억 초과` : '공시까지 남은 금액'}</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span>공시 기준선 도달율</span>
+        <span style="font-weight: 500; color: ${isRequired ? 'var(--danger)' : 'var(--text-primary)'};">${Math.round(progress)}%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: ${progress}%; background: ${isRequired ? 'var(--danger)' : 'var(--accent-mid)'}; opacity: 0.7;"></div>
+      </div>
+    </div>
+
+    <div class="section-label">공시 정보</div>
+    <div class="info-rows">
+      <div class="info-row">
+        <span class="info-row-label">공시 명칭</span>
+        <span class="info-row-value">${rule.name}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">제출 기한</span>
+        <span class="info-row-value" style="color: ${isRequired ? 'var(--danger)' : 'inherit'};">${rule.deadline}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">제출처</span>
+        <span class="info-row-value">KIND (한국거래소 전자공시시스템)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">적용 기준</span>
+        <span class="info-row-value">${marketLabel} ${corpLabel} · ${baseName} 대비 ${thresholdPct}%</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">관련 법령</span>
+        <span class="info-row-value" style="font-size: 12px;">${rule.authority}</span>
+      </div>
+    </div>
+
+    ${isRequired ? `
+    <div class="section-label">준비 서류 체크리스트</div>
+    <div class="checklist">
+      ${rule.checklist.map(item => `<div class="check-item"><div class="check-dot"></div>${item}</div>`).join('')}
+    </div>
+    ` : `
+    <div class="section-label">참고 사항</div>
+    <div class="checklist">
+      <div class="check-item"><div class="check-dot"></div>의무 공시 대상은 아니나, 투자 판단에 중요하다고 판단되는 경우 자율공시(규정 제28조) 가능합니다.</div>
+      <div class="check-item"><div class="check-dot"></div>향후 추가 거래 시 누적금액이 기준선을 초과하지 않도록 모니터링이 필요합니다.</div>
+    </div>
+    `}
+  `;
+
+  document.getElementById('major-result').innerHTML = html;
+}
+
+// ===== OFFICER CALC =====
+function calcOfficer() {
+  const total = parseFloat(document.getElementById('total-shares').value) || 0;
+  const current = parseFloat(document.getElementById('current-shares').value) || 0;
+  const trade = parseFloat(document.getElementById('trade-shares').value) || 0;
+  const accum = parseFloat(document.getElementById('accum-shares').value) || 0;
+  const dir = document.getElementById('trade-dir').value;
+  const reporterType = document.getElementById('reporter-type').value;
+
+  if (!total || !trade) return;
+
+  const afterShares = dir === 'buy' ? current + trade : current - trade;
+  const beforePct = (current / total * 100).toFixed(2);
+  const afterPct = (afterShares / total * 100).toFixed(2);
+  const changePct = (trade / total * 100).toFixed(2);
+  const accumWithThis = accum + trade;
+  const accumPct = (accumWithThis / total * 100).toFixed(2);
+
+  const isOfficer = reporterType === 'officer';
+  const isMajor = reporterType === 'major';
+  const becomesMajor = parseFloat(afterPct) >= 10 && parseFloat(beforePct) < 10;
+  const change1pct = parseFloat(changePct) >= 1;
+  const accumOver1pct = parseFloat(accumPct) >= 1;
+
+  let verdict, verdictClass, verdictDesc;
+
+  if (isOfficer) {
+    if (change1pct || accumOver1pct) {
+      verdict = '보고 의무 발생';
+      verdictClass = 'required';
+      verdictDesc = `변동율 ${accumPct}%로 1% 이상 — 사유 발생일로부터 5일 이내 보고 필요`;
+    } else {
+      verdict = '누적 보고 가능';
+      verdictClass = 'accumulate';
+      verdictDesc = `이번 변동율 ${changePct}% (누적 ${accumPct}%) — 1% 미달 시 다음 거래와 합산 가능`;
+    }
+  } else {
+    if (becomesMajor) {
+      verdict = '주요주주 편입 — 즉시 보고 필요';
+      verdictClass = 'required';
+      verdictDesc = `보유 비율이 ${beforePct}% → ${afterPct}%로 10%를 초과하여 주요주주가 됩니다.`;
+    } else if (change1pct) {
+      verdict = '보고 의무 발생';
+      verdictClass = 'required';
+      verdictDesc = `변동율 ${changePct}%로 1% 이상 — 5일 이내 보고 필요`;
+    } else {
+      verdict = '누적 보고 가능';
+      verdictClass = 'accumulate';
+      verdictDesc = `변동율 ${changePct}% (누적 ${accumPct}%) — 1% 미달로 다음 거래와 합산 가능`;
+    }
+  }
+
+  const remaining1pct = Math.ceil(total * 0.01) - accumWithThis;
+
+  const html = `
+    <div class="verdict ${verdictClass}">
+      <div class="verdict-icon">${verdictClass === 'required' ? '!' : '~'}</div>
+      <div>
+        <div class="verdict-label">${verdict}</div>
+        <div class="verdict-desc">${verdictDesc}</div>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">거래 전 보유 비율</div>
+        <div class="metric-value">${beforePct}%</div>
+        <div class="metric-sub">${fmtN(current)}주</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">거래 후 보유 비율</div>
+        <div class="metric-value ${verdictClass === 'required' ? 'danger' : ''}">${afterPct}%</div>
+        <div class="metric-sub">${fmtN(afterShares)}주</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">이번 변동율</div>
+        <div class="metric-value">${changePct}%</div>
+        <div class="metric-sub">${fmtN(trade)}주 ${dir === 'buy' ? '매수' : '매도'}</div>
+      </div>
+    </div>
+
+    <div class="section-label">보고 기준 상세</div>
+    <div class="info-rows">
+      <div class="info-row">
+        <span class="info-row-label">적용 규정</span>
+        <span class="info-row-value">자본시장법 제173조 (임원·주요주주 소유상황 보고)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">보고 기한</span>
+        <span class="info-row-value">${verdictClass === 'required' ? '사유 발생일로부터 5영업일 이내' : '보고 의무 미발생 (누적 1% 초과 시 보고)'}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">1% 도달까지</span>
+        <span class="info-row-value">${remaining1pct > 0 ? `추가 ${fmtN(remaining1pct)}주 거래 시 보고 의무 발생` : '이미 1% 초과 — 보고 의무 발생'}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">제출처</span>
+        <span class="info-row-value">금융감독원 DART 전자공시시스템</span>
+      </div>
+    </div>
+
+    <div class="section-label">준비 서류</div>
+    <div class="checklist">
+      <div class="check-item"><div class="check-dot"></div>임원·주요주주 소유상황 보고서 (DART 양식)</div>
+      <div class="check-item"><div class="check-dot"></div>주식 거래 내역 확인서 (증권사 거래내역)</div>
+      <div class="check-item"><div class="check-dot"></div>특수관계인 보유 현황 (해당 시)</div>
+    </div>
+  `;
+
+  document.getElementById('sh-result').innerHTML = html;
+}
+
+// ===== BULK (5%) CALC =====
+function calcBulk() {
+  const total = parseFloat(document.getElementById('bulk-total-shares').value) || 0;
+  const before = parseFloat(document.getElementById('bulk-before-shares').value) || 0;
+  const trade = parseFloat(document.getElementById('bulk-trade-shares').value) || 0;
+  const dir = document.getElementById('bulk-dir').value;
+  const purpose = document.getElementById('bulk-purpose').value;
+
+  if (!total || !trade) return;
+
+  const after = dir === 'buy' ? before + trade : before - trade;
+  const beforePct = (before / total * 100).toFixed(2);
+  const afterPct = (after / total * 100).toFixed(2);
+  const changePct = (Math.abs(after - before) / total * 100).toFixed(2);
+
+  const crosses5 = parseFloat(beforePct) < 5 && parseFloat(afterPct) >= 5;
+  const already5 = parseFloat(beforePct) >= 5;
+  const change1pct = parseFloat(changePct) >= 1;
+  const reportingDeadline = purpose === 'management' ? '5영업일 이내 (경영참여 목적 — 즉시 보고 권고)' : '5영업일 이내';
+
+  let verdict, verdictClass, verdictDesc;
+
+  if (crosses5) {
+    verdict = '최초 대량보유 보고 의무 발생';
+    verdictClass = 'required';
+    verdictDesc = `보유 비율이 ${beforePct}% → ${afterPct}%로 5% 기준선을 최초로 초과합니다.`;
+  } else if (already5 && change1pct) {
+    verdict = '변동 보고 의무 발생';
+    verdictClass = 'required';
+    verdictDesc = `5% 이상 보유자로서 1% 이상 변동(${changePct}%) — 5영업일 이내 변동 보고 필요`;
+  } else if (already5) {
+    verdict = '누적 보고 가능';
+    verdictClass = 'accumulate';
+    verdictDesc = `변동율 ${changePct}%로 1% 미달 — 다음 거래와 합산 후 1% 초과 시 보고`;
+  } else {
+    verdict = '보고 의무 미발생';
+    verdictClass = 'not-required';
+    verdictDesc = `보유 비율 ${afterPct}%로 5% 미만 — 대량보유 보고 대상 아님`;
+  }
+
+  const html = `
+    <div class="verdict ${verdictClass}">
+      <div class="verdict-icon">${verdictClass === 'required' ? '!' : verdictClass === 'accumulate' ? '~' : '✓'}</div>
+      <div>
+        <div class="verdict-label">${verdict}</div>
+        <div class="verdict-desc">${verdictDesc}</div>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">거래 전</div>
+        <div class="metric-value">${beforePct}%</div>
+        <div class="metric-sub">${fmtN(before)}주</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">거래 후</div>
+        <div class="metric-value ${verdictClass === 'required' ? 'danger' : ''}">${afterPct}%</div>
+        <div class="metric-sub">${fmtN(after)}주</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">변동율</div>
+        <div class="metric-value">${changePct}%</div>
+        <div class="metric-sub">${fmtN(trade)}주 ${dir === 'buy' ? '취득' : '처분'}</div>
+      </div>
+    </div>
+
+    <div class="section-label">보고 기준 상세</div>
+    <div class="info-rows">
+      <div class="info-row">
+        <span class="info-row-label">적용 규정</span>
+        <span class="info-row-value">자본시장법 제147조 (주식 등의 대량보유 보고)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">보고 기한</span>
+        <span class="info-row-value">${verdictClass === 'required' ? reportingDeadline : '보고 의무 미발생'}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">보유 목적</span>
+        <span class="info-row-value">${purpose === 'management' ? '경영 참여 목적 (상세 계획 기재 필요)' : '단순 투자 목적'}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">제출처</span>
+        <span class="info-row-value">금융감독원 DART 전자공시시스템</span>
+      </div>
+    </div>
+
+    <div class="section-label">준비 서류</div>
+    <div class="checklist">
+      <div class="check-item"><div class="check-dot"></div>주식 등의 대량보유상황 보고서 (DART 양식)</div>
+      <div class="check-item"><div class="check-dot"></div>보유 주식 거래내역 (증권사 확인서)</div>
+      ${purpose === 'management' ? '<div class="check-item"><div class="check-dot"></div>경영 참여 목적 및 향후 계획 상세 기재</div>' : ''}
+      <div class="check-item"><div class="check-dot"></div>특별관계자 보유 현황 포함 (공동보유자 있는 경우)</div>
+    </div>
+  `;
+
+  document.getElementById('sh-result').innerHTML = html;
+}
+
+// ===== SH TYPE SWITCH =====
+function switchShType(type) {
+  state.shType = type;
+  document.getElementById('officer-panel').style.display = type === 'officer' ? 'block' : 'none';
+  document.getElementById('bulk-panel').style.display = type === 'bulk' ? 'block' : 'none';
+}
+
+// ===== RISK OPTIONS =====
+function selectRiskOpt(group, el, value) {
+  const map = { motive: 'riskMotive', severity: 'riskSeverity', violation: 'riskViolation' };
+  document.querySelectorAll('#' + group + '-options .risk-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  state[map[group]] = value;
+}
+
+// ===== RISK CALC =====
+function calcRisk() {
+  const points = PENALTY_TABLE[state.riskViolation]?.[state.riskMotive]?.[state.riskSeverity] || 0;
+  const fine = points >= 5 ? points * 4000000 : 0;
+  const canSubstitute = points < 5 && state.riskMotive !== 'intent';
+
+  const motiveLabel = { minor: '경과실', major: '중과실', intent: '고의' }[state.riskMotive];
+  const severityLabel = { minor: '경미', moderate: '보통', serious: '중대' }[state.riskSeverity];
+  const violationLabel = { omit: '공시 불이행', change: '공시 번복·변경', false: '허위 공시' }[state.riskViolation];
+
+  const html = `
+    <div class="risk-result-grid">
+      <div class="risk-metric danger">
+        <div class="risk-metric-label">추정 부과 벌점</div>
+        <div class="risk-metric-value">${points}점</div>
+      </div>
+      <div class="risk-metric warning">
+        <div class="risk-metric-label">추정 제재금</div>
+        <div class="risk-metric-value">${fine > 0 ? (fine / 10000).toFixed(0) + '만원' : '미발생'}</div>
+      </div>
+    </div>
+
+    <div class="section-label">산출 기준</div>
+    <div class="info-rows">
+      <div class="info-row">
+        <span class="info-row-label">위반 종류</span>
+        <span class="info-row-value">${violationLabel}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">귀책 범위</span>
+        <span class="info-row-value">${motiveLabel}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">중요성</span>
+        <span class="info-row-value">${severityLabel}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">관련 규정</span>
+        <span class="info-row-value" style="font-size: 12px;">공시규정 제35조, 시행세칙 [별표 2]</span>
+      </div>
+    </div>
+
+    <div class="section-label">관리 포인트</div>
+    <div class="checklist">
+      <div class="check-item"><div class="check-dot"></div>누계 벌점 15점 이상 시 관리종목 지정 위험 (최근 1년 기준)</div>
+      ${canSubstitute ? '<div class="check-item"><div class="check-dot"></div>벌점 5점 미만·비고의 위반의 경우, 1점당 400만원으로 제재금 대체 신청 가능 (시행세칙 제13조의3)</div>' : ''}
+      ${points >= 5 ? '<div class="check-item"><div class="check-dot"></div>벌점 5점 이상으로 추가 공시위반제재금 부과 가능 — 법무팀 즉시 보고 필요</div>' : ''}
+      <div class="check-item"><div class="check-dot"></div>위반 사실 인지 즉시 자진 정정 공시 시 제재 경감 가능</div>
+      <div class="check-item"><div class="check-dot"></div>본 추정치는 거래소 심의기준에 따른 참고값이며, 실제 제재는 심의 결과에 따라 달라질 수 있습니다.</div>
+    </div>
+  `;
+
+  document.getElementById('risk-result').innerHTML = html;
+}
+
+// ===== UTILS =====
+function fmt(n) { return Math.round(n).toLocaleString('ko-KR'); }
+function fmtN(n) { return Math.round(n).toLocaleString('ko-KR'); }
+</script>
+
+</body>
+</html>
