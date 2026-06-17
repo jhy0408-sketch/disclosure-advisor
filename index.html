@@ -233,6 +233,17 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
   .card{box-shadow:none;break-inside:avoid;}
   .two-col{grid-template-columns:1fr;}
 }
+
+/* --- 인쇄용 결재란 CSS --- */
+.print-approval { display: none; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; border-bottom: 2px solid var(--text-primary); padding-bottom: 12px; }
+.print-approval-title { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); }
+.print-approval-box { display: flex; border: 1px solid var(--text-primary); background: #fff; }
+.print-approval-cell { width: 65px; height: 65px; border-left: 1px solid var(--text-primary); display: flex; flex-direction: column; align-items: center; font-size: 12px; }
+.print-approval-cell:first-child { border-left: none; background: var(--surface-2); font-weight: 700; justify-content: center; width: 25px; writing-mode: vertical-rl; letter-spacing: 5px; }
+.print-approval-sign { flex: 1; display: flex; align-items: center; justify-content: center; }
+@media print {
+  .print-approval { display: flex !important; }
+}
 </style>
 </head>
 <body>
@@ -263,14 +274,21 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
 
 <main class="main">
 
-<!-- ══ TAB: 주요경영사항 ══ -->
+<div class="print-approval">
+  <div class="print-approval-title">공시 의무 검토 의견서</div>
+  <div class="print-approval-box">
+    <div class="print-approval-cell">결재</div>
+    <div class="print-approval-cell"><div style="border-bottom: 1px solid var(--text-primary); width: 100%; text-align: center; padding: 3px 0;">담당</div><div class="print-approval-sign"></div></div>
+    <div class="print-approval-cell"><div style="border-bottom: 1px solid var(--text-primary); width: 100%; text-align: center; padding: 3px 0;">팀장</div><div class="print-approval-sign"></div></div>
+    <div class="print-approval-cell"><div style="border-bottom: 1px solid var(--text-primary); width: 100%; text-align: center; padding: 3px 0;">임원</div><div class="print-approval-sign"></div></div>
+  </div>
+</div>
+
 <div id="tab-major" class="tab-panel active">
   <div class="two-col">
 
-    <!-- 좌측 -->
     <div style="display:flex;flex-direction:column;gap:16px;">
 
-      <!-- 회사 기본정보 -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
@@ -288,7 +306,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
         </div>
       </div>
 
-      <!-- 재무정보 입력 -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
@@ -304,7 +321,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
             <button class="fin-tab" onclick="switchFin('sep',this)">별도재무제표</button>
           </div>
 
-          <!-- 연결 입력 -->
           <div id="fin-con" class="fin-panel active">
             <span class="fin-badge">K-IFRS 연결 기준 · 최근 사업연도말</span>
             <div class="field-row">
@@ -317,7 +333,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
             </div>
           </div>
 
-          <!-- 별도 입력 -->
           <div id="fin-sep" class="fin-panel">
             <span class="fin-badge">K-IFRS 별도 기준 · 최근 사업연도말</span>
             <div class="field-row">
@@ -330,7 +345,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
             </div>
           </div>
 
-          <!-- 재무 지표 카드 (입력 후 표시) -->
           <div id="fin-cards" style="display:none;margin-top:14px;">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
               <div class="fin-card-item" id="fc-asset">
@@ -354,7 +368,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
         </div>
       </div>
 
-      <!-- 공시 항목 선택 -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
@@ -390,7 +403,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
       </div>
     </div>
 
-    <!-- 우측 결과 -->
     <div style="display:flex;flex-direction:column;gap:16px;">
       <div class="card" id="result-card">
         <div class="card-header">
@@ -405,7 +417,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
         </div>
       </div>
 
-      <!-- 불성실공시 리스크 (접이식) -->
       <div class="card">
         <div class="card-header" style="cursor:pointer;" onclick="togglePenalty()">
           <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
@@ -444,7 +455,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
         </div>
       </div>
 
-      <!-- 실무 Q&A -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
@@ -479,7 +489,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
   </div>
 </div>
 
-<!-- ══ TAB: 지분공시 ══ -->
 <div id="tab-share" class="tab-panel">
   <div class="two-col">
     <div style="display:flex;flex-direction:column;gap:16px;">
@@ -1064,6 +1073,72 @@ function toggleQA(el){
 // ── 유틸 ──
 function fmt(n){return Math.round(n).toLocaleString('ko-KR');}
 function fmtN(n){return Math.round(n).toLocaleString('ko-KR');}
+
+// ==========================================
+// 💡 추가 기능: 로컬 스토리지 자동 저장 & 천 단위 콤마 마법 스크립트
+// 기존 코드를 전혀 수정하지 않고 덮어씌워 작동합니다.
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // 1. 천 단위 콤마 마법 (계산 함수들이 고장나지 않게 콤마를 숨겨서 전달)
+  const originalDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+  Object.defineProperty(HTMLInputElement.prototype, 'value', {
+    get: function() {
+      let val = originalDescriptor.get.call(this);
+      if (this.dataset.comma === 'true' && val) {
+        return val.replace(/,/g, ''); // 계산할 땐 콤마를 빼고 숫자만 줌
+      }
+      return val;
+    },
+    set: function(val) {
+      originalDescriptor.set.call(this, val);
+    }
+  });
+
+  // 모든 숫자 입력창을 텍스트로 바꾸고 콤마 기능 켜기
+  document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.type = 'text';
+    input.dataset.comma = 'true';
+    
+    input.addEventListener('input', function(e) {
+      let raw = originalDescriptor.get.call(this).replace(/[^0-9]/g, '');
+      if(raw) {
+        originalDescriptor.set.call(this, Number(raw).toLocaleString('ko-KR'));
+      } else {
+        originalDescriptor.set.call(this, '');
+      }
+    });
+  });
+
+  // 2. 재무정보 자동 저장 & 새로고침 시 불러오기
+  const inputsToSave = ['con-asset', 'con-rev', 'con-equity', 'con-capital', 'sep-asset', 'sep-rev', 'sep-equity', 'sep-capital'];
+  
+  inputsToSave.forEach(id => {
+    const savedValue = localStorage.getItem(id);
+    if (savedValue) {
+      const el = document.getElementById(id);
+      if (el) {
+        originalDescriptor.set.call(el, Number(savedValue).toLocaleString('ko-KR'));
+        el.classList.add('filled');
+      }
+    }
+  });
+  
+  // 화면 켜질 때 초기 세팅 업데이트
+  setTimeout(() => {
+    if(typeof updateFinCards === 'function') updateFinCards();
+    if(typeof calcMajor === 'function') calcMajor();
+  }, 100);
+
+  // 입력할 때마다 내 컴퓨터(브라우저)에 몰래 저장하기
+  document.addEventListener('input', function(e) {
+    if (inputsToSave.includes(e.target.id)) {
+      let rawNum = originalDescriptor.get.call(e.target).replace(/[^0-9]/g, '');
+      localStorage.setItem(e.target.id, rawNum);
+    }
+  });
+  
+});
 </script>
 </body>
 </html>
