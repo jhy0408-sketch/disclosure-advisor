@@ -6,314 +6,337 @@
 <title>공시 검토 Advisor</title>
 <style>
 :root {
-  --bg: #F0F2F5;
-  --surface: #FFFFFF;
-  --surface-2: #F7F8FA;
-  --surface-3: #EEF1F5;
-  --border: #E2E6EC;
-  --border-strong: #C5CDD9;
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --text-tertiary: #9CA3AF;
-  --accent: #1B3F6E;
-  --accent-hover: #153256;
-  --accent-light: #EBF1FA;
-  --accent-mid: #3B6FA8;
-  --accent-glow: rgba(59,111,168,0.15);
-  --danger: #B91C1C;
-  --danger-mid: #DC2626;
-  --danger-light: #FEF2F2;
-  --danger-border: #FECACA;
-  --warning: #92400E;
-  --warning-mid: #D97706;
-  --warning-light: #FFFBEB;
-  --warning-border: #FDE68A;
-  --success: #065F46;
-  --success-mid: #059669;
-  --success-light: #ECFDF5;
-  --success-border: #A7F3D0;
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --r-xl: 18px;
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --bg:#F0F2F5; --surface:#FFF; --surface-2:#F7F8FA; --surface-3:#EEF1F5;
+  --border:#E2E6EC; --border-strong:#C5CDD9;
+  --text-primary:#111827; --text-secondary:#4B5563; --text-tertiary:#9CA3AF;
+  --accent:#1B3F6E; --accent-h:#153256; --accent-light:#EBF1FA; --accent-mid:#3B6FA8; --accent-glow:rgba(59,111,168,0.15);
+  --danger:#B91C1C; --danger-mid:#DC2626; --danger-light:#FEF2F2; --danger-border:#FECACA;
+  --warning:#92400E; --warning-mid:#D97706; --warning-light:#FFFBEB; --warning-border:#FDE68A;
+  --success:#065F46; --success-mid:#059669; --success-light:#ECFDF5; --success-border:#A7F3D0;
+  --dart:#7C3AED; --dart-light:#F5F3FF; --dart-border:#DDD6FE;
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:18px;
+  --sh-xs:0 1px 2px rgba(0,0,0,.05); --sh-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04); --sh-md:0 4px 16px rgba(0,0,0,.08);
 }
-
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text-primary);font-size:13px;line-height:1.6;min-height:100vh;}
 
 /* ── Header ── */
-.header{background:linear-gradient(135deg,#1B3F6E 0%,#224E87 100%);padding:0 36px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(27,63,110,0.25);}
-.header-left{display:flex;align-items:center;gap:14px;}
-.header-logo-mark{width:32px;height:32px;background:rgba(255,255,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.2);}
-.header-title{color:#fff;font-size:15px;font-weight:700;letter-spacing:-0.02em;}
-.header-right{display:flex;align-items:center;gap:8px;}
-.header-tag{font-size:10.5px;font-weight:600;letter-spacing:0.02em;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.18); transition:all 0.2s;}
-.header-tag.large{background:var(--danger); border-color:#fff; color:#fff;}
-.btn-reset{display:flex;align-items:center;gap:6px;padding:6px 14px;font-size:11px;font-weight:600;border:1px solid rgba(255,255,255,0.25);border-radius:20px;background:var(--surface);color:var(--accent);cursor:pointer;transition:all 0.15s; margin-left:10px;}
-.btn-reset:hover{background:#f0f0f0; transform:scale(0.98);}
+.hdr{background:linear-gradient(135deg,#1B3F6E 0%,#224E87 100%);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(27,63,110,.25);}
+.hdr-left{display:flex;align-items:center;gap:12px;}
+.hdr-mark{width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);}
+.hdr-title{color:#fff;font-size:15px;font-weight:700;letter-spacing:-.02em;}
+.hdr-right{display:flex;align-items:center;gap:7px;}
+.hdr-tag{font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.18);}
+.hdr-tag.large{background:var(--danger-mid);border-color:rgba(255,255,255,.3);}
+.btn-reset{display:flex;align-items:center;gap:5px;padding:6px 12px;font-size:11px;font-weight:600;border:1px solid rgba(255,255,255,.25);border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);cursor:pointer;transition:.15s;margin-left:6px;}
+.btn-reset:hover{background:rgba(255,255,255,.2);}
 
 /* ── Tab Nav ── */
-.tab-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 36px;display:flex;gap:0;box-shadow:var(--shadow-xs);}
-.tab-btn{padding:13px 22px;font-size:13px;font-weight:600;color:var(--text-secondary);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:7px;}
+.tab-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;box-shadow:var(--sh-xs);}
+.tab-btn{padding:12px 20px;font-size:13px;font-weight:500;color:var(--text-secondary);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:.15s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
 .tab-btn:hover{color:var(--text-primary);}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:700;}
-.tab-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:0.5;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+.tab-dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.5;}
 .tab-btn.active .tab-dot{opacity:1;}
 
 /* ── Layout ── */
-.main{max-width:1240px;margin:0 auto;padding:24px 36px;}
+.main{max-width:1240px;margin:0 auto;padding:22px 32px;}
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
-.two-col{display:grid;grid-template-columns:420px 1fr;gap:20px;align-items:start;}
+.two-col{display:grid;grid-template-columns:390px 1fr;gap:18px;align-items:start;}
+.col-left{display:flex;flex-direction:column;gap:0;}
 
-/* ── Card & AI Box ── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-sm); margin-bottom:16px;}
-.card-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--surface-2);}
-.card-title{font-size:12px;font-weight:700;color:var(--text-primary);letter-spacing:0.01em;text-transform:uppercase;}
-.card-icon{width:26px;height:26px;border-radius:var(--r-sm);background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(59,111,168,0.15);}
-.card-body{padding:18px 20px;}
+/* ── Card ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-sm);margin-bottom:14px;}
+.card-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px;background:var(--surface-2);}
+.card-title{font-size:11px;font-weight:700;color:var(--text-primary);letter-spacing:.02em;text-transform:uppercase;}
+.cicon{width:24px;height:24px;border-radius:var(--r-sm);background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(59,111,168,.15);}
+.card-body{padding:16px 18px;}
 
-/* Smart Advisor Box */
-.ai-box{background:linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%); border:1px solid #cce0ff; border-radius:var(--r-xl); padding:18px 20px; margin-bottom:20px; box-shadow:var(--shadow-sm);}
-.ai-title{font-size:13px; font-weight:700; color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:12px;}
-.ai-textarea{width:100%; height:60px; padding:10px 12px; font-size:13px; border:1px solid #b3d4ff; border-radius:var(--r-sm); resize:none; font-family:inherit; margin-bottom:10px;}
-.ai-textarea:focus{outline:none; border-color:var(--accent-mid); box-shadow:0 0 0 3px rgba(59,111,168,0.1);}
-.ai-btn{padding:9px 18px; background:var(--accent); color:#fff; font-size:12px; font-weight:600; border:none; border-radius:var(--r-sm); cursor:pointer; transition:0.15s;}
-.ai-btn:hover{background:var(--accent-hover);}
+/* ── Smart Search Box ── */
+.smart-box{background:linear-gradient(135deg,#EBF4FF 0%,#E0EDFA 100%);border:1px solid #BFDBFE;border-radius:var(--r-xl);padding:16px 18px;margin-bottom:18px;}
+.smart-title{font-size:12px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:7px;margin-bottom:10px;}
+.smart-input{width:100%;padding:9px 12px;font-size:12px;border:1px solid #93C5FD;border-radius:var(--r-sm);font-family:inherit;resize:none;height:56px;background:#fff;margin-bottom:8px;}
+.smart-input:focus{outline:none;border-color:var(--accent-mid);box-shadow:0 0 0 3px var(--accent-glow);}
+.smart-btn{padding:8px 16px;background:var(--accent);color:#fff;font-size:12px;font-weight:600;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.15s;}
+.smart-btn:hover{background:var(--accent-h);}
 
 /* ── Field ── */
-.field{margin-bottom:13px;}
-.field label{display:block;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:5px;letter-spacing:0.02em;}
-.field input,.field select{width:100%;padding:8px 11px;font-size:13px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);color:var(--text-primary);transition:all 0.15s;font-family:inherit;}
+.field{margin-bottom:12px;}
+.field:last-child{margin-bottom:0;}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;letter-spacing:.02em;text-transform:uppercase;}
+.field input,.field select{width:100%;padding:8px 11px;font-size:13px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);color:var(--text-primary);transition:all .15s;font-family:inherit;appearance:none;}
 .field input:focus,.field select:focus{outline:none;border-color:var(--accent-mid);box-shadow:0 0 0 3px var(--accent-glow);}
 .field input.filled{background:#FAFDF9;border-color:#A7DBC0;}
-.input-wrap{position:relative;}
-.input-wrap input{padding-right:38px;}
-.input-unit{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-tertiary);pointer-events:none;font-weight:500;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.iw{position:relative;}
+.iw input{padding-right:36px;}
+.iu{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-tertiary);pointer-events:none;font-weight:500;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
 
-/* ── Segment & Tabs ── */
-.segment{display:flex;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px;gap:2px;}
-.seg-btn{flex:1;padding:6px 10px;font-size:12px;font-weight:500;border:none;background:none;border-radius:4px;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;text-align:center;}
-.seg-btn.active{background:var(--surface);color:var(--accent);box-shadow:var(--shadow-xs);font-weight:600;}
+/* ── Segment ── */
+.seg{display:flex;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px;gap:2px;}
+.seg-btn{flex:1;padding:6px 8px;font-size:12px;font-weight:500;border:none;background:none;border-radius:4px;cursor:pointer;color:var(--text-secondary);transition:all .15s;text-align:center;}
+.seg-btn.active{background:var(--surface);color:var(--accent);box-shadow:var(--sh-xs);font-weight:600;}
 
-.fin-tabs{display:flex;gap:2px;margin-bottom:14px;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px;}
-.fin-tab{flex:1;padding:7px 12px;font-size:12px;font-weight:500;border:none;border-radius:4px;background:none;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+/* ── Fin Tabs ── */
+.fin-tabs{display:flex;gap:2px;margin-bottom:12px;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-sm);padding:2px;}
+.fin-tab{flex:1;padding:7px 10px;font-size:12px;font-weight:500;border:none;border-radius:4px;background:none;color:var(--text-secondary);cursor:pointer;transition:all .15s;text-align:center;}
 .fin-tab.active{background:var(--accent);color:#fff;font-weight:600;}
 .fin-panel{display:none;}
 .fin-panel.active{display:block;}
+.fin-note{font-size:10px;color:var(--text-tertiary);margin-bottom:10px;}
 
-/* ── Search & Lists ── */
-.search-box{margin-bottom:12px; position:relative;}
-.search-box input{width:100%; padding:9px 12px 9px 32px; font-size:12px; border:1px solid var(--border-strong); border-radius:20px; background:var(--surface-2);}
-.search-icon{position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-tertiary); font-size:12px;}
+/* ── Fin Cards ── */
+.fin-cards{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px;}
+.fc{background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-md);padding:9px 12px;}
+.fc.adj{background:var(--warning-light);border-color:var(--warning-border);}
+.fc-label{font-size:10px;font-weight:600;color:var(--text-tertiary);margin-bottom:4px;}
+.fc-val{font-size:15px;font-weight:700;color:var(--text-primary);}
+.fc.adj .fc-val{color:var(--warning-mid);}
+.fc-note{font-size:9px;color:var(--warning-mid);margin-top:2px;font-weight:600;}
 
-.cat-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
-.cat-btn{padding:4px 10px;font-size:11px;font-weight:600;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+/* ── Cat & Search ── */
+.search-wrap{position:relative;margin-bottom:9px;}
+.search-wrap input{width:100%;padding:8px 12px 8px 30px;font-size:12px;border:1px solid var(--border-strong);border-radius:20px;background:var(--surface-2);font-family:inherit;}
+.search-wrap input:focus{outline:none;border-color:var(--accent-mid);}
+.s-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-tertiary);}
+.cat-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px;}
+.cat-btn{padding:4px 9px;font-size:11px;font-weight:600;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-secondary);cursor:pointer;transition:all .15s;white-space:nowrap;}
 .cat-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 
-.type-scroll{max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding-right:2px;}
-.type-scroll::-webkit-scrollbar{width:4px;}
+/* ── Type List ── */
+.type-scroll{max-height:290px;overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding-right:2px;}
+.type-scroll::-webkit-scrollbar{width:3px;}
 .type-scroll::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:2px;}
-.type-item{padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:all 0.15s;background:var(--surface);display:flex;align-items:flex-start;gap:8px;}
-.type-item:hover{border-color:var(--accent-mid);background:var(--accent-light);}
-.type-item.selected{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 2px rgba(27,63,110,0.08);}
-.type-item-body{flex:1;min-width:0;}
-.type-name{font-size:12px;font-weight:600;color:var(--text-primary);}
-.type-desc{font-size:11px;color:var(--text-secondary);margin-top:2px; line-height:1.4;}
-.badge{flex-shrink:0;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;}
-.badge-day{background:var(--danger-light);color:var(--danger);border:1px solid var(--danger-border);}
-.badge-next{background:var(--warning-light);color:var(--warning);border:1px solid var(--warning-border);}
+.ti{padding:8px 11px;border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:all .15s;background:var(--surface);display:flex;align-items:flex-start;gap:7px;}
+.ti:hover{border-color:var(--accent-mid);background:var(--accent-light);}
+.ti.sel{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 2px rgba(27,63,110,.08);}
+.ti-body{flex:1;min-width:0;}
+.ti-name{font-size:12px;font-weight:600;color:var(--text-primary);}
+.ti-desc{font-size:11px;color:var(--text-tertiary);margin-top:2px;line-height:1.4;}
+.bdg{flex-shrink:0;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-top:2px;}
+.bdg-day{background:var(--danger-light);color:var(--danger);border:1px solid var(--danger-border);}
+.bdg-next{background:var(--warning-light);color:var(--warning);border:1px solid var(--warning-border);}
 
-.quick-btns{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px;}
-.quick-btn{padding:4px 9px;font-size:11px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-secondary);cursor:pointer;}
-.quick-btn:hover{background:var(--accent-light); color:var(--accent); border-color:var(--accent-mid);}
+/* ── Amount ── */
+.quick-btns{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.qb{padding:4px 9px;font-size:11px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text-secondary);cursor:pointer;transition:.15s;}
+.qb:hover{border-color:var(--accent-mid);color:var(--accent);background:var(--accent-light);}
+.btn-go{width:100%;padding:11px;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:all .15s;margin-top:12px;letter-spacing:.01em;}
+.btn-go:hover{background:linear-gradient(135deg,var(--accent-h) 0%,var(--accent) 100%);}
 
-.btn-analyze{width:100%;padding:12px;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer; margin-top:16px; box-shadow:0 2px 8px rgba(27,63,110,0.25);}
-.btn-analyze:hover{background:linear-gradient(135deg,var(--accent-hover) 0%,var(--accent) 100%);}
-.btn-analyze:active{transform:scale(0.99);}
+/* ── Result ── */
+.result-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center;color:var(--text-tertiary);gap:12px;}
+.result-empty p{font-size:13px;line-height:1.8;}
 
-/* ── Result UI ── */
-.result-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center;color:var(--text-tertiary);gap:14px;}
-.verdict{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:var(--r-lg);margin-bottom:14px;border:1px solid;}
-.verdict.required{background:var(--danger-light);border-color:var(--danger-border);}
+/* ── Verdict ── */
+.verdict{display:flex;align-items:flex-start;gap:13px;padding:15px 18px;border-radius:var(--r-lg);margin-bottom:18px;border:1px solid;}
+.verdict.req{background:var(--danger-light);border-color:var(--danger-border);}
 .verdict.ok{background:var(--success-light);border-color:var(--success-border);}
 .verdict.info{background:var(--warning-light);border-color:var(--warning-border);}
-.verdict-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:700; color:#fff;}
-.verdict.required .verdict-icon{background:var(--danger-mid);}
-.verdict.ok .verdict-icon{background:var(--success-mid);}
-.verdict.info .verdict-icon{background:var(--warning-mid);}
-.verdict-tag{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px;}
-.verdict.required .verdict-tag{color:var(--danger);}
-.verdict.ok .verdict-tag{color:var(--success);}
-.verdict.info .verdict-tag{color:var(--warning-mid);}
-.verdict-text{font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.5;}
+.v-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;font-weight:700;color:#fff;}
+.verdict.req .v-icon{background:var(--danger-mid);}
+.verdict.ok .v-icon{background:var(--success-mid);}
+.verdict.info .v-icon{background:var(--warning-mid);}
+.v-tag{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;}
+.verdict.req .v-tag{color:var(--danger);}
+.verdict.ok .v-tag{color:var(--success);}
+.verdict.info .v-tag{color:var(--warning-mid);}
+.v-text{font-size:13px;font-weight:500;color:var(--text-primary);line-height:1.5;}
 
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
-.metric{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;}
-.metric-label{font-size:10px;font-weight:600;color:var(--text-tertiary);margin-bottom:5px;}
-.metric-val{font-size:18px;font-weight:700;color:var(--text-primary);}
-.metric-val.red{color:var(--danger-mid);}
-.metric-val.green{color:var(--success-mid);}
-.metric-sub{font-size:10px;color:var(--text-tertiary);margin-top:3px;}
+/* ── Metrics ── */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:18px;}
+.metric{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);padding:11px 13px;}
+.m-label{font-size:10px;font-weight:600;color:var(--text-tertiary);margin-bottom:4px;letter-spacing:.03em;}
+.m-val{font-size:19px;font-weight:700;color:var(--text-primary);}
+.m-val.red{color:var(--danger-mid);}
+.m-val.green{color:var(--success-mid);}
+.m-sub{font-size:10px;color:var(--text-tertiary);margin-top:2px;}
 
-.info-table{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-bottom:18px;}
-.info-row{display:flex;align-items:flex-start;padding:10px 14px;border-bottom:1px solid var(--border);gap:12px;}
-.info-row:nth-child(even){background:var(--surface-2);}
-.info-key{font-size:11px;font-weight:600;color:var(--text-tertiary);min-width:96px;flex-shrink:0;padding-top:1px;}
-.info-val{font-size:12px;color:var(--text-primary);font-weight:500;flex:1;line-height:1.5;}
+/* ── Progress ── */
+.prog-wrap{margin-bottom:18px;}
+.prog-hdr{display:flex;justify-content:space-between;font-size:11px;font-weight:500;color:var(--text-secondary);margin-bottom:6px;}
+.prog-track{height:7px;background:var(--surface-3);border-radius:4px;border:1px solid var(--border);overflow:hidden;}
+.prog-fill{height:100%;border-radius:4px;transition:width .45s cubic-bezier(.4,0,.2,1);}
 
-.sec-label{font-size:11px;font-weight:700;color:var(--text-tertiary);letter-spacing:0.08em;margin-bottom:10px;margin-top:20px;display:flex;align-items:center;gap:6px;}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
-.checklist{display:flex;flex-direction:column;gap:6px;}
-.check-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--surface-2);border-radius:var(--r-sm);border:1px solid var(--border);font-size:12px;}
-.check-dot{width:5px;height:5px;border-radius:50%;background:var(--accent-mid);flex-shrink:0;margin-top:6px;}
+/* ── Info Table ── */
+.itbl{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-bottom:16px;}
+.irow{display:flex;align-items:flex-start;padding:9px 13px;border-bottom:1px solid var(--border);gap:11px;}
+.irow:last-child{border-bottom:none;}
+.irow:nth-child(even){background:var(--surface-2);}
+.ik{font-size:11px;font-weight:600;color:var(--text-tertiary);min-width:90px;flex-shrink:0;padding-top:1px;}
+.iv{font-size:12px;color:var(--text-primary);font-weight:500;flex:1;line-height:1.5;}
 
-/* DART Card styling */
-.dart-card{background:linear-gradient(135deg, #fdfbf7 0%, #fff7e6 100%); border:1px solid var(--warning-border); border-radius:var(--r-lg); padding:16px 20px; margin-bottom:14px;}
-.dart-title{font-size:12px; font-weight:800; color:var(--warning-mid); margin-bottom:8px; display:flex; align-items:center; gap:6px;}
+/* ── Section Label ── */
+.sl{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;margin-top:16px;display:flex;align-items:center;gap:6px;}
+.sl:first-child{margin-top:0;}
+.sl::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* Regulation List */
-.reg-item{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md); padding:16px; margin-bottom:12px; box-shadow:var(--shadow-xs);}
-.reg-title{font-size:13px; font-weight:700; color:var(--accent); margin-bottom:6px;}
-.reg-desc{font-size:12px; color:var(--text-secondary); line-height:1.6;}
+/* ── Checklist ── */
+.chklist{display:flex;flex-direction:column;gap:5px;}
+.chi{display:flex;align-items:flex-start;gap:8px;padding:8px 11px;background:var(--surface-2);border-radius:var(--r-sm);border:1px solid var(--border);font-size:12px;line-height:1.5;}
+.ch-dot{width:5px;height:5px;border-radius:50%;background:var(--accent-mid);flex-shrink:0;margin-top:6px;}
 
-.footer{text-align:center;padding:20px 36px;font-size:11px;color:var(--text-tertiary);border-top:1px solid var(--border);margin-top:36px;line-height:1.9;}
+/* ── DART Box ── */
+.dart-box{background:linear-gradient(135deg,#FAF5FF 0%,#F5F0FF 100%);border:1px solid var(--dart-border);border-radius:var(--r-lg);padding:14px 16px;margin-top:16px;}
+.dart-title{font-size:11px;font-weight:700;color:var(--dart);display:flex;align-items:center;gap:6px;margin-bottom:10px;letter-spacing:.03em;}
+.dart-items{display:flex;flex-direction:column;gap:6px;}
+.dart-item{background:#fff;border:1px solid var(--dart-border);border-radius:var(--r-sm);padding:9px 12px;}
+.dart-item-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;}
+.dart-item-name{font-size:12px;font-weight:600;color:var(--text-primary);}
+.dart-deadline{font-size:10px;font-weight:700;color:var(--dart);background:var(--dart-light);padding:2px 7px;border-radius:10px;border:1px solid var(--dart-border);}
+.dart-item-desc{font-size:11px;color:var(--text-secondary);}
+
+/* ── Reg Search ── */
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.reg-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:all .2s;}
+.reg-card:hover{box-shadow:var(--sh-md);border-color:var(--accent-mid);transform:translateY(-1px);}
+.reg-card-hdr{padding:14px 16px;display:flex;align-items:flex-start;gap:10px;}
+.reg-icon-wrap{width:38px;height:38px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;}
+.reg-card-meta{flex:1;}
+.reg-card-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:3px;}
+.reg-card-sub{font-size:11px;color:var(--text-secondary);}
+.reg-card-body{padding:0 16px 14px;}
+.reg-card-desc{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px;}
+.reg-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
+.reg-tag{padding:3px 8px;font-size:10px;font-weight:600;border-radius:10px;}
+.rt-kind{background:var(--accent-light);color:var(--accent);border:1px solid rgba(59,111,168,.2);}
+.rt-dart{background:var(--dart-light);color:var(--dart);border:1px solid var(--dart-border);}
+.rt-dart2{background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;}
+.reg-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--accent-mid);text-decoration:none;padding:5px 10px;border:1px solid var(--accent-mid);border-radius:20px;transition:.15s;}
+.reg-link:hover{background:var(--accent-light);}
+
+/* ── Q&A ── */
+.qa-item{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-bottom:7px;}
+.qa-q{padding:10px 13px;font-size:12px;font-weight:600;cursor:pointer;background:var(--surface-2);display:flex;justify-content:space-between;align-items:center;}
+.qa-q:hover{background:var(--accent-light);}
+.qa-prefix{color:var(--accent-mid);font-weight:700;margin-right:5px;font-size:10px;}
+.qa-arrow{font-size:10px;color:var(--text-tertiary);transition:transform .2s;}
+.qa-item.open .qa-arrow{transform:rotate(180deg);}
+.qa-a{display:none;padding:10px 13px;font-size:12px;color:var(--text-secondary);background:var(--surface);border-top:1px solid var(--border);line-height:1.7;}
+.qa-item.open .qa-a{display:block;}
+
+.footer{text-align:center;padding:18px 32px;font-size:11px;color:var(--text-tertiary);border-top:1px solid var(--border);margin-top:32px;line-height:1.9;}
+@media print{.hdr,.tab-nav,.btn-go,.quick-btns,.cat-wrap,.smart-box{display:none!important;}.main{padding:0;}.card{box-shadow:none;break-inside:avoid;}.two-col{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="header-left">
-    <div class="header-logo-mark">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
-    </div>
-    <div>
-      <div class="header-title">공시 검토 Advisor</div>
-    </div>
+<header class="hdr">
+  <div class="hdr-left">
+    <div class="hdr-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+    <div class="hdr-title">공시 검토 Advisor</div>
   </div>
-  <div class="header-right">
-    <span id="top-mkt-badge" class="header-tag">코스피 적용 중</span>
-    <span id="top-large-badge" class="header-tag large" style="display:none;">대규모법인</span>
-    
+  <div class="hdr-right">
+    <span id="mkt-badge" class="hdr-tag">코스피 적용 중</span>
+    <span id="large-badge" class="hdr-tag large" style="display:none;">대규모법인</span>
     <button class="btn-reset" onclick="resetAll()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.22-10.27l-3.26 3.26"/></svg>
-      전체 초기화
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.22-10.27l-3.26 3.26"/></svg>초기화
     </button>
   </div>
 </header>
 
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('major',this)"><div class="tab-dot"></div>주요경영사항 공시</button>
-  <button class="tab-btn" onclick="switchTab('share',this)"><div class="tab-dot"></div>지분공시 (통합진단)</button>
-  <button class="tab-btn" onclick="switchTab('reg',this)"><div class="tab-dot"></div>공시 관련 규정 검색</button>
+  <button class="tab-btn active" onclick="switchTab('major',this)"><div class="tab-dot"></div>수시·주요사항 공시</button>
+  <button class="tab-btn" onclick="switchTab('share',this)"><div class="tab-dot"></div>지분공시</button>
+  <button class="tab-btn" onclick="switchTab('reg',this)"><div class="tab-dot"></div>공시 관련 규정</button>
 </nav>
 
 <main class="main">
 
-  <div class="ai-box">
-    <div class="ai-title">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      상황으로 자동 찾기 (스마트 검색)
+<!-- ══ TAB 1: 수시·주요사항 공시 ══ -->
+<div id="tab-major" class="tab-panel active">
+
+  <div class="smart-box">
+    <div class="smart-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      상황으로 자동 찾기
     </div>
-    <textarea id="smart-text" class="ai-textarea" placeholder="현재 당면한 이벤트나 상황을 자유롭게 적어보세요. (예: 어제 임원이 자사주를 1만주 매도했습니다. / 자회사를 50억원에 처분하기로 결정했습니다.)"></textarea>
-    <button class="ai-btn" onclick="analyzeSituation()">관련 공시 찾아보기 →</button>
+    <textarea id="smart-txt" class="smart-input" placeholder="상황을 자유롭게 적어보세요. (예: 은행에서 50억원 단기차입 결정했어요 / 임원이 자사주 1만주 매도했습니다)"></textarea>
+    <button class="smart-btn" onclick="smartSearch()">관련 공시 찾기 →</button>
   </div>
 
-<div id="tab-major" class="tab-panel active">
   <div class="two-col">
-    <div style="display:flex;flex-direction:column;gap:0;">
-      
+    <div class="col-left">
+
+      <!-- 회사 기본정보 -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-          <span class="card-title">회사 기본 정보 세팅</span>
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <span class="card-title">회사 기본 정보</span>
         </div>
         <div class="card-body">
-          <div class="field-row">
-            <div class="field">
-              <label>회사명 (선택)</label>
-              <input type="text" id="comp-name" placeholder="예: 삼성전자">
+          <div class="field" style="margin:0;">
+            <label>상장 시장</label>
+            <div class="seg" id="mkt-seg">
+              <button class="seg-btn active" onclick="setSeg('mkt-seg','mkt','kospi',this);onMktChange()">코스피</button>
+              <button class="seg-btn" onclick="setSeg('mkt-seg','mkt','kosdaq',this);onMktChange()">코스닥</button>
             </div>
-            <div class="field">
-              <label>상장 시장</label>
-              <select id="mkt" onchange="setMkt(this.value)">
-                <option value="kospi">코스피 (KOSPI)</option>
-                <option value="kosdaq">코스닥 (KOSDAQ)</option>
-              </select>
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label>지주회사 여부</label>
-              <select id="is-holding" onchange="calcMajor()">
-                <option value="no">일반 기업</option>
-                <option value="yes">공정거래법상 지주회사</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>결산월</label>
-              <select id="fiscal-month">
-                <option value="12">12월 결산법인</option>
-                <option value="3">3월 결산법인</option>
-                <option value="6">6월 결산법인</option>
-                <option value="9">9월 결산법인</option>
-              </select>
-            </div>
+            <input type="hidden" id="mkt" value="kospi">
           </div>
         </div>
       </div>
 
+      <!-- 재무정보 -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <span class="card-title">재무정보 입력 (최근 사업연도말)</span>
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <span class="card-title">재무정보 입력</span>
+          <div style="margin-left:auto;display:flex;gap:5px;align-items:center;">
+            <span id="fin-lbl" style="font-size:10px;font-weight:600;color:var(--accent-mid);background:var(--accent-light);padding:2px 8px;border-radius:10px;border:1px solid rgba(59,111,168,.2);">연결 기준</span>
+            <span id="large-fin-badge" style="display:none;font-size:10px;font-weight:600;color:var(--danger);background:var(--danger-light);padding:2px 8px;border-radius:10px;border:1px solid var(--danger-border);">대규모법인</span>
+          </div>
         </div>
         <div class="card-body">
           <div class="fin-tabs">
             <button class="fin-tab active" onclick="switchFin('con',this)">연결재무제표</button>
             <button class="fin-tab" onclick="switchFin('sep',this)">별도재무제표</button>
           </div>
-
           <div id="fin-con" class="fin-panel active">
-            <div class="field-row">
-              <div class="field"><label>자산총계</label><div class="input-wrap"><input type="number" id="con-asset" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>매출액</label><div class="input-wrap"><input type="number" id="con-rev" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+            <div class="fin-note">K-IFRS 연결 기준 · 최근 사업연도말</div>
+            <div class="frow">
+              <div class="field"><label>자산총계</label><div class="iw"><input type="text" id="con-asset" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
+              <div class="field"><label>매출액</label><div class="iw"><input type="text" id="con-rev" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
             </div>
-            <div class="field-row">
-              <div class="field"><label>자기자본</label><div class="input-wrap"><input type="number" id="con-equity" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>납입 자본금</label><div class="input-wrap"><input type="number" id="con-capital" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+            <div class="frow">
+              <div class="field"><label>자기자본</label><div class="iw"><input type="text" id="con-equity" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
+              <div class="field"><label>납입 자본금</label><div class="iw"><input type="text" id="con-capital" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
             </div>
           </div>
-
           <div id="fin-sep" class="fin-panel">
-            <div class="field-row">
-              <div class="field"><label>자산총계</label><div class="input-wrap"><input type="number" id="sep-asset" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>매출액</label><div class="input-wrap"><input type="number" id="sep-rev" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+            <div class="fin-note">K-IFRS 별도 기준 · 최근 사업연도말</div>
+            <div class="frow">
+              <div class="field"><label>자산총계</label><div class="iw"><input type="text" id="sep-asset" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
+              <div class="field"><label>매출액</label><div class="iw"><input type="text" id="sep-rev" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
             </div>
-            <div class="field-row">
-              <div class="field"><label>자기자본</label><div class="input-wrap"><input type="number" id="sep-equity" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
-              <div class="field"><label>납입 자본금</label><div class="input-wrap"><input type="number" id="sep-capital" placeholder="0" oninput="updateFinCards();calcMajor()"><span class="input-unit">억원</span></div></div>
+            <div class="frow">
+              <div class="field"><label>자기자본</label><div class="iw"><input type="text" id="sep-equity" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
+              <div class="field"><label>납입 자본금</label><div class="iw"><input type="text" id="sep-capital" placeholder="0" oninput="onFin(this)"><span class="iu">억원</span></div></div>
+            </div>
+          </div>
+          <div id="fin-cards" style="display:none;">
+            <div class="fin-cards">
+              <div class="fc" id="fc-asset"><div class="fc-label">자산총계</div><div class="fc-val" id="fv-asset">—</div></div>
+              <div class="fc" id="fc-rev"><div class="fc-label">매출액</div><div class="fc-val" id="fv-rev">—</div></div>
+              <div class="fc" id="fc-equity"><div class="fc-label">자기자본 <span id="fc-eq-note" style="font-size:9px;color:var(--warning-mid);font-weight:600;"></span></div><div class="fc-val" id="fv-equity">—</div></div>
+              <div class="fc" id="fc-capital"><div class="fc-label">납입 자본금</div><div class="fc-val" id="fv-capital">—</div></div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- 공시 항목 -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
           <span class="card-title">수시공시 항목 선택</span>
         </div>
         <div class="card-body">
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="rule-search" placeholder="공시 항목 검색 (예: 소송, 합병, 자기주식...)" oninput="searchRules(this.value)">
+          <div class="search-wrap">
+            <span class="s-icon">🔍</span>
+            <input type="text" id="rule-srch" placeholder="항목 검색 (예: 소송, 합병, 차입...)" oninput="searchRules(this.value)">
           </div>
-
-          <div class="cat-wrap" id="cat-wrap">
+          <div class="cat-wrap">
             <button class="cat-btn active" onclick="filterCat('all',this)">전체</button>
             <button class="cat-btn" onclick="filterCat('biz',this)">영업·생산</button>
             <button class="cat-btn" onclick="filterCat('issue',this)">발행증권</button>
@@ -321,36 +344,62 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
             <button class="cat-btn" onclick="filterCat('debt',this)">채무·재무</button>
             <button class="cat-btn" onclick="filterCat('loss',this)">손실·재해</button>
             <button class="cat-btn" onclick="filterCat('corp',this)">기업경영</button>
-            <button class="cat-btn" onclick="filterCat('sub',this)">종속회사</button>
+            <button class="cat-btn" onclick="filterCat('sub',this)">종속회사 관련</button>
           </div>
           <div class="type-scroll" id="type-scroll"></div>
-
-          <div class="field" style="margin-top:18px;">
+          <div class="field" style="margin-top:14px;">
             <label>거래 / 사건 금액</label>
-            <div class="input-wrap"><input type="number" id="deal" placeholder="0" oninput="calcMajor()"><span class="input-unit">억원</span></div>
+            <div class="iw"><input type="text" id="deal" placeholder="0" oninput="calcMajor()"><span class="iu">억원</span></div>
             <div class="quick-btns">
-              <button class="quick-btn" onclick="addAmt(1)">+1억</button>
-              <button class="quick-btn" onclick="addAmt(10)">+10억</button>
-              <button class="quick-btn" onclick="addAmt(50)">+50억</button>
-              <button class="quick-btn" onclick="addAmt(100)">+100억</button>
-              <button class="quick-btn" onclick="addAmt(500)">+500억</button>
+              <button class="qb" onclick="addAmt(1)">+1억</button>
+              <button class="qb" onclick="addAmt(10)">+10억</button>
+              <button class="qb" onclick="addAmt(50)">+50억</button>
+              <button class="qb" onclick="addAmt(100)">+100억</button>
+              <button class="qb" onclick="addAmt(500)">+500억</button>
+              <button class="qb" onclick="addAmt(1000)">+1,000억</button>
             </div>
           </div>
-          <button class="btn-analyze" onclick="calcMajor()">공시 의무 검토 →</button>
+          <button class="btn-go" onclick="calcMajor()">공시 의무 검토 →</button>
         </div>
       </div>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <div class="card" id="result-card">
-        <div class="card-header">
-          <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-          <span class="card-title">공시 검토 결과 (KIND + DART)</span>
+    <!-- 결과 패널 -->
+    <div>
+      <div class="card">
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <span class="card-title">공시 검토 결과</span>
         </div>
         <div class="card-body" id="major-result">
           <div class="result-empty">
-            <div class="result-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-            <p>좌측에서 재무정보와<br>수시공시 항목을 선택하세요.<br><br>스마트 어시스턴트에 상황을 묘사하면<br>관련 공시를 알아서 찾아줍니다.</p>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <p>좌측에서 재무정보와 공시 항목을 선택하세요.<br><br>스마트 검색에 상황을 묘사하면<br>관련 공시를 자동으로 찾아줍니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span class="card-title">실무 Q&A</span>
+        </div>
+        <div class="card-body">
+          <div class="qa-item" onclick="toggleQA(this)">
+            <div class="qa-q"><span><span class="qa-prefix">Q.</span>자본잠식 시 공시 기준은?</span><span class="qa-arrow">▼</span></div>
+            <div class="qa-a">공시규정 제3조 제5항에 따라 자기자본이 자본금 미만인 경우 <strong>납입 자본금을 자기자본으로 대체</strong>하여 비율을 산출합니다. 재무정보 입력 시 납입 자본금이 자기자본보다 크면 자동 조정됩니다.</div>
+          </div>
+          <div class="qa-item" onclick="toggleQA(this)">
+            <div class="qa-q"><span><span class="qa-prefix">Q.</span>KIND 수시공시와 DART 주요사항보고서의 차이?</span><span class="qa-arrow">▼</span></div>
+            <div class="qa-a">KIND 수시공시는 한국거래소에 제출하는 공시규정상 의무이고, DART 주요사항보고서는 자본시장법 제161조에 따라 금감원에 제출하는 법정 공시입니다. 자사주 취득·처분, 합병, 증자 등 주요 사건은 <strong>두 곳 모두 제출</strong>해야 합니다.</div>
+          </div>
+          <div class="qa-item" onclick="toggleQA(this)">
+            <div class="qa-q"><span><span class="qa-prefix">Q.</span>의무 미달 시 자율공시 가능?</span><span class="qa-arrow">▼</span></div>
+            <div class="qa-a">공시규정 제28조에 따라 의무 비율 미달이더라도 투자 판단에 중요하다고 판단되면 자율공시 가능합니다. 사유발생 익일까지 제출하면 됩니다.</div>
+          </div>
+          <div class="qa-item" onclick="toggleQA(this)">
+            <div class="qa-q"><span><span class="qa-prefix">Q.</span>종속회사 수시공시 기준은 연결 기준으로?</span><span class="qa-arrow">▼</span></div>
+            <div class="qa-a">네, 종속회사 관련 공시(제8조의2)는 지배회사의 <strong>연결 재무제표</strong>를 기준으로 의무 비율을 산출합니다. 재무정보 입력 시 연결 탭을 선택하세요.</div>
           </div>
         </div>
       </div>
@@ -358,199 +407,331 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
   </div>
 </div>
 
+<!-- ══ TAB 2: 지분공시 ══ -->
 <div id="tab-share" class="tab-panel">
   <div class="two-col">
-    <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:0;">
+
       <div class="card">
-        <div class="card-header">
-          <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <span class="card-title">지분 변동 입력 (통합 진단)</span>
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <span class="card-title">보고 유형</span>
+        </div>
+        <div class="card-body">
+          <div class="seg" id="sh-seg">
+            <button class="seg-btn active" onclick="setSeg('sh-seg','sh-type','officer',this);switchSh('officer')">임원·주요주주 (제173조)</button>
+            <button class="seg-btn" onclick="setSeg('sh-seg','sh-type','bulk',this);switchSh('bulk')">대량보유 5%룰 (제147조)</button>
+          </div>
+          <input type="hidden" id="sh-type" value="officer">
+          <div style="margin-top:10px;font-size:11px;color:var(--text-tertiary);background:var(--surface-3);border-radius:var(--r-sm);padding:8px 11px;line-height:1.6;">
+            지분 변동 내역을 입력하면 자본시장법상 임원보고(제173조) 및 대량보유보고(제147조, 5%룰) 두 가지 의무를 진단합니다.
+          </div>
+        </div>
+      </div>
+
+      <div id="officer-panel" class="card">
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <span class="card-title">임원·주요주주 소유상황</span>
         </div>
         <div class="card-body">
           <div class="field">
-            <label>회사 총 발행주식수</label>
-            <div class="input-wrap"><input type="number" id="sh-total" placeholder="0" oninput="calcShare()"><span class="input-unit">주</span></div>
+            <label>보고 대상자</label>
+            <div class="seg" id="rtype-seg">
+              <button class="seg-btn active" onclick="setSeg('rtype-seg','rtype','officer',this);calcOfficer()">임원</button>
+              <button class="seg-btn" onclick="setSeg('rtype-seg','rtype','major',this);calcOfficer()">주요주주 (10% 이상)</button>
+            </div>
+            <input type="hidden" id="rtype" value="officer">
           </div>
-          
-          <div class="sec-label">거래자 및 거래 정보</div>
+          <div class="field"><label>총 발행주식수</label><div class="iw"><input type="text" id="o-total" placeholder="0" oninput="calcOfficer()"><span class="iu">주</span></div></div>
+          <div class="field"><label>현재 보유주식수 (거래 전)</label><div class="iw"><input type="text" id="o-cur" placeholder="0" oninput="calcOfficer()"><span class="iu">주</span></div></div>
+          <div class="field"><label>이번 거래 주식수</label><div class="iw"><input type="text" id="o-trade" placeholder="0" oninput="calcOfficer()"><span class="iu">주</span></div></div>
           <div class="field">
-            <label>거래자 신분</label>
-            <select id="sh-role" onchange="calcShare()">
-              <option value="general">일반 주주</option>
-              <option value="officer">임원 (등기/미등기/주요주주 등)</option>
-            </select>
+            <label>거래 방향</label>
+            <div class="seg" id="odir-seg">
+              <button class="seg-btn active" onclick="setSeg('odir-seg','o-dir','buy',this);calcOfficer()">매수</button>
+              <button class="seg-btn" onclick="setSeg('odir-seg','o-dir','sell',this);calcOfficer()">매도</button>
+            </div>
+            <input type="hidden" id="o-dir" value="buy">
           </div>
-          <div class="field-row">
-            <div class="field">
-              <label>거래 전 보유 주식수</label>
-              <div class="input-wrap"><input type="number" id="sh-before" placeholder="0" oninput="calcShare()"><span class="input-unit">주</span></div>
+          <div class="field"><label>누적 미보고 변동주식수 <span style="font-weight:400;">(선택)</span></label><div class="iw"><input type="text" id="o-accum" placeholder="0" oninput="calcOfficer()"><span class="iu">주</span></div></div>
+          <button class="btn-go" onclick="calcOfficer()">보고 의무 검토 →</button>
+        </div>
+      </div>
+
+      <div id="bulk-panel" class="card" style="display:none;">
+        <div class="card-hdr">
+          <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <span class="card-title">대량보유 보고</span>
+        </div>
+        <div class="card-body">
+          <div class="field"><label>총 발행주식수</label><div class="iw"><input type="text" id="b-total" placeholder="0" oninput="calcBulk()"><span class="iu">주</span></div></div>
+          <div class="field"><label>보유 전 주식수</label><div class="iw"><input type="text" id="b-before" placeholder="0" oninput="calcBulk()"><span class="iu">주</span></div></div>
+          <div class="field"><label>이번 취득/처분 주식수</label><div class="iw"><input type="text" id="b-trade" placeholder="0" oninput="calcBulk()"><span class="iu">주</span></div></div>
+          <div class="field">
+            <label>거래 방향</label>
+            <div class="seg" id="bdir-seg">
+              <button class="seg-btn active" onclick="setSeg('bdir-seg','b-dir','buy',this);calcBulk()">취득</button>
+              <button class="seg-btn" onclick="setSeg('bdir-seg','b-dir','sell',this);calcBulk()">처분</button>
             </div>
-            <div class="field">
-              <label>이번 거래 주식수</label>
-              <div class="input-wrap"><input type="number" id="sh-trade" placeholder="0" oninput="calcShare()"><span class="input-unit">주</span></div>
-            </div>
+            <input type="hidden" id="b-dir" value="buy">
           </div>
-          
-          <div class="field-row">
-            <div class="field">
-              <label>거래 방향</label>
-              <div class="segment" id="sh-dir-seg">
-                <button class="seg-btn active" onclick="setSeg('sh-dir-seg','sh-dir','buy',this);calcShare()">취득 (매수)</button>
-                <button class="seg-btn" onclick="setSeg('sh-dir-seg','sh-dir','sell',this);calcShare()">처분 (매도)</button>
-              </div>
-              <input type="hidden" id="sh-dir" value="buy">
-            </div>
-            <div class="field">
-              <label>보유 목적 (5% 이상 시)</label>
-              <select id="sh-purpose" onchange="calcShare()">
-                <option value="investment">단순 투자</option>
-                <option value="management">경영 참여</option>
-              </select>
-            </div>
+          <div class="field">
+            <label>보유 목적</label>
+            <select id="b-purpose" onchange="calcBulk()"><option value="investment">단순 투자</option><option value="management">경영 참여</option></select>
           </div>
-          <button class="btn-analyze" onclick="calcShare()">지분공시 의무 통합 진단 →</button>
+          <button class="btn-go" onclick="calcBulk()">보고 의무 검토 →</button>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header">
-        <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <div class="card-hdr">
+        <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
         <span class="card-title">지분공시 검토 결과</span>
       </div>
-      <div class="card-body" id="share-result">
+      <div class="card-body" id="sh-result">
         <div class="result-empty">
-          <div class="result-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <p>좌측에 지분 변동 내역을 입력하시면<br><strong>임원보고(173조)</strong> 및 <strong>대량보유보고(5%룰)</strong><br>두 가지 의무를 동시에 진단합니다.</p>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <p>좌측에서 보고 유형과<br>주식 보유 현황을 입력해주세요.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ══ TAB 3: 공시 관련 규정 ══ -->
 <div id="tab-reg" class="tab-panel">
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-      <span class="card-title">공시 관련 핵심 규정 검색</span>
-    </div>
-    <div class="card-body">
-      <div class="search-box" style="max-width:400px; margin-bottom:20px;">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="reg-search" placeholder="규정 키워드 검색 (예: 161조, 주요사항, 자율공시...)" oninput="filterRegs(this.value)">
-      </div>
-      <div id="reg-list" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:14px;">
+  <div class="reg-grid">
+
+    <div class="reg-card">
+      <div class="reg-card-hdr">
+        <div class="reg-icon-wrap" style="background:#EBF1FA;">📋</div>
+        <div class="reg-card-meta">
+          <div class="reg-card-title">수시공시 (주요경영사항)</div>
+          <div class="reg-card-sub">유가증권시장 공시규정 제7조 / 코스닥 제6조</div>
         </div>
+      </div>
+      <div class="reg-card-body">
+        <div class="reg-tags"><span class="reg-tag rt-kind">KIND 제출</span><span class="reg-tag rt-dart2">당일 오후 6시</span></div>
+        <div class="reg-card-desc">자산총계·자기자본·매출액의 일정 비율(코스피 5%, 코스닥 10%) 이상의 거래·사건 발생 시 당일 6시까지 KIND에 신고합니다. 대규모법인(자산 2조↑)은 절반 비율 적용.</div>
+        <a class="reg-link" href="https://law.krx.co.kr" target="_blank">KRX 법무포털 ↗</a>
+      </div>
     </div>
+
+    <div class="reg-card">
+      <div class="reg-card-hdr">
+        <div class="reg-icon-wrap" style="background:#F5F3FF;">📄</div>
+        <div class="reg-card-meta">
+          <div class="reg-card-title">주요사항보고서</div>
+          <div class="reg-card-sub">자본시장법 제161조 및 시행령 제171조</div>
+        </div>
+      </div>
+      <div class="reg-card-body">
+        <div class="reg-tags"><span class="reg-tag rt-dart">DART 제출</span><span class="reg-tag rt-dart2">결의일 익일까지</span></div>
+        <div class="reg-card-desc">합병·분할·증자·감자·자기주식 취득·처분·사채 발행 등 자본시장법 열거 사항 발생 시 이사회 결의일 익일까지 DART에 보고합니다. 유형자산 및 타법인 주식은 자산총액 10% 이상 시 적용.</div>
+        <a class="reg-link" href="https://dart.fss.or.kr" target="_blank">DART 바로가기 ↗</a>
+      </div>
+    </div>
+
+    <div class="reg-card">
+      <div class="reg-card-hdr">
+        <div class="reg-icon-wrap" style="background:#ECFDF5;">👤</div>
+        <div class="reg-card-meta">
+          <div class="reg-card-title">임원·주요주주 소유상황 보고</div>
+          <div class="reg-card-sub">자본시장법 제173조</div>
+        </div>
+      </div>
+      <div class="reg-card-body">
+        <div class="reg-tags"><span class="reg-tag rt-dart">DART 제출</span><span class="reg-tag rt-dart2">5영업일 이내</span></div>
+        <div class="reg-card-desc">상장사 임원 또는 주요주주(10% 이상)가 주식 등을 매매한 경우, 변동일로부터 5영업일 이내에 DART에 소유상황 보고서를 제출해야 합니다. 변동율 1% 이상 또는 누적 1% 이상 시 의무 발생.</div>
+        <a class="reg-link" href="https://dart.fss.or.kr" target="_blank">DART 바로가기 ↗</a>
+      </div>
+    </div>
+
+    <div class="reg-card">
+      <div class="reg-card-hdr">
+        <div class="reg-icon-wrap" style="background:#FFF7ED;">📊</div>
+        <div class="reg-card-meta">
+          <div class="reg-card-title">대량보유상황 보고 (5%룰)</div>
+          <div class="reg-card-sub">자본시장법 제147조</div>
+        </div>
+      </div>
+      <div class="reg-card-body">
+        <div class="reg-tags"><span class="reg-tag rt-dart">DART 제출</span><span class="reg-tag rt-dart2">5영업일 이내</span></div>
+        <div class="reg-card-desc">누구든지 상장사 주식을 5% 이상 보유하게 되거나, 이후 1% 이상 변동이 있는 경우 5영업일 이내에 DART에 대량보유상황 보고서를 제출해야 합니다. 경영 참여 목적인 경우 상세 계획 기재 필수.</div>
+        <a class="reg-link" href="https://dart.fss.or.kr" target="_blank">DART 바로가기 ↗</a>
+      </div>
+    </div>
+
+    <div class="reg-card">
+      <div class="reg-card-hdr">
+        <div class="reg-icon-wrap" style="background:#FEF2F2;">⚠️</div>
+        <div class="reg-card-meta">
+          <div class="reg-card-title">불성실공시 제재</div>
+          <div class="reg-card-sub">유가증권시장 공시규정 제35조, 시행세칙 [별표 2]</div>
+        </div>
+      </div>
+      <div class="reg-card-body">
+        <div class="reg-tags"><span class="reg-tag rt-kind">KIND 관할</span></div>
+        <div class="reg-card-desc">공시 불이행·번복·허위 공시 시 위반 동기(경과실→고의)와 중요성(경미→중대)을 교차하여 벌점을 부과합니다. 누계 15점 이상 시 관리종목 지정 위험. 5점 미만·비고의는 1점당 400만원 제재금 대체 가능.</div>
+        <a class="reg-link" href="https://law.krx.co.kr" target="_blank">KRX 법무포털 ↗</a>
+      </div>
+    </div>
+
+    <div class="reg-card">
+      <div class="reg-card-hdr">
+        <div class="reg-icon-wrap" style="background:#F0FDF4;">🔵</div>
+        <div class="reg-card-meta">
+          <div class="reg-card-title">공정공시</div>
+          <div class="reg-card-sub">유가증권시장 공시규정 제15조 / 코스닥 제13조</div>
+        </div>
+      </div>
+      <div class="reg-card-body">
+        <div class="reg-tags"><span class="reg-tag rt-kind">KIND 제출</span></div>
+        <div class="reg-card-desc">미공개 중요 정보를 특정인에게 선별 제공하기 전에 모든 투자자에게 동시에 공시해야 합니다. 애널리스트 대상 실적 가이던스, IR 자료 제공 시 특히 주의 필요. 위반 시 불성실공시 제재 대상.</div>
+        <a class="reg-link" href="https://kind.krx.co.kr" target="_blank">KIND 바로가기 ↗</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
 </main>
 
 <footer class="footer">
-  본 도구는 상장사 공시 실무자를 위한 개인용 자가진단 시스템입니다.<br>
-  유가증권/코스닥 공시규정 및 자본시장법을 기반으로 구동되며, 최종 판단은 전문가 검토를 수반하시기 바랍니다.
+  본 도구는 상장사 공시 실무자를 위한 자가진단 시스템입니다.<br>
+  유가증권시장·코스닥 공시규정 및 자본시장법을 기반으로 구동되며, 최종 판단은 전문가 검토를 수반하시기 바랍니다. | 규정 기준일: 2026년
 </footer>
 
 <script>
-// ── 전체 초기화 ──
-function resetAll() {
-  if(confirm("입력한 모든 재무 금액과 선택 사항을 초기화하시겠습니까?")) {
-    localStorage.clear();
-    location.reload();
-  }
-}
-
 // ── 상태 ──
-const S = {
-  mkt:'kospi', isLarge:false, fin:'con',
-  type:null, cat:'all'
-};
+const S = { mkt:'kospi', isLarge:false, fin:'con', type:null, cat:'all' };
 
-// ── 수시공시 항목 (DART 세트 추가됨) ──
-// r:[[코스피일반,코스피大규모],[코스닥일반,코스닥大규모]]
+// ── RULES: r=[[코스피일반,코스피大],[코스닥일반,코스닥大]] ──
+// 자기주식 취득·처분은 basis:'none' (금액무관) — 자본시장법 제165조의3, 공시규정 제7조제1항제2호가목(3)
 const RULES = [
-  {id:'b01',cat:'biz',name:'영업 일부/전부 정지·정지처분',desc:'영업정지, 행정처분 발생 시',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호가목 / 코스닥 제6조제1항제1호가목',chk:['행정처분 문서','매출액 산출근거','향후 영업재개 계획'], dart:[{name:'주요사항보고서 (영업정지)', dl:'사유발생일 익일'}]},
-  {id:'b02',cat:'biz',name:'거래처와의 거래중단',desc:'주요 거래처와의 거래가 중단된 경우',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호나목 / 코스닥 제6조제1항제1호나목',chk:['거래중단 확인서','해당 매출액 비율 산출','대체 거래처 확보 계획']},
-  {id:'b03',cat:'biz',name:'단일 판매·공급계약 체결·해지',desc:'주요 판매·공급계약을 체결하거나 해지한 경우',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제1호다목 / 코스닥 제6조제1항제1호다목',chk:['계약서 사본','계약금액 산출근거','계약상대방 정보','계약기간 및 주요조건']},
-  {id:'b04',cat:'biz',name:'제품 수거·파기 결정',desc:'제품의 리콜, 수거 또는 파기 조치',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호라목 / 코스닥 제6조제1항제1호라목',chk:['수거·파기 대상 제품 목록','예상 손실 규모','원인 및 향후 조치']},
-  {id:'b05',cat:'biz',name:'생산활동 중단·폐업',desc:'주요 생산시설 가동 중단 또는 폐업',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호마목 / 코스닥 제6조제1항제1호마목',chk:['중단 사유 및 범위','재가동 또는 폐업 계획']},
-  {id:'b06',cat:'biz',name:'중대재해 발생',desc:'산업안전보건법상 중대재해 발생',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제1호바목 / 코스닥 제6조제1항제1호바목',chk:['재해 발생 경위','피해 현황','관계기관 신고','재발방지 조치']},
+  // 영업·생산
+  {id:'b01',cat:'biz',name:'영업 일부/전부 정지·정지처분',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호가목 / 코스닥 제6조제1항제1호가목',
+   dart:null,chk:['행정처분 문서','매출액 산출근거','향후 영업재개 계획']},
+  {id:'b02',cat:'biz',name:'거래처와의 거래중단',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호나목 / 코스닥 제6조제1항제1호나목',
+   dart:null,chk:['거래중단 확인서','해당 매출액 비율 산출','대체 거래처 확보 계획']},
+  {id:'b03',cat:'biz',name:'단일 판매·공급계약 체결·해지',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제1호다목 / 코스닥 제6조제1항제1호다목',
+   dart:null,chk:['계약서 사본','계약금액 산출근거','계약상대방 정보','계약기간 및 주요조건']},
+  {id:'b04',cat:'biz',name:'제품 수거·파기 결정',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호라목 / 코스닥 제6조제1항제1호라목',
+   dart:null,chk:['수거·파기 대상 목록','예상 손실 규모','원인 및 향후 조치']},
+  {id:'b05',cat:'biz',name:'생산활동 중단·폐업',basis:'rev',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제1호마목 / 코스닥 제6조제1항제1호마목',
+   dart:null,chk:['중단 사유 및 범위','재가동 또는 폐업 계획']},
+  {id:'b06',cat:'biz',name:'중대재해 발생',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제1호바목 / 코스닥 제6조제1항제1호바목',
+   dart:null,chk:['재해 발생 경위','피해 현황','관계기관 신고','재발방지 조치']},
 
-  {id:'i01',cat:'issue',name:'유상증자·무상증자',desc:'신주를 발행하기로 결정한 경우',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(1) / 코스닥 제6조제1항제2호가목(1)',chk:['이사회 의사록','신주발행 방식','발행예정가액 산출근거','납입일정'], dart:[{name:'주요사항보고서 (유상증자/무상증자 결정)', dl:'이사회 결의일 익일'}]},
-  {id:'i01_2',cat:'issue',name:'자본감소 (감자)',desc:'자본금을 감소시키기로 결정한 경우',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(1)',chk:['이사회 의사록','감자 비율 및 사유','채권자 보호절차'], dart:[{name:'주요사항보고서 (감자 결정)', dl:'이사회 결의일 익일'}]},
-  {id:'i02',cat:'issue',name:'주식 소각 (이익소각)',desc:'보유 중인 자기주식을 소각하기로 한 경우',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(2)',chk:['이사회 의사록','소각 주식수 및 금액','소각 일정']},
-  {id:'i03',cat:'issue',name:'자기주식 취득·처분',desc:'자사주 매입 또는 매각 결정',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호가목(3)',chk:['이사회 의사록','취득/처분 목적','한도 및 기간'], dart:[{name:'주요사항보고서 (자기주식 취득/처분 결정)', dl:'이사회 결의일 익일'},{name:'자기주식 취득/처분 결과보고서', dl:'취득/처분 완료 후 5일 이내'}]},
-  {id:'i04',cat:'issue',name:'주식분할·병합',desc:'주식 액면분할 또는 병합 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(4)',chk:['이사회 의사록','분할/병합 비율','효력 발생일']},
-  {id:'i05',cat:'issue',name:'CB·BW 등 주권관련 사채 발행',desc:'전환사채, 신주인수권부사채 발행',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(6)',chk:['이사회 의사록','발행조건(이율·만기·전환가액)','배정방식'], dart:[{name:'주요사항보고서 (전환사채권/신주인수권부사채권 발행결정)', dl:'이사회 결의일 익일'}]},
-  
-  {id:'v01',cat:'invest',name:'신규시설투자·시설증설',desc:'설비 투자 등에 자금 투입',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(1)',chk:['이사회 의사록','투자금액 및 기간','투자 목적']},
-  {id:'v02',cat:'invest',name:'유형자산 양수·양도',desc:'부동산, 설비 등 대규모 유형자산 거래',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(2)',chk:['이사회 의사록','매매계약서','감정평가서'], dart:[{name:'주요사항보고서 (유형자산 양수/양도 결정)', dl:'이사회 결의일 익일 (자산총계 10% 이상 시)'}]},
-  {id:'v03',cat:'invest',name:'타법인 주식·출자증권 취득·처분',desc:'타사 지분을 매매한 경우 (자회사 포함)',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(3)',chk:['이사회 의사록','주식매매계약서','상대 법인 정보'], dart:[{name:'주요사항보고서 (타법인주식및출자증권 양수/양도 결정)', dl:'이사회 결의일 익일 (자산총계 10% 이상 시)'}]},
-  
-  {id:'d01',cat:'debt',name:'단기차입금 증가 결정',desc:'금융기관 차입 등 1년 이하 단기 빚 증가',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(1)',chk:['이사회 의사록 또는 대표이사 결정','차입조건','기존 단기차입금 현황']},
-  {id:'d02',cat:'debt',name:'채무인수·채무면제 결정',desc:'타인의 채무를 인수하거나 면제받음',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(2)',chk:['이사회 의사록','대상 채무 내역','거래 배경']},
-  {id:'d03',cat:'debt',name:'담보제공·채무보증 결정',desc:'타인을 위해 자산을 담보/보증 제공',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(3)',chk:['이사회 의사록','피보증법인 재무현황','보증금액']},
-  {id:'d07',cat:'debt',name:'선급금·금전대여',desc:'타인에게 금전을 대여하거나 가지급함',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(7)',chk:['이사회 의사록','거래상대방 정보','금액 및 조건']},
+  // 발행증권
+  {id:'i01',cat:'issue',name:'유상증자·무상증자·자본감소',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(1) / 코스닥 제6조제1항제2호가목(1)',
+   dart:{name:'주요사항보고서 (증자·감자)',deadline:'이사회 결의일 익일까지',law:'자본시장법 제161조제1항제5호'},
+   chk:['이사회 의사록','신주발행 방식','발행예정가액 산출근거','납입일정']},
+  {id:'i02',cat:'issue',name:'주식 소각 (이익소각)',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(2)',
+   dart:null,chk:['이사회 의사록','소각 주식수 및 금액','소각 일정']},
+  {id:'i03',cat:'issue',name:'자기주식 취득·처분',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(3) / 코스닥 제6조제1항제2호가목(3)',
+   dart:{name:'주요사항보고서 (자기주식 취득·처분)',deadline:'이사회 결의일 익일까지 + 완료 후 5일 이내 처분결과보고서',law:'자본시장법 제161조제1항제4호'},
+   chk:['이사회 의사록','취득방법(장내/공개매수/신탁)','취득기간 및 한도','취득목적']},
+  {id:'i04',cat:'issue',name:'주식분할·병합',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호가목(4)',
+   dart:null,chk:['이사회 의사록','분할/병합 비율','효력 발생일']},
+  {id:'i05',cat:'issue',name:'CB·BW·EB·DR 등 발행',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호가목(6) / 코스닥 제6조제1항제2호가목(9)',
+   dart:{name:'주요사항보고서 (사채 발행)',deadline:'이사회 결의일 익일까지',law:'자본시장법 제161조제1항제9호'},
+   chk:['이사회 의사록','발행조건(이율·만기·전환가액)','배정방식']},
 
-  {id:'l01',cat:'loss',name:'재해발생',desc:'화재, 홍수 등으로 인한 대규모 재산 피해',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호라목(1)',chk:['재해 발생 경위','피해규모 산정','복구 계획']},
-  {id:'l02',cat:'loss',name:'벌금·과태료·추징금 부과',desc:'행정, 형사 제재금이 부과된 경우',basis:'equity',r:[[.05,.025],[.05,.03]],dl:'당일',ref:'코스피 제7조제1항제2호라목(2)',chk:['부과기관 및 처분일','부과금액','사유']},
-  {id:'l03',cat:'loss',name:'임·직원 횡령·배임 혐의 확인',desc:'임원(금액무관) 또는 직원의 횡령·배임',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호라목(3)',chk:['혐의 확인 경위','관련 금액','수사기관 신고']},
-  {id:'l09',cat:'loss',name:'현금·주식 배당 결정',desc:'분기, 중간, 결산 배당 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(4)',chk:['이사회 의사록','배당금액 및 배당기준일']},
+  // 투자·자산
+  {id:'v01',cat:'invest',name:'신규시설투자·시설증설·공장신설',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(1) / 코스닥 제6조제1항제2호나목(4)',
+   dart:null,chk:['이사회 의사록','투자금액 및 기간','투자 목적·기대효과','재원조달 방법']},
+  {id:'v02',cat:'invest',name:'유형자산 취득·처분',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(2) / 코스닥 제6조제1항제2호나목(5)',
+   dart:{name:'주요사항보고서 (자산 양수도)',deadline:'이사회 결의일 익일까지',law:'자본시장법 제161조제1항제7호 — 자산총액 10% 이상 시',note:'DART 주요사항보고서는 자산총액 10% 이상 시 제출 (KIND 기준보다 높음)'},
+   chk:['이사회 의사록','매매계약서','감정평가서(부동산)','자산 현황 명세서']},
+  {id:'v03',cat:'invest',name:'타법인 주식·출자증권 취득·처분',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호나목(3) / 코스닥 제6조제1항제2호나목(6)',
+   dart:{name:'주요사항보고서 (타법인 주식 취득·처분)',deadline:'이사회 결의일 익일까지',law:'자본시장법 제161조제1항제7호 — 자산총액 10% 이상 시',note:'DART 주요사항보고서는 자산총액 10% 이상 시 제출 (KIND 기준보다 높음)'},
+   chk:['이사회 의사록','주식매매계약서','투자대상법인 재무정보','취득목적']},
+  {id:'v04',cat:'invest',name:'피출자 비상장법인 부도·회생·해산',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제2호나목(4) / 코스닥 제6조제1항제2호나목(7)',
+   dart:null,chk:['해당 법인 부도·회생 확인서','출자금액 및 장부가액','회수 가능성 검토']},
 
-  {id:'c01',cat:'corp',name:'최대주주 변경',desc:'최대주주가 변경된 사실을 확인한 경우',basis:'none',r:[[0,0],[0,0]],dl:'익일',ref:'코스피 제7조제1항제3호가목(1)',chk:['변경 경위 및 확인일','신·구 최대주주 현황']},
-  {id:'c04',cat:'corp',name:'영업양수도·합병·분할',desc:'기업의 주요 조직 구조개편 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(5)',chk:['이사회 의사록','합병·분할 계획서','합병비율 산출근거'], dart:[{name:'주요사항보고서 (회사합병/분할/영업양수도 결정)', dl:'이사회 결의일 익일'}]},
-  {id:'c06',cat:'corp',name:'부도·은행거래정지',desc:'어음부도 또는 당좌거래가 정지된 경우',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호나목(1)',chk:['부도 어음 내역','당좌거래 정지 통보문'], dart:[{name:'주요사항보고서 (부도발생 및 은행거래정지)', dl:'사유발생일 익일'}]},
-  {id:'c09',cat:'corp',name:'소송 제기·판결',desc:'대규모 소송이 제기되거나 판결이 난 경우',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제3호다목(2)',chk:['소장 사본','청구금액','소송 원인']},
-  
-  {id:'s01',cat:'sub',name:'종속회사 유상증자·감자',desc:'연결 대상 종속회사의 자본금 변동',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',chk:['종속회사 이사회 의사록','종속회사 재무현황']},
-  {id:'s02',cat:'sub',name:'종속회사 유형자산 취득·처분',desc:'종속회사의 대규모 자산 거래',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2',chk:['종속회사 이사회 의사록','거래계약서']},
-  {id:'s03',cat:'sub',name:'종속회사 타법인 주식 취득·처분',desc:'종속회사의 타사 지분 거래',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2',chk:['종속회사 이사회 의사록','투자대상법인 정보']},
-  {id:'s05',cat:'sub',name:'종속회사 단기차입금 증가',desc:'종속회사의 단기 빚 증가',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제8조의2',chk:['종속회사 차입 내역']}
-];
+  // 채무·재무
+  {id:'d01',cat:'debt',name:'단기차입금 증가 결정',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(1) / 코스닥 제6조제1항제2호다목(1)',
+   dart:null,chk:['이사회 의사록 또는 대표이사 결정','차입조건','기존 단기차입금 현황']},
+  {id:'d02',cat:'debt',name:'채무인수·채무면제 결정',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(2) / 코스닥 제6조제1항제2호다목(3)',
+   dart:null,chk:['이사회 의사록','인수·면제 대상 채무 내역','거래 배경']},
+  {id:'d03',cat:'debt',name:'담보제공·채무보증 결정',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(3) / 코스닥 제6조제1항제2호다목(4)',
+   dart:null,chk:['이사회 의사록','피보증법인 재무현황','보증금액 및 기간','담보 목적물 명세']},
+  {id:'d04',cat:'debt',name:'피보증법인 부도·회생·해산',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'익일',ref:'코스피 제7조제1항제2호다목(4)',
+   dart:null,chk:['해당 법인 부도·회생 확인서','보증금액 및 이행 위험']},
+  {id:'d05',cat:'debt',name:'사채원리금 미지급',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(5) / 코스닥 제6조제1항제2호다목(6)',
+   dart:null,chk:['미지급 사채 내역','미지급 원인','향후 지급 계획']},
+  {id:'d06',cat:'debt',name:'금융기관 대출원리금 미지급',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(6) / 코스닥 제6조제1항제2호다목(7)',
+   dart:null,chk:['미지급 대출 내역','연체 원인','만기연장·자구책 계획']},
+  {id:'d07',cat:'debt',name:'선급금·금전가지급·금전대여·증권대여',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호다목(7) / 코스닥 제6조제1항제2호다목(5)',
+   dart:null,chk:['이사회 의사록','거래상대방 정보','금액 및 조건','회수 방법']},
 
-// ── 규정 데이터 ──
-const REGS = [
-  {title:"자본시장법 제147조", desc:"[대량보유상황 보고] 상장사 주식등을 5% 이상 보유하게 되거나, 이후 1% 이상 변동이 있는 경우 5영업일 이내에 금감원에 보고해야 합니다."},
-  {title:"자본시장법 제161조", desc:"[주요사항보고서 제출] 부도, 합병, 증자/감자, 자기주식 취득/처분, 대규모 자산양수도 등 법정 주요사항 발생 시 익일까지 금감원에 보고서를 제출해야 합니다."},
-  {title:"자본시장법 제173조", desc:"[임원등의 특정증권등 소유상황 보고] 임원 또는 주요주주는 주식 소유상황 및 그 변동 내용을 사유 발생일로부터 5영업일 이내에 보고해야 합니다."},
-  {title:"유가증권시장 공시규정 제7조", desc:"[주요경영사항 공시] 상장법인은 영업, 생산, 투자, 자금, 재무구조 등과 관련된 주요 경영사항이 발생한 경우 거래소(KIND)에 즉시 또는 익일까지 공시해야 합니다."},
-  {title:"유가증권시장 공시규정 제8조의2", desc:"[종속회사 주요경영사항 공시] K-IFRS 연결 대상 종속회사에 주요 사항(증자, 합병, 자산양수도 등)이 발생한 경우, 지배회사(상장사)가 이를 공시할 의무가 있습니다."},
-  {title:"유가증권시장 공시규정 제28조", desc:"[자율공시] 의무 공시 기준 금액에 미달하더라도, 회사가 투자자의 투자판단에 중요하다고 인정하는 사항은 자율적으로 공시할 수 있습니다."}
+  // 손실·재해
+  {id:'l01',cat:'loss',name:'재해발생',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제2호라목(1) / 코스닥 제6조제1항제2호라목(1)',
+   dart:null,chk:['재해 발생 경위','피해규모 산정','보험처리 여부','복구 계획']},
+  {id:'l02',cat:'loss',name:'벌금·과태료·추징금·과징금 부과',basis:'equity',r:[[.05,.025],[.05,.03]],dl:'당일',ref:'코스피 제7조제1항제2호라목(2) / 코스닥 제6조제1항제2호라목(4)',
+   dart:null,chk:['부과기관 및 처분일','부과금액','부과 사유','이의신청 여부']},
+  {id:'l03',cat:'loss',name:'임·직원 횡령·배임 혐의 확인',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'당일',ref:'코스피 제7조제1항제2호라목(3) / 코스닥 제6조제1항제2호라목(6)',
+   dart:null,chk:['혐의 확인 경위','관련 금액','수사기관 신고 여부','내부통제 조치']},
+  {id:'l04',cat:'loss',name:'파생상품 거래 손실발생',basis:'equity',r:[[.05,.025],[.05,.025]],dl:'익일',ref:'코스피 제7조제1항제2호라목(4)',
+   dart:null,chk:['파생상품 내역','누계 손실 산출','손실 원인','포지션 관리 계획']},
+  {id:'l05',cat:'loss',name:'대규모 손상차손',basis:'equity',r:[[.50,.25],[.50,.25]],dl:'당일',ref:'코스피 제7조제1항제2호라목(6)',
+   dart:null,chk:['손상차손 대상 자산','손상금액 산출근거','충당금 설정 현황']},
+  {id:'l06',cat:'loss',name:'감사보고서 제출 (부적정·의견거절)',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(1)',
+   dart:null,chk:['감사보고서','감사의견 및 이유','자본잠식률 계산']},
+  {id:'l07',cat:'loss',name:'매출액·손익구조 30%(大15%) 이상 변동',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(3)',
+   dart:null,chk:['내부결산 재무제표','직전연도 대비 변동률','변동 원인 설명']},
+  {id:'l08',cat:'loss',name:'현금·주식 배당 결정',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제2호마목(4)(5)',
+   dart:null,chk:['이사회 의사록','배당금액 및 배당기준일','주주명부폐쇄기간']},
+
+  // 기업경영
+  {id:'c01',cat:'corp',name:'최대주주 변경',basis:'none',r:[[0,0],[0,0]],dl:'익일',ref:'코스피 제7조제1항제3호가목(1) / 코스닥 제6조제1항제3호가목(1)',
+   dart:null,chk:['변경 경위 및 확인일','신·구 최대주주 현황','지분변동 내역']},
+  {id:'c02',cat:'corp',name:'영업양수도·합병·분할·분할합병',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(5) / 코스닥 제6조제1항제3호가목(4)',
+   dart:{name:'주요사항보고서 (합병·분할·영업양수도)',deadline:'이사회 결의일 익일까지',law:'자본시장법 제161조제1항제1호~3호'},
+   chk:['이사회 의사록','합병·분할 계획서','상대방 법인 재무정보','합병비율 산출근거','주총 일정']},
+  {id:'c03',cat:'corp',name:'주식 포괄교환·이전',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호가목(4) / 코스닥 제6조제1항제3호가목(3)',
+   dart:{name:'주요사항보고서 (주식 포괄교환·이전)',deadline:'이사회 결의일 익일까지',law:'자본시장법 제161조제1항제6호'},
+   chk:['이사회 의사록','교환비율 산출근거','주주총회 일정']},
+  {id:'c04',cat:'corp',name:'부도·은행거래정지',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호나목(1) / 코스닥 제6조제1항제3호나목(1)',
+   dart:{name:'주요사항보고서 (부도 등)',deadline:'사유 발생일 익일까지',law:'자본시장법 제161조제1항제8호'},
+   chk:['부도 어음 내역','당좌거래 정지 통보문','긴급 자구계획']},
+  {id:'c05',cat:'corp',name:'회생절차·파산 관련사항',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호나목(2) / 코스닥 제6조제1항제3호나목(2)',
+   dart:null,chk:['법원 결정문','신청 원인','향후 절차 일정']},
+  {id:'c06',cat:'corp',name:'일정 청구금액 이상 소송',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제7조제1항제3호다목(2) / 코스닥 제6조의2제1항제6호',
+   dart:null,chk:['소장 사본','청구금액','소송 원인','법률 자문 의견']},
+  {id:'c07',cat:'corp',name:'주주총회 소집 이사회결의·주총결의',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제3호라목 / 코스닥 제6조제1항제3호라목',
+   dart:null,chk:['이사회 의사록','주총 일정','의안 목록']},
+  {id:'c08',cat:'corp',name:'투자판단 관련 중요정보 (포괄주의)',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제7조제1항제4호 / 코스닥 제6조제1항제4호',
+   dart:null,chk:['중요정보 해당 여부 검토','거래소 사전협의','공시 내용 초안']},
+
+  // 종속회사
+  {id:'s01',cat:'sub',name:'종속회사 유상증자·감자',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',
+   dart:null,chk:['종속회사 이사회 의사록','지배회사 연결 자기자본 대비 비율','종속회사 재무현황']},
+  {id:'s02',cat:'sub',name:'종속회사 유형자산 취득·처분',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',
+   dart:null,chk:['종속회사 이사회 의사록','거래계약서','지배회사 연결 자산총액 대비 비율']},
+  {id:'s03',cat:'sub',name:'종속회사 타법인 주식 취득·처분',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',
+   dart:null,chk:['종속회사 이사회 의사록','투자대상법인 정보','지배회사 연결 자기자본 대비 비율']},
+  {id:'s04',cat:'sub',name:'종속회사 영업양수도·합병·분할',basis:'asset',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',
+   dart:null,chk:['종속회사 이사회 의사록','합병·분할 계획서','지배회사 연결 기준 비율 산출']},
+  {id:'s05',cat:'sub',name:'종속회사 단기차입금 증가',basis:'equity',r:[[.10,.05],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',
+   dart:null,chk:['종속회사 차입 내역','지배회사 연결 자기자본 대비 비율']},
+  {id:'s06',cat:'sub',name:'종속회사 담보·채무보증 제공',basis:'equity',r:[[.05,.025],[.10,.05]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',
+   dart:null,chk:['종속회사 이사회 의사록','보증금액 및 상대방','지배회사 연결 자기자본 대비 비율']},
+  {id:'s07',cat:'sub',name:'종속회사 부도·회생·해산',basis:'none',r:[[0,0],[0,0]],dl:'당일',ref:'코스피 제8조의2 / 코스닥 제6조의2',
+   dart:null,chk:['종속회사 부도·회생 확인서','지배회사 연결 재무 영향 분석']},
 ];
 
 // ── 초기화 ──
 (function init(){
   renderList('all');
   if(RULES.length) selectType(RULES[0].id);
-  filterRegs('');
+  loadSaved();
 })();
 
-function setMkt(val) {
-  S.mkt = val;
-  document.getElementById('top-mkt-badge').textContent = val === 'kospi' ? '코스피 적용 중' : '코스닥 적용 중';
-  renderList(S.cat);
-  calcMajor();
-}
-
-function getDynamicDesc(rule) {
-  if (rule.basis === 'none') return `<span style="color:var(--danger-mid); font-weight:600;">[금액 무관 즉시 공시]</span> ${rule.desc}`;
-  const mktIdx = S.mkt === 'kospi' ? 0 : 1;
-  const lgIdx = S.isLarge ? 1 : 0;
-  const ratio = rule.r[mktIdx][lgIdx];
-  const basisName = rule.basis === 'asset' ? '자산총계' : (rule.basis === 'equity' ? '자기자본' : '매출액');
-  const finPrefix = rule.cat === 'sub' ? '연결 ' : (S.fin === 'con' ? '연결 ' : '별도 ');
-  return `<span style="color:var(--accent-mid); font-weight:600;">[기준: ${finPrefix}${basisName}의 ${ratio * 100}% 이상]</span><br>${rule.desc}`;
-}
-
-function searchRules(query) {
-  query = query.toLowerCase();
-  const items = RULES.filter(r => r.name.toLowerCase().includes(query) || r.desc.toLowerCase().includes(query));
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.cat-btn')[0].classList.add('active');
-  renderHTMLList(items);
-}
-
+// ── 탭 ──
 function switchTab(name,btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -558,378 +739,398 @@ function switchTab(name,btn){
   if(btn) btn.classList.add('active');
 }
 
+// ── 세그먼트 ──
 function setSeg(segId,inputId,val,btn){
   document.querySelectorAll('#'+segId+' .seg-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   document.getElementById(inputId).value=val;
+  if(inputId==='mkt') S.mkt=val;
 }
 
+function onMktChange(){
+  S.mkt=document.getElementById('mkt').value;
+  document.getElementById('mkt-badge').textContent=S.mkt==='kospi'?'코스피 적용 중':'코스닥 적용 중';
+  renderList(S.cat);
+  calcMajor();
+}
+
+// ── 재무탭 ──
 function switchFin(basis,btn){
   S.fin=basis;
   document.querySelectorAll('.fin-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.fin-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('fin-'+basis).classList.add('active');
+  document.getElementById('fin-lbl').textContent=basis==='con'?'연결 기준':'별도 기준';
+  updateFinCards();
   renderList(S.cat);
   calcMajor();
+}
+
+// ── 재무 입력 ──
+function onFin(el){
+  let raw=el.value.replace(/[^0-9]/g,'');
+  el.value=raw?Number(raw).toLocaleString('ko-KR'):'';
+  el.value?el.classList.add('filled'):el.classList.remove('filled');
+  localStorage.setItem(el.id,raw);
+  updateFinCards();
+  calcMajor();
+}
+
+function getFinVal(id){
+  return parseFloat((document.getElementById(id).value||'').replace(/,/g,''))||0;
 }
 
 function updateFinCards(){
   const b=S.fin;
-  const asset = parseFloat(document.getElementById(b+'-asset').value)||0;
-  // 대규모법인 판정
-  const isHolding = document.getElementById('is-holding').value === 'yes';
-  // (참고: 지주회사 로직 등 추가 확장 가능. UI 적으로는 자산 2조 이상 시 대규모 표시)
-  S.isLarge = asset >= 20000;
-  document.getElementById('top-large-badge').style.display = S.isLarge ? 'inline-block' : 'none';
-  renderList(S.cat);
+  const asset=getFinVal(b+'-asset'), rev=getFinVal(b+'-rev'), equity=getFinVal(b+'-equity'), capital=getFinVal(b+'-capital');
+  const hasAny=asset||rev||equity||capital;
+  document.getElementById('fin-cards').style.display=hasAny?'block':'none';
+
+  // 대규모법인 자동 판정
+  S.isLarge=asset>=20000;
+  const lb=document.getElementById('large-badge'), lfb=document.getElementById('large-fin-badge');
+  lb.style.display=S.isLarge?'inline-block':'none';
+  lfb.style.display=S.isLarge?'inline-block':'none';
+
+  if(!hasAny) return;
+
+  // 자본잠식 조정
+  const isAdj=capital>0&&equity<capital;
+  const effEq=isAdj?capital:equity;
+
+  document.getElementById('fv-asset').textContent=asset?fmt(asset)+'억 원':'—';
+  document.getElementById('fv-rev').textContent=rev?fmt(rev)+'억 원':'—';
+  document.getElementById('fv-equity').textContent=effEq?fmt(effEq)+'억 원':'—';
+  document.getElementById('fv-capital').textContent=capital?fmt(capital)+'억 원':'—';
+
+  const note=document.getElementById('fc-eq-note'), eqfc=document.getElementById('fc-equity');
+  if(isAdj){note.textContent='자본잠식 조정';eqfc.classList.add('adj');}
+  else{note.textContent='';eqfc.classList.remove('adj');}
 }
 
+// ── 금액 입력 ──
 function addAmt(n){
   const el=document.getElementById('deal');
-  el.value=(parseFloat(el.value)||0)+n;
+  const cur=parseFloat(el.value.replace(/,/g,''))||0;
+  el.value=Number(cur+n).toLocaleString('ko-KR');
   calcMajor();
 }
 
+// ── 카테고리·검색 ──
 function filterCat(cat,btn){
   S.cat=cat;
   document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  document.getElementById('rule-search').value = ''; 
+  document.getElementById('rule-srch').value='';
   renderList(cat);
 }
 
-function renderList(cat){
-  const items = cat === 'all' ? RULES : RULES.filter(r => r.cat === cat);
-  renderHTMLList(items);
+function searchRules(q){
+  q=q.toLowerCase();
+  const items=RULES.filter(r=>r.name.toLowerCase().includes(q)||(r.dart&&r.dart.name.toLowerCase().includes(q)));
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cat-btn')[0].classList.add('active');
+  renderHTML(items);
 }
 
-function renderHTMLList(items) {
-  const list = document.getElementById('type-scroll');
-  list.innerHTML = items.map(r => `
-    <div class="type-item ${S.type===r.id?'selected':''}" id="ti-${r.id}" onclick="selectType('${r.id}')">
-      <div class="type-item-body">
-        <div class="type-name">${r.name}</div>
-        <div class="type-desc">${getDynamicDesc(r)}</div>
+function renderList(cat){
+  renderHTML(cat==='all'?RULES:RULES.filter(r=>r.cat===cat));
+}
+
+function getDynDesc(rule){
+  if(rule.basis==='none') return `<span style="color:var(--danger-mid);font-weight:600;">금액 무관 — 즉시 공시</span>`;
+  const mi=S.mkt==='kospi'?0:1, li=S.isLarge?1:0;
+  const ratio=rule.r[mi][li];
+  const bn=rule.basis==='asset'?'자산총계':rule.basis==='equity'?'자기자본':'매출액';
+  const pre=rule.cat==='sub'?'연결 ':(S.fin==='con'?'연결 ':'별도 ');
+  return `<span style="color:var(--accent-mid);font-weight:600;">${pre}${bn}의 ${(ratio*100)}% 이상</span>`;
+}
+
+function renderHTML(items){
+  document.getElementById('type-scroll').innerHTML=items.map(r=>`
+    <div class="ti ${S.type===r.id?'sel':''}" id="ti-${r.id}" onclick="selectType('${r.id}')">
+      <div class="ti-body">
+        <div class="ti-name">${r.name}${r.dart?'&nbsp;<span style="font-size:9px;font-weight:700;color:var(--dart);background:var(--dart-light);padding:1px 5px;border-radius:4px;border:1px solid var(--dart-border);">+DART</span>':''}</div>
+        <div class="ti-desc">${getDynDesc(r)}</div>
       </div>
-      <span class="badge badge-${r.dl==='당일'?'day':'next'}">${r.dl}</span>
+      <span class="bdg bdg-${r.dl==='당일'?'day':'next'}">${r.dl}</span>
     </div>`).join('');
 }
 
 function selectType(id){
   S.type=id;
-  document.querySelectorAll('.type-item').forEach(el=>el.classList.remove('selected'));
+  document.querySelectorAll('.ti').forEach(el=>el.classList.remove('sel'));
   const el=document.getElementById('ti-'+id);
-  if(el) el.classList.add('selected');
+  if(el) el.classList.add('sel');
   calcMajor();
 }
 
-// ── AI 스마트 검색 (고도화) ──
-function analyzeSituation() {
-  const text = document.getElementById('smart-text').value.toLowerCase();
-  if(!text.trim()) { alert("상황을 먼저 입력해주세요!"); return; }
-  
-  // 지분공시 매칭
-  if(text.includes('임원') && (text.includes('매도') || text.includes('매수') || text.includes('팔') || text.includes('샀'))) {
-    switchTab('share', document.querySelectorAll('.tab-btn')[1]);
-    document.getElementById('sh-role').value = 'officer';
-    calcShare();
-    alert("💡 입력하신 상황을 분석하여 [지분공시 - 통합 진단] 탭으로 안내합니다.");
+// ── 스마트 검색 ──
+function smartSearch(){
+  const txt=document.getElementById('smart-txt').value.toLowerCase();
+  if(!txt.trim()){alert('상황을 먼저 입력해주세요!');return;}
+
+  // 지분공시 우선 매칭
+  if((txt.includes('임원')||txt.includes('대표')||txt.includes('이사'))&&(txt.includes('매도')||txt.includes('매수')||txt.includes('팔')||txt.includes('샀'))){
+    switchTab('share',document.querySelectorAll('.tab-btn')[1]);
+    alert('💡 임원 주식 거래 → [지분공시] 탭의 임원·주요주주 소유상황 보고(자본시장법 제173조)를 확인하세요.');
     return;
   }
-  if((text.includes('5%') || text.includes('대량')) && (text.includes('매수') || text.includes('매도') || text.includes('처분') || text.includes('취득'))) {
-    switchTab('share', document.querySelectorAll('.tab-btn')[1]);
-    calcShare();
-    alert("💡 [지분공시 - 통합 진단] 탭으로 안내합니다.");
+  if((txt.includes('5%')||txt.includes('대량보유'))&&(txt.includes('매수')||txt.includes('취득')||txt.includes('처분'))){
+    switchTab('share',document.querySelectorAll('.tab-btn')[1]);
+    setSeg('sh-seg','sh-type','bulk',document.querySelectorAll('#sh-seg .seg-btn')[1]);
+    switchSh('bulk');
+    alert('💡 대량보유 변동 → [지분공시] 탭의 대량보유 보고(자본시장법 제147조)를 확인하세요.');
     return;
   }
 
   // 주요경영사항 매칭
-  let targetId = null;
-  // 문맥 파악 강화 (자회사 처분 vs 유상증자)
-  if(text.includes('자회사') || text.includes('종속회사') || text.includes('타법인') || text.includes('지분')) {
-    if(text.includes('처분') || text.includes('매각') || text.includes('팔')) targetId = 'v03';
-    else if(text.includes('취득') || text.includes('사') || text.includes('매수')) targetId = 'v03';
-    else if(text.includes('유상증자') || text.includes('감자') || text.includes('출자')) targetId = 's01';
-    else targetId = 's01'; // 기본값
-  }
-  else if(text.includes('자기주식') || text.includes('자사주')) targetId = 'i03';
-  else if(text.includes('차입') || text.includes('대출') || text.includes('빌렸')) targetId = 'd01';
-  else if(text.includes('소송') || text.includes('피소') || text.includes('재판')) targetId = 'c09';
-  else if(text.includes('합병') || text.includes('인수') || text.includes('양수도')) targetId = 'c04';
-  else if(text.includes('투자') || text.includes('공장') || text.includes('설비')) targetId = 'v01';
-  else if(text.includes('배당')) targetId = 'l09';
-  else if(text.includes('계약') || text.includes('수주')) targetId = 'b03';
-  else if(text.includes('횡령') || text.includes('배임')) targetId = 'l03';
-  
-  if(targetId) {
-    switchTab('major', document.querySelectorAll('.tab-btn')[0]);
-    const rule = RULES.find(r=>r.id===targetId);
-    if(rule) {
-      filterCat('all', document.querySelectorAll('.cat-btn')[0]);
-      selectType(targetId);
-      document.getElementById('ti-'+targetId).scrollIntoView({behavior: 'smooth', block: 'center'});
-      alert(`💡 분석 완료! [${rule.name}] 항목을 찾았습니다.\n좌측에 거래 금액을 입력해 보세요.`);
-    }
+  const map=[
+    {keys:['자사주','자기주식'],id:'i03'},
+    {keys:['단기차입','차입','은행에서'],id:'d01'},
+    {keys:['소송','피소','재판'],id:'c06'},
+    {keys:['합병','인수','분할'],id:'c02'},
+    {keys:['증자','감자','유상증자'],id:'i01'},
+    {keys:['사채','cb','bw','전환사채'],id:'i05'},
+    {keys:['공장','설비','시설투자'],id:'v01'},
+    {keys:['배당'],id:'l08'},
+    {keys:['계약','수주'],id:'b03'},
+    {keys:['횡령','배임'],id:'l03'},
+    {keys:['담보','보증'],id:'d03'},
+    {keys:['종속회사','자회사'],id:'s01'},
+    {keys:['부도'],id:'c04'},
+  ];
+  let found=null;
+  for(const m of map){if(m.keys.some(k=>txt.includes(k))){found=m.id;break;}}
+
+  if(found){
+    switchTab('major',document.querySelectorAll('.tab-btn')[0]);
+    filterCat('all',document.querySelectorAll('.cat-btn')[0]);
+    selectType(found);
+    const el=document.getElementById('ti-'+found);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+    const rule=RULES.find(r=>r.id===found);
+    alert(`💡 [${rule.name}] 항목을 찾았습니다.\n좌측에 거래 금액을 입력해 공시 의무를 확인하세요.`);
   } else {
-    alert("🤔 정확한 공시 항목을 찾지 못했습니다. 핵심 단어(예: 차입, 자사주 매각, 합병)를 포함해 다시 적어주세요.");
+    alert('관련 항목을 자동으로 찾지 못했습니다.\n핵심 키워드(차입, 소송, 자사주, 합병 등)를 포함해서 다시 입력해보세요.');
   }
 }
 
-// ── 수시공시 계산 ──
+// ── 메인 계산 ──
 function calcMajor(){
   const rule=RULES.find(r=>r.id===S.type);
   if(!rule) return;
-  const deal=parseFloat(document.getElementById('deal').value)||0;
+  const deal=parseFloat((document.getElementById('deal').value||'').replace(/,/g,''))||0;
   const b=S.fin;
-  const asset  = parseFloat(document.getElementById(b+'-asset').value)||0;
-  const equity = parseFloat(document.getElementById(b+'-equity').value)||0;
-  const capital= parseFloat(document.getElementById(b+'-capital').value)||0;
-  const rev    = parseFloat(document.getElementById(b+'-rev').value)||0;
+  const asset=getFinVal(b+'-asset'), equity=getFinVal(b+'-equity'), capital=getFinVal(b+'-capital'), rev=getFinVal(b+'-rev');
 
-  const isCapAdj = capital>0 && equity<capital;
-  const effEquity = isCapAdj ? capital : equity;
+  // 자본잠식 조정
+  const isCapAdj=capital>0&&equity<capital;
+  const effEq=isCapAdj?capital:equity;
 
-  const mktIdx = S.mkt === 'kospi' ? 0 : 1;
-  const lgIdx = S.isLarge ? 1 : 0;
-  const ratio = rule.r[mktIdx][lgIdx]; 
+  // 비율 결정
+  const mi=S.mkt==='kospi'?0:1, li=S.isLarge?1:0;
+  const ratio=rule.r[mi][li];
 
-  if(rule.basis==='none'||ratio===0){
-    renderNoThreshold(rule,b); return;
-  }
+  if(rule.basis==='none'||ratio===0){renderNoThreshold(rule);return;}
 
   let base,baseName;
   if(rule.basis==='asset'){base=asset;baseName='자산총계';}
-  else if(rule.basis==='equity'){base=effEquity;baseName=isCapAdj?'자기자본(자본잠식 조정)':'자기자본';}
+  else if(rule.basis==='equity'){base=effEq;baseName=isCapAdj?'자기자본(자본잠식 조정)':'자기자본';}
   else{base=rev;baseName='매출액';}
 
   if(!base){
-    document.getElementById('major-result').innerHTML=`<div class="verdict info"><div class="verdict-icon">i</div><div><div class="verdict-tag">입력 필요</div><div class="verdict-text">${S.fin==='con'?'연결':'별도'} ${baseName}을 상단에 입력해주세요.</div></div></div>`;
+    document.getElementById('major-result').innerHTML=`
+      <div class="verdict info"><div class="v-icon">i</div>
+      <div><div class="v-tag">입력 필요</div>
+      <div class="v-text">${S.fin==='con'?'연결':'별도'} ${baseName.replace('(자본잠식 조정)','')}을 입력해주세요.</div></div></div>`;
     return;
   }
   if(!deal) return;
 
-  const threshold=base*ratio;
-  const pct=(deal/base*100).toFixed(2);
-  const thPct=(ratio*100).toFixed(2);
-  const prog=Math.min(deal/threshold*100,100);
-  const isReq=deal>=threshold;
-  const mktLabel=S.mkt==='kospi'?'코스피':'코스닥';
-  const corpLabel=S.isLarge?'대규모법인':'일반법인';
-  const bLabel=rule.cat==='sub'?'연결':(S.fin==='con'?'연결':'별도'); 
+  const thr=base*ratio, pct=(deal/base*100).toFixed(2), thPct=(ratio*100).toFixed(2);
+  const prog=Math.min(deal/thr*100,100), isReq=deal>=thr;
+  const mktL=S.mkt==='kospi'?'코스피':'코스닥', corpL=S.isLarge?'대규모법인':'일반법인';
+  const bL=rule.cat==='sub'?'연결':(S.fin==='con'?'연결':'별도');
+  const dlTxt=rule.dl==='당일'?'사유 발생 당일 오후 6시까지':'익일 오후 6시까지 (전일 18시 이후 발생 시 익일 07:30~07:50 가능)';
 
-  // DART 세트 렌더링 준비
-  let dartHtml = '';
-  if (rule.dart && isReq) { // 의무 발생 시에만 띄움
-    let dartItems = rule.dart.map(d => `
-      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-strong);">
-        <span style="font-weight:600; color:var(--text-primary);">📄 ${d.name}</span>
-        <span style="color:var(--danger); font-size:11px; font-weight:700;">기한: ${d.dl}</span>
-      </div>
-    `).join('');
-    dartHtml = `
-      <div class="dart-card">
-        <div class="dart-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          주의! 금감원(DART) 주요사항보고서 등 제출 의무 발생
-        </div>
-        <div style="font-size:12px; color:var(--text-secondary); margin-bottom:8px;">자본시장법 제161조 등에 따라 아래 서류를 DART에 반드시 제출해야 합니다.</div>
-        ${dartItems}
-      </div>
-    `;
+  let dartHtml='';
+  if(rule.dart){
+    dartHtml=`<div class="dart-box">
+      <div class="dart-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>DART 주요사항보고서도 제출 필요</div>
+      <div class="dart-items"><div class="dart-item">
+        <div class="dart-item-top"><span class="dart-item-name">${rule.dart.name}</span><span class="dart-deadline">${rule.dart.deadline}</span></div>
+        <div class="dart-item-desc">${rule.dart.law}${rule.dart.note?'<br><span style="color:var(--warning-mid);">⚠️ '+rule.dart.note+'</span>':''}</div>
+      </div></div></div>`;
   }
 
   document.getElementById('major-result').innerHTML=`
-    ${isCapAdj?`<div style="font-size:11px;color:var(--warning-mid);background:var(--warning-light);border:1px solid var(--warning-border);border-radius:var(--r-sm);padding:7px 11px;margin-bottom:14px;">⚠️ 공시규정 제3조제5항 적용 — 납입 자본금(${fmt(capital)}억원)을 자기자본으로 적용합니다.</div>`:''}
-    <div class="verdict ${isReq?'required':'ok'}">
-      <div class="verdict-icon">${isReq?'!':'✓'}</div>
+    ${isCapAdj?`<div style="font-size:11px;color:var(--warning-mid);background:var(--warning-light);border:1px solid var(--warning-border);border-radius:var(--r-sm);padding:7px 11px;margin-bottom:13px;">⚠️ 자본잠식 감지 — 공시규정 제3조 제5항에 따라 납입 자본금(${fmt(capital)}억원)을 자기자본으로 적용합니다.</div>`:''}
+    <div class="verdict ${isReq?'req':'ok'}">
+      <div class="v-icon">${isReq?'!':'✓'}</div>
       <div>
-        <div class="verdict-tag">${isReq?'공시 의무 발생':'공시 의무 미발생'}</div>
-        <div class="verdict-text">${isReq ?`<strong>${rule.name}</strong> 공시를 KIND에 제출해야 합니다.` :`거래금액 ${fmt(deal)}억원이 기준선 ${fmt(threshold)}억원 미만입니다.`}</div>
+        <div class="v-tag">${isReq?'KIND 수시공시 의무 발생':'공시 의무 미발생'}</div>
+        <div class="v-text">${isReq?`<strong>${rule.name}</strong> 공시를 ${dlTxt} KIND에 제출해야 합니다.`:`거래금액 ${fmt(deal)}억원이 기준선 ${fmt(thr)}억원 미만으로 의무 공시 대상이 아닙니다.`}</div>
       </div>
     </div>
-
-    ${dartHtml}
-
     <div class="metrics">
-      <div class="metric"><div class="metric-label">거래금액 비율</div><div class="metric-val ${isReq?'red':'green'}">${pct}%</div><div class="metric-sub">기준 ${thPct}%</div></div>
-      <div class="metric"><div class="metric-label">의무 발생 기준선</div><div class="metric-val">${fmt(threshold)}억</div><div class="metric-sub">${bLabel} ${baseName} 기준</div></div>
-      <div class="metric"><div class="metric-label">${isReq?'기준선 초과액':'여유 금액'}</div><div class="metric-val ${isReq?'red':''}">${fmt(Math.abs(deal-threshold))}억</div><div class="metric-sub">${isReq?'즉시 공시 요망':'기준 도달까지 남은 금액'}</div></div>
+      <div class="metric"><div class="m-label">거래금액 비율</div><div class="m-val ${isReq?'red':'green'}">${pct}%</div><div class="m-sub">기준 ${thPct}%</div></div>
+      <div class="metric"><div class="m-label">의무 발생 기준금액</div><div class="m-val">${fmt(thr)}억</div><div class="m-sub">${bL} ${baseName} 기준</div></div>
+      <div class="metric"><div class="m-label">${isReq?'기준선 초과액':'여유 금액'}</div><div class="m-val ${isReq?'red':''}">${fmt(Math.abs(deal-thr))}억</div><div class="m-sub">${isReq?'즉시 공시 필요':'기준선까지 남은 금액'}</div></div>
     </div>
-
     <div class="prog-wrap">
-      <div class="prog-header"><span>공시 기준선 도달율</span><span style="font-weight:600;color:${isReq?'var(--danger-mid)':'var(--text-primary)'};">${Math.round(prog)}%</span></div>
-      <div class="prog-track"><div class="prog-fill" style="width:${prog}%;background:${isReq?'var(--danger-mid)':'var(--success-mid)'}; opacity:0.8;"></div></div>
+      <div class="prog-hdr"><span>공시 기준선 도달율</span><span style="font-weight:600;color:${isReq?'var(--danger-mid)':'var(--text-primary)'};">${Math.round(prog)}%</span></div>
+      <div class="prog-track"><div class="prog-fill" style="width:${prog}%;background:${isReq?'var(--danger-mid)':'var(--success-mid)'};opacity:.8;"></div></div>
     </div>
-
-    <div class="sec-label">세부 정보</div>
-    <div class="info-table">
-      <div class="info-row"><span class="info-key">공시 항목</span><span class="info-val">${rule.name}</span></div>
-      <div class="info-row"><span class="info-key">제출처</span><span class="info-val">한국거래소(KIND) 수시공시</span></div>
-      <div class="info-row"><span class="info-key">관련 조항</span><span class="info-val" style="font-size:11px;">유가증권시장 공시규정 ${rule.ref}</span></div>
-    </div>
-  `;
-}
-
-function renderNoThreshold(rule,b){
-  let dartHtml = '';
-  if (rule.dart) { 
-    let dartItems = rule.dart.map(d => `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-strong);"><span style="font-weight:600;">📄 ${d.name}</span><span style="color:var(--danger); font-size:11px; font-weight:700;">기한: ${d.dl}</span></div>`).join('');
-    dartHtml = `<div class="dart-card"><div class="dart-title">주의! 금감원(DART) 제출 의무 동시 발생</div>${dartItems}</div>`;
-  }
-  document.getElementById('major-result').innerHTML=`
-    <div class="verdict required">
-      <div class="verdict-icon">!</div>
-      <div>
-        <div class="verdict-tag">금액 무관 — 공시 의무 발생</div>
-        <div class="verdict-text"><strong>${rule.name}</strong>은 사유 발생 즉시 무조건 공시 의무가 발생합니다.</div>
-      </div>
+    <div class="sl">KIND 공시 정보</div>
+    <div class="itbl">
+      <div class="irow"><span class="ik">공시 항목</span><span class="iv">${rule.name}</span></div>
+      <div class="irow"><span class="ik">제출 기한</span><span class="iv" style="color:${isReq?'var(--danger)':'inherit'};">${dlTxt}</span></div>
+      <div class="irow"><span class="ik">제출처</span><span class="iv">KIND (한국거래소 전자공시시스템)</span></div>
+      <div class="irow"><span class="ik">적용 기준</span><span class="iv">${mktL} ${corpL} · ${bL} ${baseName} 대비 ${thPct}%</span></div>
+      <div class="irow"><span class="ik">관련 조항</span><span class="iv" style="font-size:11px;">${rule.ref}</span></div>
     </div>
     ${dartHtml}
-    <div class="sec-label">세부 정보</div>
-    <div class="info-table">
-      <div class="info-row"><span class="info-key">공시 항목</span><span class="info-val">${rule.name}</span></div>
-      <div class="info-row"><span class="info-key">관련 조항</span><span class="info-val" style="font-size:11px;">유가증권시장 공시규정 ${rule.ref}</span></div>
-    </div>
-  `;
+    ${isReq?`<div class="sl">준비 서류</div><div class="chklist">${rule.chk.map(i=>`<div class="chi"><div class="ch-dot"></div>${i}</div>`).join('')}</div>`
+    :`<div class="sl">참고</div><div class="chklist">
+      <div class="chi"><div class="ch-dot"></div>의무 미달이더라도 투자 판단에 중요하다면 자율공시(공시규정 제28조) 가능합니다.</div>
+      <div class="chi"><div class="ch-dot"></div>향후 추가 거래 시 누적금액이 기준선을 초과하지 않도록 모니터링하세요.</div>
+    </div>`}`;
 }
 
-// ── 지분공시 (통합 진단) ──
-function calcShare(){
-  const total = parseFloat(document.getElementById('sh-total').value)||0;
-  const before = parseFloat(document.getElementById('sh-before').value)||0;
-  const trade = parseFloat(document.getElementById('sh-trade').value)||0;
-  const dir = document.getElementById('sh-dir').value;
-  const role = document.getElementById('sh-role').value;
-  
+function renderNoThreshold(rule){
+  const dlTxt=rule.dl==='당일'?'사유 발생 당일 오후 6시까지':'익일 오후 6시까지 (전일 18시 이후 발생 시 익일 07:30~07:50 가능)';
+  let dartHtml='';
+  if(rule.dart){
+    dartHtml=`<div class="dart-box">
+      <div class="dart-title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>DART 주요사항보고서도 제출 필요</div>
+      <div class="dart-items"><div class="dart-item">
+        <div class="dart-item-top"><span class="dart-item-name">${rule.dart.name}</span><span class="dart-deadline">${rule.dart.deadline}</span></div>
+        <div class="dart-item-desc">${rule.dart.law}</div>
+      </div></div></div>`;
+  }
+  document.getElementById('major-result').innerHTML=`
+    <div class="verdict req"><div class="v-icon">!</div>
+    <div><div class="v-tag">금액 무관 — KIND 공시 의무 발생</div>
+    <div class="v-text"><strong>${rule.name}</strong>은 금액 기준 없이 사유 발생 즉시 공시 의무가 발생합니다.</div></div></div>
+    <div class="sl">KIND 공시 정보</div>
+    <div class="itbl">
+      <div class="irow"><span class="ik">공시 항목</span><span class="iv">${rule.name}</span></div>
+      <div class="irow"><span class="ik">제출 기한</span><span class="iv" style="color:var(--danger);">${dlTxt}</span></div>
+      <div class="irow"><span class="ik">제출처</span><span class="iv">KIND (한국거래소 전자공시시스템)</span></div>
+      <div class="irow"><span class="ik">관련 조항</span><span class="iv" style="font-size:11px;">${rule.ref}</span></div>
+    </div>
+    ${dartHtml}
+    <div class="sl">준비 서류</div>
+    <div class="chklist">${rule.chk.map(i=>`<div class="chi"><div class="ch-dot"></div>${i}</div>`).join('')}</div>`;
+}
+
+// ── 지분공시 ──
+function switchSh(type){
+  document.getElementById('officer-panel').style.display=type==='officer'?'block':'none';
+  document.getElementById('bulk-panel').style.display=type==='bulk'?'block':'none';
+}
+
+function getNum(id){return parseFloat((document.getElementById(id).value||'').replace(/,/g,''))||0;}
+
+function calcOfficer(){
+  const total=getNum('o-total'), cur=getNum('o-cur'), trade=getNum('o-trade'), accum=getNum('o-accum');
+  const dir=document.getElementById('o-dir').value, rtype=document.getElementById('rtype').value;
   if(!total||!trade) return;
-
-  const after = dir === 'buy' ? before + trade : before - trade;
-  const bPct = (before/total*100).toFixed(2);
-  const aPct = (after/total*100).toFixed(2);
-  const chPct = (Math.abs(trade)/total*100).toFixed(2);
-  
-  // 173조 (임원/주요주주) 판단 로직
-  let art173 = { required: false, msg: '보고 의무 미발생', color: 'ok' };
-  if(role === 'officer') {
-    art173 = { required: true, msg: '임원등 특정증권 소유상황 보고 의무 발생 (5영업일 이내)', color: 'required' };
-  } else if (parseFloat(bPct) < 10 && parseFloat(aPct) >= 10) {
-    art173 = { required: true, msg: '주요주주(10%) 신규 편입에 따른 소유상황 보고 의무 발생', color: 'required' };
-  }
-
-  // 147조 (5%룰) 판단 로직
-  let art147 = { required: false, msg: '보고 의무 미발생', color: 'ok' };
-  if (parseFloat(bPct) < 5 && parseFloat(aPct) >= 5) {
-    art147 = { required: true, msg: '최초 5% 도달에 따른 신규 대량보유 보고 의무 발생', color: 'required' };
-  } else if (parseFloat(bPct) >= 5 && parseFloat(chPct) >= 1) {
-    art147 = { required: true, msg: '5% 이상 보유자로서 1% 이상 변동 발생 (보고 의무)', color: 'required' };
-  } else if (parseFloat(bPct) >= 5 && parseFloat(chPct) < 1) {
-    art147 = { required: false, msg: '변동율 1% 미만 (다음 거래와 누적 합산 가능)', color: 'info' };
-  }
-
-  document.getElementById('share-result').innerHTML=`
-    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:14px;">
-      <div style="font-size:12px; font-weight:600; color:var(--text-secondary);">현재 예상 지분율 (거래 후)</div>
-      <div style="font-size:28px; font-weight:800; color:var(--accent); letter-spacing:-0.02em;">${aPct}%</div>
-    </div>
-    
-    <div class="verdict ${art173.color}">
-      <div class="verdict-icon">${art173.required ? '!' : (art173.color==='info'?'i':'✓')}</div>
-      <div>
-        <div class="verdict-tag">임원·주요주주 보고 (제173조)</div>
-        <div class="verdict-text">${art173.msg}</div>
-      </div>
-    </div>
-    
-    <div class="verdict ${art147.color}">
-      <div class="verdict-icon">${art147.required ? '!' : (art147.color==='info'?'i':'✓')}</div>
-      <div>
-        <div class="verdict-tag">대량보유 5% 보고 (제147조)</div>
-        <div class="verdict-text">${art147.msg}</div>
-      </div>
-    </div>
-
+  const after=dir==='buy'?cur+trade:cur-trade;
+  const bP=(cur/total*100).toFixed(2), aP=(after/total*100).toFixed(2), cP=(trade/total*100).toFixed(2), acP=((accum+trade)/total*100).toFixed(2);
+  const x10=parseFloat(bP)<10&&parseFloat(aP)>=10, trig=parseFloat(cP)>=1||parseFloat(acP)>=1;
+  let v,vc,vd;
+  if(rtype!=='officer'&&x10){v='주요주주 편입 — 즉시 보고';vc='req';vd=`보유 비율 ${bP}% → ${aP}%로 10% 초과`;}
+  else if(trig){v='보고 의무 발생';vc='req';vd=`변동율 ${cP}% (누적 ${acP}%) — 사유 발생일로부터 5영업일 이내 보고`;}
+  else{v='누적 보고 가능';vc='info';vd=`변동율 ${cP}% (누적 ${acP}%) — 1% 미달, 다음 거래와 합산 가능`;}
+  const rem=Math.ceil(total*0.01)-(accum+trade);
+  document.getElementById('sh-result').innerHTML=`
+    <div class="verdict ${vc}"><div class="v-icon">${vc==='req'?'!':'~'}</div>
+    <div><div class="v-tag">${v}</div><div class="v-text">${vd}</div></div></div>
     <div class="metrics">
-      <div class="metric"><div class="metric-label">거래 전 지분율</div><div class="metric-val">${bPct}%</div><div class="metric-sub">${fmtN(before)}주</div></div>
-      <div class="metric"><div class="metric-label">거래 후 지분율</div><div class="metric-val ${(art147.required||art173.required)?'red':''}">${aPct}%</div><div class="metric-sub">${fmtN(after)}주</div></div>
-      <div class="metric"><div class="metric-label">변동률</div><div class="metric-val">${chPct}%</div><div class="metric-sub">${fmtN(trade)}주 ${dir==='buy'?'매수':'매도'}</div></div>
+      <div class="metric"><div class="m-label">거래 전 보유</div><div class="m-val">${bP}%</div><div class="m-sub">${fmtN(cur)}주</div></div>
+      <div class="metric"><div class="m-label">거래 후 보유</div><div class="m-val ${vc==='req'?'red':''}">${aP}%</div><div class="m-sub">${fmtN(after)}주</div></div>
+      <div class="metric"><div class="m-label">변동율</div><div class="m-val">${cP}%</div><div class="m-sub">${fmtN(trade)}주 ${dir==='buy'?'매수':'매도'}</div></div>
     </div>
-    <div class="info-table" style="margin:0;">
-      <div class="info-row"><span class="info-key">제출 기한</span><span class="info-val">사유발생일(결제일)로부터 5영업일 이내</span></div>
-      <div class="info-row"><span class="info-key">제출처</span><span class="info-val">금융감독원 (DART)</span></div>
+    <div class="sl">보고 기준 상세</div>
+    <div class="itbl">
+      <div class="irow"><span class="ik">적용 규정</span><span class="iv">자본시장법 제173조 (임원·주요주주 소유상황 보고)</span></div>
+      <div class="irow"><span class="ik">제출처</span><span class="iv">금융감독원 DART</span></div>
+      <div class="irow"><span class="ik">보고 기한</span><span class="iv">${vc==='req'?'사유 발생일로부터 5영업일 이내':'보고 의무 미발생'}</span></div>
+      <div class="irow"><span class="ik">1% 도달까지</span><span class="iv">${rem>0?'추가 '+fmtN(rem)+'주 거래 시 보고 의무 발생':'이미 1% 초과 — 보고 의무 발생'}</span></div>
     </div>
-  `;
+    <div class="sl">준비 서류</div>
+    <div class="chklist">
+      <div class="chi"><div class="ch-dot"></div>임원·주요주주 소유상황 보고서 (DART 양식)</div>
+      <div class="chi"><div class="ch-dot"></div>주식 거래 내역 확인서 (증권사 거래내역)</div>
+      <div class="chi"><div class="ch-dot"></div>특수관계인 보유 현황 (해당 시)</div>
+    </div>`;
 }
 
-// ── 규정 검색 탭 ──
-function filterRegs(query) {
-  query = query.toLowerCase();
-  const list = document.getElementById('reg-list');
-  const filtered = REGS.filter(r => r.title.toLowerCase().includes(query) || r.desc.toLowerCase().includes(query));
-  
-  if(filtered.length === 0) {
-    list.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-tertiary);">검색 결과가 없습니다.</div>`;
-    return;
+function calcBulk(){
+  const total=getNum('b-total'), before=getNum('b-before'), trade=getNum('b-trade');
+  const dir=document.getElementById('b-dir').value, purpose=document.getElementById('b-purpose').value;
+  if(!total||!trade) return;
+  const after=dir==='buy'?before+trade:before-trade;
+  const bP=(before/total*100).toFixed(2), aP=(after/total*100).toFixed(2), cP=(Math.abs(after-before)/total*100).toFixed(2);
+  const x5=parseFloat(bP)<5&&parseFloat(aP)>=5, a5=parseFloat(bP)>=5;
+  let v,vc,vd;
+  if(x5){v='최초 대량보유 보고 의무 발생';vc='req';vd=`보유 비율 ${bP}% → ${aP}%로 5% 기준선 최초 초과`;}
+  else if(a5&&parseFloat(cP)>=1){v='변동 보고 의무 발생';vc='req';vd=`5% 이상 보유자로서 1% 이상 변동(${cP}%) — 5영업일 이내 보고`;}
+  else if(a5){v='누적 보고 가능';vc='info';vd=`변동율 ${cP}%로 1% 미달 — 다음 거래와 합산`;}
+  else{v='보고 의무 미발생';vc='ok';vd=`보유 비율 ${aP}%로 5% 미만`;}
+  document.getElementById('sh-result').innerHTML=`
+    <div class="verdict ${vc}"><div class="v-icon">${vc==='req'?'!':vc==='ok'?'✓':'~'}</div>
+    <div><div class="v-tag">${v}</div><div class="v-text">${vd}</div></div></div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">거래 전</div><div class="m-val">${bP}%</div><div class="m-sub">${fmtN(before)}주</div></div>
+      <div class="metric"><div class="m-label">거래 후</div><div class="m-val ${vc==='req'?'red':''}">${aP}%</div><div class="m-sub">${fmtN(after)}주</div></div>
+      <div class="metric"><div class="m-label">변동율</div><div class="m-val">${cP}%</div><div class="m-sub">${fmtN(trade)}주 ${dir==='buy'?'취득':'처분'}</div></div>
+    </div>
+    <div class="sl">보고 기준 상세</div>
+    <div class="itbl">
+      <div class="irow"><span class="ik">적용 규정</span><span class="iv">자본시장법 제147조 (주식 등의 대량보유 보고)</span></div>
+      <div class="irow"><span class="ik">제출처</span><span class="iv">금융감독원 DART</span></div>
+      <div class="irow"><span class="ik">보고 기한</span><span class="iv">${vc==='req'?'5영업일 이내':'보고 의무 미발생'}</span></div>
+      <div class="irow"><span class="ik">보유 목적</span><span class="iv">${purpose==='management'?'경영 참여 목적 (상세 계획 기재 필요)':'단순 투자 목적'}</span></div>
+    </div>
+    <div class="sl">준비 서류</div>
+    <div class="chklist">
+      <div class="chi"><div class="ch-dot"></div>주식 등의 대량보유상황 보고서 (DART 양식)</div>
+      <div class="chi"><div class="ch-dot"></div>보유 주식 거래내역 (증권사 확인서)</div>
+      ${purpose==='management'?'<div class="chi"><div class="ch-dot"></div>경영 참여 목적 및 향후 계획 상세 기재</div>':''}
+      <div class="chi"><div class="ch-dot"></div>특별관계자 보유 현황 (공동보유자 있는 경우)</div>
+    </div>`;
+}
+
+// ── Q&A ──
+function toggleQA(el){el.classList.toggle('open');}
+
+// ── 초기화 ──
+function resetAll(){
+  if(confirm('입력한 모든 재무 금액을 초기화하시겠습니까?')){
+    localStorage.clear();
+    location.reload();
   }
-  
-  list.innerHTML = filtered.map(r => `
-    <div class="reg-item">
-      <div class="reg-title">${r.title}</div>
-      <div class="reg-desc">${r.desc}</div>
-    </div>
-  `).join('');
 }
 
-// ── 유틸 & 콤마 마법 ──
+// ── localStorage 복원 ──
+function loadSaved(){
+  ['con-asset','con-rev','con-equity','con-capital','sep-asset','sep-rev','sep-equity','sep-capital'].forEach(id=>{
+    const v=localStorage.getItem(id);
+    if(v){
+      const el=document.getElementById(id);
+      if(el){el.value=Number(v).toLocaleString('ko-KR');el.classList.add('filled');}
+    }
+  });
+  setTimeout(()=>{updateFinCards();calcMajor();},100);
+}
+
+// ── 유틸 ──
 function fmt(n){return Math.round(n).toLocaleString('ko-KR');}
 function fmtN(n){return Math.round(n).toLocaleString('ko-KR');}
-
-document.addEventListener('DOMContentLoaded', function() {
-  const originalDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
-  Object.defineProperty(HTMLInputElement.prototype, 'value', {
-    get: function() {
-      let val = originalDescriptor.get.call(this);
-      if (this.dataset.comma === 'true' && val) return val.replace(/,/g, ''); 
-      return val;
-    },
-    set: function(val) { originalDescriptor.set.call(this, val); }
-  });
-
-  document.querySelectorAll('input[type="number"]').forEach(input => {
-    input.type = 'text';
-    input.dataset.comma = 'true';
-    input.addEventListener('input', function(e) {
-      let raw = originalDescriptor.get.call(this).replace(/[^0-9]/g, '');
-      if(raw) originalDescriptor.set.call(this, Number(raw).toLocaleString('ko-KR'));
-      else originalDescriptor.set.call(this, '');
-    });
-  });
-
-  const inputsToSave = ['comp-name', 'con-asset', 'con-rev', 'con-equity', 'con-capital', 'sep-asset', 'sep-rev', 'sep-equity', 'sep-capital', 'sh-total', 'sh-before'];
-  inputsToSave.forEach(id => {
-    const savedValue = localStorage.getItem(id);
-    if (savedValue) {
-      const el = document.getElementById(id);
-      if (el) {
-        if(id === 'comp-name') el.value = savedValue;
-        else originalDescriptor.set.call(el, Number(savedValue).toLocaleString('ko-KR'));
-        el.classList.add('filled');
-      }
-    }
-  });
-  
-  setTimeout(() => {
-    if(typeof updateFinCards === 'function') updateFinCards();
-    if(typeof calcMajor === 'function') calcMajor();
-  }, 100);
-
-  document.addEventListener('input', function(e) {
-    if (inputsToSave.includes(e.target.id)) {
-      if(e.target.id === 'comp-name') localStorage.setItem(e.target.id, e.target.value);
-      else localStorage.setItem(e.target.id, originalDescriptor.get.call(e.target).replace(/[^0-9]/g, ''));
-    }
-  });
-});
 </script>
 </body>
 </html>
