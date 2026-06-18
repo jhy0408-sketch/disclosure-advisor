@@ -380,6 +380,17 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic 
 <div id="tab-share" class="tab-panel">
   <div class="two-col">
     <div style="display:flex;flex-direction:column;gap:0;">
+
+      <!-- 지분공시 스마트 검색 -->
+      <div class="smart-box" style="margin-bottom:14px;">
+        <div class="smart-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          상황으로 자동 찾기
+        </div>
+        <textarea id="share-smart-txt" class="smart-input" placeholder="상황을 자유롭게 적어보세요. (예: 임원이 오늘 자사주 1만주 매도했어 / 외부 투자자가 지분을 6%로 늘렸다고 연락옴)"></textarea>
+        <button class="smart-btn" onclick="shareSmartSearch()">지분공시 의무 확인 →</button>
+      </div>
+
       <div class="card">
         <div class="card-hdr">
           <div class="cicon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -759,6 +770,8 @@ function smartSearch(){
   }
 
   const map=[
+    // 완전자회사화·공개매수·상장폐지 → 투자판단관련주요경영사항 (우선순위 최상위)
+    {keys:['완전자회사','완전 자회사','상장폐지','공개매수','tender offer','squeeze out','소수주주'],id:'c08'},
     {keys:['자사주 처분','자기주식 처분','자사주를 처분','자기주식을 처분'],id:'i03_2'},
     {keys:['자사주 취득','자기주식 취득','자사주를 취득','자기주식을 매입'],id:'i03_1'},
     {keys:['자사주','자기주식'],id:'i03_1'},
@@ -775,6 +788,7 @@ function smartSearch(){
     {keys:['계약','수주'],id:'b03'},
     {keys:['횡령','배임'],id:'l03'},
     {keys:['담보','보증'],id:'d03'},
+    // 자회사·종속회사는 후순위 (위에서 완전자회사화 등 먼저 걸러진 후)
     {keys:['자회사','종속회사'],id:'s01'},
     {keys:['부도'],id:'c04'},
     {keys:['타법인','지분 처분','지분 취득'],id:'v03'},
@@ -902,6 +916,44 @@ function renderVoluntary(rule){
     <div class="sl">체크리스트</div>
     <div class="chklist">${rule.chk.map(i=>`<div class="chi"><div class="ch-dot"></div>${i}</div>`).join('')}</div>
   `;
+}
+
+// 지분공시 스마트 검색
+function shareSmartSearch(){
+  const txt=document.getElementById('share-smart-txt').value.toLowerCase();
+  if(!txt.trim()){alert('상황을 먼저 입력해주세요!');return;}
+
+  let msg='';
+
+  // 임원 여부 판단
+  const isOfficer=txt.includes('임원')||txt.includes('대표')||txt.includes('이사')||txt.includes('감사')||txt.includes('cfo')||txt.includes('ceo');
+  // 거래 방향
+  const isSell=txt.includes('매도')||txt.includes('처분')||txt.includes('팔')||txt.includes('팔았');
+  const isBuy=txt.includes('매수')||txt.includes('취득')||txt.includes('샀')||txt.includes('늘');
+
+  // 임원 세팅
+  if(isOfficer){
+    document.getElementById('sh-role').value='officer';
+    msg='💡 임원 거래로 분석됩니다.\n→ 자본시장법 제173조(임원 소유상황 보고) 의무 확인이 필요합니다.\n\n아래 계산기에 주식수를 입력해 정확한 의무를 확인하세요.';
+  } else if(txt.includes('5%')||txt.includes('대량')||txt.includes('지분율')){
+    document.getElementById('sh-role').value='general';
+    msg='💡 대량보유(5%룰) 관련 상황으로 분석됩니다.\n→ 자본시장법 제147조(대량보유 보고) 의무 확인이 필요합니다.\n\n아래 계산기에 주식수를 입력해 정확한 의무를 확인하세요.';
+  } else if(txt.includes('주요주주')||txt.includes('10%')){
+    document.getElementById('sh-role').value='general';
+    msg='💡 주요주주(10% 이상) 관련 상황으로 분석됩니다.\n→ 자본시장법 제173조(주요주주 소유상황 보고) 의무 확인이 필요합니다.\n\n아래 계산기에 주식수를 입력해 정확한 의무를 확인하세요.';
+  } else {
+    document.getElementById('sh-role').value='general';
+    msg='💡 일반 주주 거래로 분석됩니다.\n→ 5% 이상 보유 또는 1% 이상 변동 시 제147조 보고 의무가 발생합니다.\n\n아래 계산기에 주식수를 입력해 정확한 의무를 확인하세요.';
+  }
+
+  // 거래 방향 자동 세팅
+  if(isSell){
+    setSeg('sh-dir-seg','sh-dir','sell',document.querySelectorAll('#sh-dir-seg .seg-btn')[1]);
+  } else if(isBuy){
+    setSeg('sh-dir-seg','sh-dir','buy',document.querySelectorAll('#sh-dir-seg .seg-btn')[0]);
+  }
+
+  alert(msg);
 }
 
 // 지분공시 통합 진단
